@@ -5,6 +5,7 @@ class FacultadesController < ApplicationController
   before_action :load_institucion, only: [:edit, :update, :new, :create]
   before_action :set_facultad, only: [:show, :edit, :update, :destroy]
   before_action :load_config
+  before_action :config_audit, only: [:create, :update, :destroy]
 
   # GET /facultades
   # GET /facultades.json
@@ -29,15 +30,17 @@ class FacultadesController < ApplicationController
   # POST /facultades
   # POST /facultades.json
   def create
-    @facultad = Facultad.new(facultad_params)
+    ActiveRecord::Base.transaction do
+      @facultad = Facultad.new(facultad_params)
 
-    respond_to do |format|
-      if @facultad.save
-        format.html { redirect_to @facultad, notice: 'Facultades instituto se cre&oacute; exitosamente.' }
-        format.json { render :show, status: :created, location: @facultad }
-      else
-        format.html { render :new }
-        format.json { render json: @facultad.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @facultad.save
+          format.html { redirect_to @facultad, notice: 'Facultades instituto se cre&oacute; exitosamente.' }
+          format.json { render :show, status: :created, location: @facultad }
+        else
+          format.html { render :new }
+          format.json { render json: @facultad.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -45,13 +48,15 @@ class FacultadesController < ApplicationController
   # PATCH/PUT /facultades/1
   # PATCH/PUT /facultades/1.json
   def update
-    respond_to do |format|
-      if @facultad.update(facultad_params)
-        format.html { redirect_to @facultad, notice: 'Facultades instituto se actualizo correctamente.' }
-        format.json { render :show, status: :ok, location: @facultad }
-      else
-        format.html { render :edit }
-        format.json { render json: @facultad.errors, status: :unprocessable_entity }
+    ActiveRecord::Base.transaction do
+      respond_to do |format|
+        if @facultad.update(facultad_params)
+          format.html { redirect_to @facultad, notice: 'Facultades instituto se actualizo correctamente.' }
+          format.json { render :show, status: :ok, location: @facultad }
+        else
+          format.html { render :edit }
+          format.json { render json: @facultad.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -59,11 +64,13 @@ class FacultadesController < ApplicationController
   # DELETE /facultades/1
   # DELETE /facultades/1.json
   def destroy
-    @facultad.status = Status.find(Status::VALUES[:deleted])
-    @facultad.save validate: false
-    respond_to do |format|
-      format.html { redirect_to facultades_url, notice: 'Facultades instituto se marco como borrada..' }
-      format.json { head :no_content }
+    ActiveRecord::Base.transaction do
+      @facultad.status = Status.find(Status::VALUES[:deleted])
+      @facultad.save validate: false
+      respond_to do |format|
+        format.html { redirect_to facultades_url, notice: 'Facultades instituto se marco como borrada..' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -84,7 +91,7 @@ class FacultadesController < ApplicationController
     end
 
     def load_status
-      @statuses = Status.all
+      @statuses = Status.user_visible
     end
 
     def load_tipo_instituto

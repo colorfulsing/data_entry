@@ -1,6 +1,8 @@
 class Investigacion < ApplicationRecord
   self.table_name = 'investigaciones'
 
+  include Auditable
+
   alias_attribute :nombre, :titulo
 
   belongs_to :status, class_name: 'Status', foreign_key: 'id_status'

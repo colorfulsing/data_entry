@@ -6,6 +6,7 @@ class InvestigacionesController < ApplicationController
   before_action :set_investigacion, only: [:show, :edit, :update, :destroy, :asociate_area]
   before_action :load_area, only: [:show]
   before_action :load_config
+  before_action :config_audit, only: [:create, :update, :destroy, :asociate_area]
 
   # GET /investigaciones
   # GET /investigaciones.json
@@ -30,15 +31,17 @@ class InvestigacionesController < ApplicationController
   # POST /investigaciones
   # POST /investigaciones.json
   def create
-    @investigacion = Investigacion.new(investigacion_params)
+    ActiveRecord::Base.transaction do
+      @investigacion = Investigacion.new(investigacion_params)
 
-    respond_to do |format|
-      if @investigacion.save
-        format.html { redirect_to @investigacion, notice: 'La Investigacion se cre&oacute; exitosamente.' }
-        format.json { render :show, status: :created, location: @investigacion }
-      else
-        format.html { render :new }
-        format.json { render json: @investigacion.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @investigacion.save
+          format.html { redirect_to @investigacion, notice: 'La Investigacion se cre&oacute; exitosamente.' }
+          format.json { render :show, status: :created, location: @investigacion }
+        else
+          format.html { render :new }
+          format.json { render json: @investigacion.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -46,13 +49,15 @@ class InvestigacionesController < ApplicationController
   # PATCH/PUT /investigaciones/1
   # PATCH/PUT /investigaciones/1.json
   def update
-    respond_to do |format|
-      if @investigacion.update(investigacion_params)
-        format.html { redirect_to @investigacion, notice: 'La Investigacion se actualizo correctamente.' }
-        format.json { render :show, status: :ok, location: @investigacion }
-      else
-        format.html { render :edit }
-        format.json { render json: @investigacion.errors, status: :unprocessable_entity }
+    ActiveRecord::Base.transaction do
+      respond_to do |format|
+        if @investigacion.update(investigacion_params)
+          format.html { redirect_to @investigacion, notice: 'La Investigacion se actualizo correctamente.' }
+          format.json { render :show, status: :ok, location: @investigacion }
+        else
+          format.html { render :edit }
+          format.json { render json: @investigacion.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -60,29 +65,32 @@ class InvestigacionesController < ApplicationController
   # DELETE /investigaciones/1
   # DELETE /investigaciones/1.json
   def destroy
-    @investigacion.status = Status.find(Status::VALUES[:deleted])
-    @investigacion.save validate: false
-    respond_to do |format|
-      format.html { redirect_to investigaciones_url, notice: 'La Investigacion se marco como borrada.' }
-      format.json { head :no_content }
+    ActiveRecord::Base.transaction do
+      @investigacion.status = Status.find(Status::VALUES[:deleted])
+      @investigacion.save validate: false
+      respond_to do |format|
+        format.html { redirect_to investigaciones_url, notice: 'La Investigacion se marco como borrada.' }
+        format.json { head :no_content }
+      end
     end
   end
 
   def asociate_area
-    form_params = investigacion_area_params
-    area_id = form_params[:id_area]
-    @area = Area.find(area_id)
-    existing_asociation = AreaInvestigacion.where(id_area: area_id, id_investigacion: @investigacion.id)
+    ActiveRecord::Base.transaction do
+      form_params = investigacion_area_params
+      area_id = form_params[:id_area]
+      @area = Area.find(area_id)
+      existing_asociation = AreaInvestigacion.where(id_area: area_id, id_investigacion: @investigacion.id)
 
-    respond_to do |format|
-      if existing_asociation.blank?
-        AreaInvestigacion.create id_investigacion: @investigacion.id, id_area: area_id
-        format.html { redirect_to @investigacion, notice: "Se agrego el area \"#{@area.nombre}\" exitosamente." }
-        format.json { render :show, status: :ok, location: @investigacion }
-      else
-        existing_asociation.delete_all
-        format.html { redirect_to @investigacion, notice: "Se quito el area \"#{@area.nombre}\" exitosamente." }
-        format.json { render :show, status: :ok, location: @investigacion }
+      respond_to do |format|
+        if existing_asociation.blank?
+          format.html { redirect_to @investigacion, notice: "Se agrego el area \"#{@area.nombre}\" exitosamente." }
+          format.json { render :show, status: :ok, location: @investigacion }
+        else
+          existing_asociation.destroy_all
+          format.html { redirect_to @investigacion, notice: "Se quito el area \"#{@area.nombre}\" exitosamente." }
+          format.json { render :show, status: :ok, location: @investigacion }
+        end
       end
     end
   end
@@ -94,7 +102,7 @@ class InvestigacionesController < ApplicationController
     end
 
     def load_status
-      @statuses = Status.all
+      @statuses = Status.user_visible
     end
 
     def load_facultad

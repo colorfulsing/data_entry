@@ -7,6 +7,7 @@ class UsuariosController < ApplicationController
   before_action :set_usuario, only: [:show, :edit, :update, :enable, :disable, :destroy]
   before_action :validate_current_user_access, only: [:edit, :update]
   before_action :load_config
+  before_action :config_audit, only: [:update, :destroy, :enable,:disable]
 
   # GET /usuarios
   # GET /usuarios.json
@@ -26,36 +27,42 @@ class UsuariosController < ApplicationController
   # PATCH/PUT /usuarios/1
   # PATCH/PUT /usuarios/1.json
   def update
-    respond_to do |format|
-      validate_current_password
-      @user.assign_attributes(usuario_params)
-      if @user.errors.blank? && @user.update(usuario_params)
-        format.html { redirect_to @user, notice: 'El Usuario se actualizo correctamente.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    ActiveRecord::Base.transaction do
+      respond_to do |format|
+        validate_current_password
+        @user.assign_attributes(usuario_params)
+        if @user.errors.blank? && @user.update(usuario_params)
+          format.html { redirect_to @user, notice: 'El Usuario se actualizo correctamente.' }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
 
   def enable
     return if current_user.id == @user.id
-    @user.status = Status.find(Status::VALUES[:active])
-    @user.save validate: false
-    respond_to do |format|
-      format.html { redirect_to usuarios_url, notice: "El usuario #{@user.email} se habilito." }
-      format.json { head :no_content }
+    ActiveRecord::Base.transaction do
+      @user.status = Status.find(Status::VALUES[:active])
+      @user.save validate: false
+      respond_to do |format|
+        format.html { redirect_to usuarios_url, notice: "El usuario #{@user.email} se habilito." }
+        format.json { head :no_content }
+      end
     end
   end
 
   def disable
     return if current_user.id == @user.id
-    @user.status = Status.find(Status::VALUES[:inactive])
-    @user.save validate: false
-    respond_to do |format|
-      format.html { redirect_to usuarios_url, notice: "El usuario #{@user.email} se desabilito." }
-      format.json { head :no_content }
+    ActiveRecord::Base.transaction do
+      @user.status = Status.find(Status::VALUES[:inactive])
+      @user.save validate: false
+      respond_to do |format|
+        format.html { redirect_to usuarios_url, notice: "El usuario #{@user.email} se desabilito." }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -63,11 +70,13 @@ class UsuariosController < ApplicationController
   # DELETE /usuarios/1.json
   def destroy
     return if current_user.id == @user.id
-    @user.status = Status.find(Status::VALUES[:deleted])
-    @user.save validate: false
-    respond_to do |format|
-      format.html { redirect_to usuarios_url, notice: "El usuario #{@user.email} se marco como borrado." }
-      format.json { head :no_content }
+    ActiveRecord::Base.transaction do
+      @user.status = Status.find(Status::VALUES[:deleted])
+      @user.save validate: false
+      respond_to do |format|
+        format.html { redirect_to usuarios_url, notice: "El usuario #{@user.email} se marco como borrado." }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -78,7 +87,7 @@ class UsuariosController < ApplicationController
     end
 
     def load_status
-      @statuses = Status.all
+      @statuses = Status.user_visible
     end
 
     def would_change_password

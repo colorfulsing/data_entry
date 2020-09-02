@@ -15,4 +15,9 @@ class ApplicationController < ActionController::Base
       redirect_to home_path if !current_user.admin?
     end
 
+    def config_audit
+      Audit::refresh_commit_hash
+      Audit::current_user = current_user
+    end
+
 end

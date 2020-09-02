@@ -6,12 +6,12 @@ class DefaultController < ApplicationController
 
   def search
     # Create search expression
-    @search_query = params[:q]
+    @search_query = params[:q] || ''
     search_expression = convert_to_search_expression @search_query
 
     # Create search data
     search_data = {}
-    search_args = params[:search_type]
+    search_args = params[:search_type] || ''
     @search_type = search_raw_data = search_args.to_s.split(',')
     search_raw_data.each do |raw_data|
       data = raw_data.split(':').map{|v| v.strip}

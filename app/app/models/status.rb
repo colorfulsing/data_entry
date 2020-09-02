@@ -1,6 +1,8 @@
 class Status < ApplicationRecord
   self.table_name = 'status'
 
+  include Auditable
+
   validates :nombre, presence: true
   validates :visible, presence: true
 
@@ -17,13 +19,21 @@ class Status < ApplicationRecord
   has_many :tipo_documentos, class_name: 'TipoDocumento', foreign_key: 'id_status', inverse_of: :status
   has_many :users, class_name: 'User', foreign_key: 'id_status', inverse_of: :status
   has_many :vertientes, class_name: 'Vertiente', foreign_key: 'id_status', inverse_of: :status
+  has_many :audits, class_name: 'Audit', foreign_key: 'id_status', inverse_of: :status
 
   VALUES = {
-    :active => 1,
-    :inactive => 2,
-    :deleted => 3
-    #:published => 4
-  }
+    active: 1,
+    inactive: 2,
+    deleted: 3
+    #published: 4
+  }.freeze
+
+  AUDIT_VALUES = {
+    active: self::VALUES[:active],
+    reverted: self::VALUES[:inactive]
+  }.freeze
+
+  SYSTEM_ONLY_VALUES = {}.freeze
 
   class << self
     def search_entity_class parent = nil
@@ -40,6 +50,18 @@ class Status < ApplicationRecord
 
     def entity_label
       "Estado"
+    end
+
+    def visible
+      where({visible: 1})
+    end
+
+    def exclude_system_only
+      self::SYSTEM_ONLY_VALUES.count < 1 ? all : where('id NOT IN (?)', [self::SYSTEM_ONLY_VALUES.values])
+    end
+
+    def user_visible
+      all.visible.exclude_system_only
     end
   end
 

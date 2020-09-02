@@ -4,6 +4,7 @@ class MunicipiosController < ApplicationController
   before_action :load_departamento, only: [:edit, :update, :new, :create]
   before_action :set_municipio, only: [:show, :edit, :update, :destroy]
   before_action :load_config
+  before_action :config_audit, only: [:create, :update, :destroy]
 
   # GET /municipios
   # GET /municipios.json
@@ -28,15 +29,17 @@ class MunicipiosController < ApplicationController
   # POST /municipios
   # POST /municipios.json
   def create
-    @municipio = Municipio.new(municipio_params)
+    ActiveRecord::Base.transaction do
+      @municipio = Municipio.new(municipio_params)
 
-    respond_to do |format|
-      if @municipio.save
-        format.html { redirect_to @municipio, notice: 'El Municipio se cre&oacute; exitosamente.' }
-        format.json { render :show, status: :created, location: @municipio }
-      else
-        format.html { render :new }
-        format.json { render json: @municipio.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @municipio.save
+          format.html { redirect_to @municipio, notice: 'El Municipio se cre&oacute; exitosamente.' }
+          format.json { render :show, status: :created, location: @municipio }
+        else
+          format.html { render :new }
+          format.json { render json: @municipio.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -44,13 +47,15 @@ class MunicipiosController < ApplicationController
   # PATCH/PUT /municipios/1
   # PATCH/PUT /municipios/1.json
   def update
-    respond_to do |format|
-      if @municipio.update(municipio_params)
-        format.html { redirect_to @municipio, notice: 'El Municipio se actualizo correctamente.' }
-        format.json { render :show, status: :ok, location: @municipio }
-      else
-        format.html { render :edit }
-        format.json { render json: @municipio.errors, status: :unprocessable_entity }
+    ActiveRecord::Base.transaction do
+      respond_to do |format|
+        if @municipio.update(municipio_params)
+          format.html { redirect_to @municipio, notice: 'El Municipio se actualizo correctamente.' }
+          format.json { render :show, status: :ok, location: @municipio }
+        else
+          format.html { render :edit }
+          format.json { render json: @municipio.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -58,11 +63,13 @@ class MunicipiosController < ApplicationController
   # DELETE /municipios/1
   # DELETE /municipios/1.json
   def destroy
-    @municipio.status = Status.find(Status::VALUES[:deleted])
-    @municipio.save validate: false
-    respond_to do |format|
-      format.html { redirect_to municipios_url, notice: 'El Municipio se marco como borrado.' }
-      format.json { head :no_content }
+    ActiveRecord::Base.transaction do
+      @municipio.status = Status.find(Status::VALUES[:deleted])
+      @municipio.save validate: false
+      respond_to do |format|
+        format.html { redirect_to municipios_url, notice: 'El Municipio se marco como borrado.' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -83,7 +90,7 @@ class MunicipiosController < ApplicationController
     end
 
     def load_status
-      @statuses = Status.all
+      @statuses = Status.user_visible
     end
 
     def load_departamento

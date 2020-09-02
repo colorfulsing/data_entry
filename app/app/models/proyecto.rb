@@ -1,6 +1,8 @@
 class Proyecto < ApplicationRecord
   self.table_name = 'proyecto_programa'
 
+  include Auditable
+
   belongs_to :status, class_name: 'Status', foreign_key: 'id_status'
   belongs_to :facultad, class_name: 'Facultad', foreign_key: 'id_instituto', inverse_of: :proyectos
   has_and_belongs_to_many :areas,

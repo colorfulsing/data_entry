@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_06_220811) do
+ActiveRecord::Schema.define(version: 2018_10_22_003640) do
 
   create_table "area", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nombre", limit: 100, null: false
@@ -29,6 +29,23 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["id"], name: "id_UNIQUE", unique: true
     t.index ["id_area"], name: "fk13_idx"
     t.index ["id_investigacion"], name: "fk14_idx"
+  end
+
+  create_table "audits", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.string "target_type", null: false
+    t.bigint "target_id", null: false
+    t.text "change", null: false
+    t.string "commit_hash", limit: 50, null: false
+    t.string "user_type", null: false
+    t.bigint "user_id", null: false
+    t.integer "id_status", null: false
+    t.string "action", limit: 100, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["id_status"], name: "audit_status"
+    t.index ["target_type", "target_id"], name: "index_audits_on_target_type_and_target_id"
+    t.index ["user_id", "user_type", "target_id", "target_type", "created_at", "updated_at", "action"], name: "audits_main_idx"
+    t.index ["user_type", "user_id"], name: "index_audits_on_user_type_and_user_id"
   end
 
   create_table "cuencas", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -239,6 +256,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
   add_foreign_key "area", "status", column: "id_status", name: "area_status"
   add_foreign_key "area_investigacion", "area", column: "id_area", name: "fk13"
   add_foreign_key "area_investigacion", "investigaciones", column: "id_investigacion", name: "fk14"
+  add_foreign_key "audits", "status", column: "id_status", name: "audit_status"
   add_foreign_key "cuencas", "status", column: "id_status", name: "cuencas_status"
   add_foreign_key "cuencas", "vertientes", column: "id_vertiente", name: "fk7"
   add_foreign_key "departamentos", "status", column: "id_status", name: "departamentos_status"

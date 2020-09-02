@@ -5,6 +5,7 @@ class ProyectosController < ApplicationController
   before_action :set_proyecto, only: [:show, :edit, :update, :destroy, :asociate_area]
   before_action :load_area, only: [:show]
   before_action :load_config
+  before_action :config_audit, only: [:create, :update, :destroy, :asociate_area]
 
   # GET /proyectos
   # GET /proyectos.json
@@ -29,15 +30,17 @@ class ProyectosController < ApplicationController
   # POST /proyectos
   # POST /proyectos.json
   def create
-    @proyecto = Proyecto.new(proyecto_params)
+    ActiveRecord::Base.transaction do
+      @proyecto = Proyecto.new(proyecto_params)
 
-    respond_to do |format|
-      if @proyecto.save
-        format.html { redirect_to @proyecto, notice: 'Proyecto programa se cre&oacute; exitosamente.' }
-        format.json { render :show, status: :created, location: @proyecto }
-      else
-        format.html { render :new }
-        format.json { render json: @proyecto.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @proyecto.save
+          format.html { redirect_to @proyecto, notice: 'Proyecto programa se cre&oacute; exitosamente.' }
+          format.json { render :show, status: :created, location: @proyecto }
+        else
+          format.html { render :new }
+          format.json { render json: @proyecto.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -45,13 +48,15 @@ class ProyectosController < ApplicationController
   # PATCH/PUT /proyectos/1
   # PATCH/PUT /proyectos/1.json
   def update
-    respond_to do |format|
-      if @proyecto.update(proyecto_params)
-        format.html { redirect_to @proyecto, notice: 'Proyecto programa se actualizo correctamente.' }
-        format.json { render :show, status: :ok, location: @proyecto }
-      else
-        format.html { render :edit }
-        format.json { render json: @proyecto.errors, status: :unprocessable_entity }
+    ActiveRecord::Base.transaction do
+      respond_to do |format|
+        if @proyecto.update(proyecto_params)
+          format.html { redirect_to @proyecto, notice: 'Proyecto programa se actualizo correctamente.' }
+          format.json { render :show, status: :ok, location: @proyecto }
+        else
+          format.html { render :edit }
+          format.json { render json: @proyecto.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -59,29 +64,33 @@ class ProyectosController < ApplicationController
   # DELETE /proyectos/1
   # DELETE /proyectos/1.json
   def destroy
-    @proyecto.status = Status.find(Status::VALUES[:deleted])
-    @proyecto.save validate: false
-    respond_to do |format|
-      format.html { redirect_to proyectos_url, notice: 'Proyecto programa se marco como borrado.' }
-      format.json { head :no_content }
+    ActiveRecord::Base.transaction do
+      @proyecto.status = Status.find(Status::VALUES[:deleted])
+      @proyecto.save validate: false
+      respond_to do |format|
+        format.html { redirect_to proyectos_url, notice: 'Proyecto programa se marco como borrado.' }
+        format.json { head :no_content }
+      end
     end
   end
 
   def asociate_area
-    form_params = proyecto_area_params
-    area_id = form_params[:id_area]
-    @area = Area.find(area_id)
-    existing_asociation = ProyectoArea.where(id_area: area_id, id_proyecto: @proyecto.id)
+    ActiveRecord::Base.transaction do
+      form_params = proyecto_area_params
+      area_id = form_params[:id_area]
+      @area = Area.find(area_id)
+      existing_asociation = ProyectoArea.where(id_area: area_id, id_proyecto: @proyecto.id)
 
-    respond_to do |format|
-      if existing_asociation.blank?
-        ProyectoArea.create id_proyecto: @proyecto.id, id_area: area_id
-        format.html { redirect_to @proyecto, notice: "Se agrego el area \"#{@area.nombre}\" exitosamente." }
-        format.json { render :show, status: :ok, location: @proyecto }
-      else
-        existing_asociation.delete_all
-        format.html { redirect_to @proyecto, notice: "Se quito el area \"#{@area.nombre}\" exitosamente." }
-        format.json { render :show, status: :ok, location: @proyecto }
+      respond_to do |format|
+        if existing_asociation.blank?
+          ProyectoArea.create id_proyecto: @proyecto.id, id_area: area_id
+          format.html { redirect_to @proyecto, notice: "Se agrego el area \"#{@area.nombre}\" exitosamente." }
+          format.json { render :show, status: :ok, location: @proyecto }
+        else
+          existing_asociation.destroy_all
+          format.html { redirect_to @proyecto, notice: "Se quito el area \"#{@area.nombre}\" exitosamente." }
+          format.json { render :show, status: :ok, location: @proyecto }
+        end
       end
     end
   end
@@ -93,7 +102,7 @@ class ProyectosController < ApplicationController
     end
 
     def load_status
-      @statuses = Status.all
+      @statuses = Status.user_visible
     end
 
     def load_facultad

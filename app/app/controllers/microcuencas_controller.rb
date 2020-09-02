@@ -27,15 +27,17 @@ class MicrocuencasController < ApplicationController
   # POST /microcuencas
   # POST /microcuencas.json
   def create
-    @microcuenca = Microcuenca.new(microcuenca_params)
+    ActiveRecord::Base.transaction do
+      @microcuenca = Microcuenca.new(microcuenca_params)
 
-    respond_to do |format|
-      if @microcuenca.save
-        format.html { redirect_to @microcuenca, notice: 'La Microcuenca se cre&oacute; exitosamente.' }
-        format.json { render :show, status: :created, location: @microcuenca }
-      else
-        format.html { render :new }
-        format.json { render json: @microcuenca.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @microcuenca.save
+          format.html { redirect_to @microcuenca, notice: 'La Microcuenca se cre&oacute; exitosamente.' }
+          format.json { render :show, status: :created, location: @microcuenca }
+        else
+          format.html { render :new }
+          format.json { render json: @microcuenca.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -43,13 +45,15 @@ class MicrocuencasController < ApplicationController
   # PATCH/PUT /microcuencas/1
   # PATCH/PUT /microcuencas/1.json
   def update
-    respond_to do |format|
-      if @microcuenca.update(microcuenca_params)
-        format.html { redirect_to @microcuenca, notice: 'La Microcuenca se actualizo correctamente.' }
-        format.json { render :show, status: :ok, location: @microcuenca }
-      else
-        format.html { render :edit }
-        format.json { render json: @microcuenca.errors, status: :unprocessable_entity }
+    ActiveRecord::Base.transaction do
+      respond_to do |format|
+        if @microcuenca.update(microcuenca_params)
+          format.html { redirect_to @microcuenca, notice: 'La Microcuenca se actualizo correctamente.' }
+          format.json { render :show, status: :ok, location: @microcuenca }
+        else
+          format.html { render :edit }
+          format.json { render json: @microcuenca.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -57,11 +61,13 @@ class MicrocuencasController < ApplicationController
   # DELETE /microcuencas/1
   # DELETE /microcuencas/1.json
   def destroy
-    @microcuenca.status = Status.find(Status::VALUES[:deleted])
-    @microcuenca.save validate: false
-    respond_to do |format|
-      format.html { redirect_to microcuencas_url, notice: 'La Microcuenca se marco como borrada.' }
-      format.json { head :no_content }
+    ActiveRecord::Base.transaction do
+      @microcuenca.status = Status.find(Status::VALUES[:deleted])
+      @microcuenca.save validate: false
+      respond_to do |format|
+        format.html { redirect_to microcuencas_url, notice: 'La Microcuenca se marco como borrada.' }
+        format.json { head :no_content }
+      end
     end
   end
 
@@ -82,7 +88,7 @@ class MicrocuencasController < ApplicationController
     end
 
     def load_status
-      @statuses = Status.all
+      @statuses = Status.user_visible
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -84,3 +84,6 @@ gem 'bootstrap', '~> 4.1.0'
 gem 'bootstrap-datepicker-rails'
 
 gem 'rails-i18n', '~> 5.1'
+
+# Enabled per request global variables
+gem 'request_store'

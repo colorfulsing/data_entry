@@ -1,6 +1,8 @@
 class TipoInstituto < ApplicationRecord
   self.table_name = 'tipo_instituto'
 
+  include Auditable
+
   belongs_to :status, class_name: 'Status', foreign_key: 'id_status'
   has_many :facultades, class_name: 'Facultad', foreign_key: 'id_tipo_instituto', inverse_of: :tipo_instituto
 

@@ -1,6 +1,8 @@
 class Area < ApplicationRecord
   self.table_name = 'area'
 
+  include Auditable
+
   belongs_to :status, class_name: 'Status', foreign_key: 'id_status'
   has_and_belongs_to_many :proyectos,
     class_name: "Proyecto",

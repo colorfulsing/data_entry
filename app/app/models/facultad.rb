@@ -3,6 +3,7 @@ class Facultad < ApplicationRecord
 
   include EmailField
   include WebsiteField
+  include Auditable
 
   alias_attribute :email, :correo_electronico
   alias_attribute :website, :sitio_web

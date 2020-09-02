@@ -7,6 +7,7 @@ class User < ApplicationRecord
   belongs_to :status, class_name: 'Status', foreign_key: 'id_status'
 
   include EmailField
+  include Auditable
 
   validates :email, presence: true
   validates :status, presence: true
