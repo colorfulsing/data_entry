@@ -14,15 +14,15 @@ default: &default
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   host: <%= ENV["DB_HOST"] %>
-  database: <%= ENV["DB_NAME"] %>
-  username: <%= ENV["DB_USER"] %>
-  password: <%= ENV["DB_PASS"] %>
+  database: <%= ENV["DB_DATABASE_NAME"] %>
+  username: <%= ENV["DB_WRITE_USER"] %>
+  password: <%= ENV["DB_WRITE_PASS"] %>
 
 development:
   <<: *default
 test:
   <<: *default
-  database: <%= ENV["DB_NAME"] %>_test
+  database: <%= ENV["DB_DATABASE_NAME"] %>_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

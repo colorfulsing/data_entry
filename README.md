@@ -5,62 +5,103 @@ Data entry project donated to Redfia using Ruby on Rails 5.
 Requirements:
 
 * MySQL v5.7
-* Ruby 2.4.2
-* Nginx 1.13.12
+* Ruby 2.5
+* Nginx 1.15
 
 ## Docker
 You can use the included docker-compose file for both development and production.
 
 Every change perform on the current code at the host will be reflected on the rails container created by this docker-compose.
 
-Remember to execute a **"down"** command before switching between **dev**, **test**, and **prod** environments within the same project directory.
+### Initial Configuration
 
-"PWD" parameter is required to execute docker-compose commands since it is used to specify host relative paths.
+Create a custom docker volume to store the database data so it can persist even
+after the containers are destroyed. We will refer to this volume as
+**"db_volume"** from now on this readme file for easier reading.
 
-### "up" command requirements
-Before you can execute the "up" command, you need to create the following files:
+Create an **".env"** file using **".env.dist"** file as template to configure
+the docker project to fit your needs. Look at the template file for more details
+about each configuration parameter.
 
-*./docker/secrets/db_user.txt*
+Create all your application secrets (database credentials, domain name, etc.) by
+using the **"/docker/secrets/samples"** directory and files as a sample, just
+copy and paste it's contents inside **"/docker/secrets"** directory, then modify
+each secret and certificate to match your needs and security level.
 
-* Contains the database user to be used on the containers.
+If you don't have an existing database, then remember to add your database seed
+inside **"/docker/infraestructure/db/seeds"** directory so it is restored when
+the database container is created for first time (db_volume should be empty to
+be restored). Additionally, you will need to add a "USE" statement as your
+database seed first line to make sure it restore the seed on the right database.
 
-*./docker/secrets/db_pass.txt*
+Remember to add the domain name to your **"/etc/hosts"** file when deploying on
+development environment so you can access the site easily.
 
-* Contains the database password to be used on the containers.
+**TODO:** Create a "waitish" functionality on the app boot script to prevent it
+from starting until the database is ready.
 
-*./docker/secrets/app_secret_key.txt*
+Now the initial configuration should be ready, so you can start the docker
+compose project by using the included automated **"/deploy.sh"** script or by
+doing manually using docker-compose command.
 
-* Contains the website secret used to manage the user session.
+### Using the automated deploy script (recommended)
 
-*./docker/db/seed/seed.sql.gz*
+This project provides a basic automated deployment script **"deploy.sh"** that
+can be use to easily manage this docker compose project. To do so, just execute
+it on the terminal (assuming you are located on the project's root directory):
 
-* (Optional) Initialize the database using a custom seed backup script. It can be compressed as ".sql.gz" or uncompressed as ".sql" extensions.
+* To rebuild the project's containers:
 
-You will also need to create or reuse a database storage volume called **"db_volume"** to store the appliation persistent data. This volume will persists even after a "down" command and **it's highly recommended that this volume is located into a safe location since it will store the database.** You can use the following command to create a new one for dev or prod environments within the default docker directory structure:
+  ./deploy.sh rebuild
 
-    docker volume create db_volume
+* To start/restart the project's containers:
 
-### "up" command execution
+  ./deploy.sh start
 
-To execute as development, use the following command:
+* To destory the project's containers:
 
-    env PWD="$PWD" ENV="dev" docker-compose up
+  ./deploy.sh destroy
 
-To execute as development and perform the automated tests, use the following command:
+That's it! it will do the rest for you, including attaching the started
+containers logs to the current terminal so you can monitor all it's
+containers activities. To stop the containers, just hit **"ctrl + c"** and it will
+gracefully stop the containers for you.
 
-    env PWD="$PWD" ENV="dev" EXEC_TEST=1 docker-compose up
+For more information and commands, execute the deployment script with *"--help"*
+option:
 
-To execute as production, use the following command:
+  ./deploy.sh --help
 
-    env PWD="$PWD" docker-compose up
+### Deploying manullay with docker-compose
 
-Once the containers are initialized, we can use "start" and "stop" commands.
+Remember to check the "Initial Configuration" section before you execute the
+docker project and to execute a **"down"** command before switching between **dev** and **prod** environments within the same project directory.
 
-### Nginx container configuration
+**"PWD"** parameter is required to execute docker-compose commands since it is used to specify host relative paths. The automated deployment script already does this
+internally, but you will have to explicitly do it since you are deploying the
+project manually. Another option is to add **"PWD"** param inside **"/.env"**
+file with an absolute path of the project so you don't need to add it everytime
+you want to execute a docker compose command.
 
-The default nginx configuration is set to use "http://data-entry.redfia.com" as server name and port 8080 as gateway. You need to add this host as local on your /etc/hosts file to be able to access the website. You can find both dev and prod nginx configuration templates here:
+#### Build the containers
 
-*./docker/web/site_config_dev.conf.template*
-*./docker/web/site_config_prod.conf.template*
+To build the contianers without startint it, use the following command:
 
-Make sure to adjust these settings along the docker-compose file before deploying to production to make sure it fits your production environment arquitecture.
+    env PWD="$PWD" docker-compose up --no-start
+
+Once the containers are initialized, we can use "start" command.
+
+#### Start the existing containers
+To build the contianers without startint it, use the following command:
+
+    env PWD="$PWD" docker-compose start && env PWD="$PWD" docker-compose logs -f
+
+#### Stop the existing containers
+To build the contianers without startint it, use the following command:
+
+    env PWD="$PWD" docker-compose stop
+
+#### Destroy the existing containers
+To build the contianers without startint it, use the following command:
+
+    env PWD="$PWD" docker-compose down

@@ -1,19 +1,27 @@
-upstream rails_app {
-  server rails:3000;
-}
 server {
   listen 80;
+  server_name ${WEB_DOMAIN_NAME};
+  return 301 https://${WEB_DOMAIN_NAME}/$request_uri;
+}
+
+server {
+  listen 443 ssl;
   keepalive_timeout 10;
-  server_name data-entry.redfia.com;
+  server_name ${WEB_DOMAIN_NAME};
   root /var/www/html/public;
 
-  location ~ ^/assets/ {
-    expires max;
-    gzip_static on;
-    gzip_vary on;
-    add_header Cache-Control public;
-    break;
-  }
+  # SSL configuration
+  ssl_certificate ${PROXY_APP_CERTIFICATE_FILE};
+  ssl_certificate_key ${PROXY_APP_CERTIFICATE_KEY_FILE};
+
+  # this is the internal Docker DNS
+  resolver ${DOCKER_RESOLVER_IP};
+
+  # Use a variable to bypass upstream validation
+  set $upstream http://app:3000;
+
+  # Set cache settings
+  include settings/20-cache.${ENV}.conf;
 
   location / {
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -30,14 +38,11 @@ server {
       rewrite (.*) $1.html break;
     }
     if (!-f $request_filename) {
-      proxy_pass http://rails_app;
+      proxy_pass $upstream;
       break;
     }
   }
-  location ~* \.(ico|css|gif|jpe?g|png|js)(\?[0-9]+)?$ {
-     expires max;
-     break;
-  }
+
   # Error pages
   # error_page 500 502 503 504 /500.html;
   location = /500.html {

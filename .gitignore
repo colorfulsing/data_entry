@@ -20,7 +20,4 @@
 /config/database.yml
 /public/assets
 
-/docker/db/seeds/*
-/docker/secrets/*
-/docker/web/default.conf
 /.env
