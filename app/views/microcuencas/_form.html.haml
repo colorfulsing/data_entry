@@ -13,10 +13,10 @@
   .row
     .col.col-4.form-group
       = form.label :id_subcuenca
-      = form.number_field :id_subcuenca, id: :microcuenca_id_subcuenca
+      = form.number_field :id_subcuenca, id: :microcuenca_id_subcuenca, class: 'form-control'
     .col.col-4.form-group
       = form.label :nombre
-      = form.text_field :nombre, id: :microcuenca_nombre
+      = form.text_field :nombre, id: :microcuenca_nombre, class: 'form-control'
     .col.col-4.form-group
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :microcuenca_id_status, class: 'form-control'}

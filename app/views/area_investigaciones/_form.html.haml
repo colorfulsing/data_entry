@@ -13,9 +13,9 @@
   .row
     .col.col-4.form-group
       = form.label :id_investigacion
-      = form.number_field :id_investigacion, id: :area_investigacion_id_investigacion
+      = form.number_field :id_investigacion, id: :area_investigacion_id_investigacion, class: 'form-control'
     .col.col-4.form-group
       = form.label :id_area
-      = form.number_field :id_area, id: :area_investigacion_id_area
+      = form.number_field :id_area, id: :area_investigacion_id_area, class: 'form-control'
   .actions
       = form.submit "Guardar", class: 'btn btn-primary pull-right'

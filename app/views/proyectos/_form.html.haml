@@ -13,13 +13,13 @@
   .row
     .col.col-4.form-group
       = form.label :id_instituto
-      = form.number_field :id_instituto, id: :proyecto_id_instituto
+      = form.number_field :id_instituto, id: :proyecto_id_instituto, class: 'form-control'
     .col.col-4.form-group
       = form.label :nombre
-      = form.text_field :nombre, id: :proyecto_nombre
+      = form.text_field :nombre, id: :proyecto_nombre, class: 'form-control'
     .col.col-4.form-group
       = form.label :descripcion
-      = form.text_field :descripcion, id: :proyecto_descripcion
+      = form.text_field :descripcion, id: :proyecto_descripcion, class: 'form-control'
     .col.col-4.form-group
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :proyecto_id_status, class: 'form-control'}

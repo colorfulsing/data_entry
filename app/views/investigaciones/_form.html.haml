@@ -13,40 +13,40 @@
   .row
     .col.col-4.form-group
       = form.label :id_instituto
-      = form.number_field :id_instituto, id: :investigacion_id_instituto
+      = form.number_field :id_instituto, id: :investigacion_id_instituto, class: 'form-control'
     .col.col-4.form-group
       = form.label :id_microcuenca
-      = form.number_field :id_microcuenca, id: :investigacion_id_microcuenca
+      = form.number_field :id_microcuenca, id: :investigacion_id_microcuenca, class: 'form-control'
     .col.col-4.form-group
       = form.label :id_municipio
-      = form.number_field :id_municipio, id: :investigacion_id_municipio
+      = form.number_field :id_municipio, id: :investigacion_id_municipio, class: 'form-control'
     .col.col-4.form-group
       = form.label :id_documento
-      = form.number_field :id_documento, id: :investigacion_id_documento
+      = form.number_field :id_documento, id: :investigacion_id_documento, class: 'form-control'
     .col.col-4.form-group
       = form.label :autor
-      = form.text_field :autor, id: :investigacion_autor
+      = form.text_field :autor, id: :investigacion_autor, class: 'form-control'
     .col.col-4.form-group
       = form.label :titulo
-      = form.text_field :titulo, id: :investigacion_titulo
+      = form.text_field :titulo, id: :investigacion_titulo, class: 'form-control'
     .col.col-4.form-group
       = form.label :no_paginas
-      = form.number_field :no_paginas, id: :investigacion_no_paginas
+      = form.number_field :no_paginas, id: :investigacion_no_paginas, class: 'form-control'
     .col.col-4.form-group
       = form.label :fecha_realizacion
-      = form.text_field :fecha_realizacion, id: :investigacion_fecha_realizacion
+      = form.text_field :fecha_realizacion, id: :investigacion_fecha_realizacion, class: 'form-control'
     .col.col-4.form-group
       = form.label :fecha_publicacion
-      = form.text_field :fecha_publicacion, id: :investigacion_fecha_publicacion
+      = form.text_field :fecha_publicacion, id: :investigacion_fecha_publicacion, class: 'form-control'
     .col.col-4.form-group
       = form.label :resumen
-      = form.text_area :resumen, id: :investigacion_resumen
+      = form.text_area :resumen, id: :investigacion_resumen, class: 'form-control'
     .col.col-4.form-group
       = form.label :palabras_clave
-      = form.text_field :palabras_clave, id: :investigacion_palabras_clave
+      = form.text_field :palabras_clave, id: :investigacion_palabras_clave, class: 'form-control'
     .col.col-4.form-group
       = form.label :recurso_web
-      = form.text_area :recurso_web, id: :investigacion_recurso_web
+      = form.text_area :recurso_web, id: :investigacion_recurso_web, class: 'form-control'
     .col.col-4.form-group
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :investigacion_id_status, class: 'form-control'}
