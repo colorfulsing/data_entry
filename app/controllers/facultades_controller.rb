@@ -33,7 +33,7 @@ class FacultadesController < ApplicationController
 
     respond_to do |format|
       if @facultad.save
-        format.html { redirect_to @facultad, notice: 'Facultades instituto se creo exitosamente.' }
+        format.html { redirect_to @facultad, notice: 'Facultades instituto se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @facultad }
       else
         format.html { render :new }
@@ -73,7 +73,7 @@ class FacultadesController < ApplicationController
     limit = APP_CONFIG['autocomplete_limit']
     @collection = []
     unless search_expression.blank?
-      @collection = Facultad.search(query).limit(limit)
+      @collection = Facultad.search(query).limit(limit).order(:nombre)
     end
   end
 

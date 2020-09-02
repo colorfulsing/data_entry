@@ -34,7 +34,7 @@ class InvestigacionesController < ApplicationController
 
     respond_to do |format|
       if @investigacion.save
-        format.html { redirect_to @investigacion, notice: 'La Investigacion se creo exitosamente.' }
+        format.html { redirect_to @investigacion, notice: 'La Investigacion se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @investigacion }
       else
         format.html { render :new }

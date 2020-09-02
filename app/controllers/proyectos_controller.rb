@@ -33,7 +33,7 @@ class ProyectosController < ApplicationController
 
     respond_to do |format|
       if @proyecto.save
-        format.html { redirect_to @proyecto, notice: 'Proyecto programa se creo exitosamente.' }
+        format.html { redirect_to @proyecto, notice: 'Proyecto programa se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @proyecto }
       else
         format.html { render :new }

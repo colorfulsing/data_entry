@@ -32,7 +32,7 @@ class MunicipiosController < ApplicationController
 
     respond_to do |format|
       if @municipio.save
-        format.html { redirect_to @municipio, notice: 'El Municipio se creo exitosamente.' }
+        format.html { redirect_to @municipio, notice: 'El Municipio se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @municipio }
       else
         format.html { render :new }
@@ -72,7 +72,7 @@ class MunicipiosController < ApplicationController
     limit = APP_CONFIG['autocomplete_limit']
     @collection = []
     unless search_expression.blank?
-      @collection = Municipio.search(query).limit(limit)
+      @collection = Municipio.search(query).limit(limit).order(:nombre)
     end
   end
 

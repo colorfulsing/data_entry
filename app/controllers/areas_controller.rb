@@ -31,7 +31,7 @@ class AreasController < ApplicationController
 
     respond_to do |format|
       if @area.save
-        format.html { redirect_to @area, notice: 'La Area se creo exitosamente.' }
+        format.html { redirect_to @area, notice: 'La area de estudio se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @area }
       else
         format.html { render :new }
@@ -45,7 +45,7 @@ class AreasController < ApplicationController
   def update
     respond_to do |format|
       if @area.update(area_params)
-        format.html { redirect_to @area, notice: 'La Area se actualizo correctamente.' }
+        format.html { redirect_to @area, notice: 'La area de estudio se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @area }
       else
         format.html { render :edit }
@@ -60,7 +60,7 @@ class AreasController < ApplicationController
     @area.status = Status.find(Status::VALUES[:deleted])
     @area.save validate: false
     respond_to do |format|
-      format.html { redirect_to areas_url, notice: 'La Area se marco como borrada.' }
+      format.html { redirect_to areas_url, notice: 'La area de estudio se marco como borrada.' }
       format.json { head :no_content }
     end
   end

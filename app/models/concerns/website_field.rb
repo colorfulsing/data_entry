@@ -2,7 +2,7 @@ module WebsiteField
   extend ActiveSupport::Concern
 
   included do
-    validate :website_validation
+    #validate :website_validation
 
     def website_valid?
       return true if self.website.blank?

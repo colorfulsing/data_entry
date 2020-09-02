@@ -13,12 +13,12 @@
       .container
         - if !alert.to_s.strip.blank?
           .alert.alert-warning{role: "alert"}
-            = alert
+            = strip_tags html_unescape alert
             %a.close-button.close-alert-trigger{href: 'javascript:void(0);'}
               %i.fa.fa-times
         - if !notice.to_s.strip.blank?
           #notice.alert.alert-info{role: "alert"}
-            = notice
+            = strip_tags html_unescape notice
             %a.close-button.close-alert-trigger{href: 'javascript:void(0);'}
               %i.fa.fa-times
 

@@ -31,7 +31,7 @@ class VertientesController < ApplicationController
 
     respond_to do |format|
       if @vertiente.save
-        format.html { redirect_to @vertiente, notice: 'La Vertiente se creo exitosamente.' }
+        format.html { redirect_to @vertiente, notice: 'La Vertiente se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @vertiente }
       else
         format.html { render :new }

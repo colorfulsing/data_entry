@@ -31,7 +31,7 @@ class TipoInstitutosController < ApplicationController
 
     respond_to do |format|
       if @tipo_instituto.save
-        format.html { redirect_to @tipo_instituto, notice: 'El Tipo Instituto se creo exitosamente.' }
+        format.html { redirect_to @tipo_instituto, notice: 'El Tipo Instituto se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @tipo_instituto }
       else
         format.html { render :new }

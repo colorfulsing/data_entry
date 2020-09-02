@@ -32,7 +32,7 @@ class InstitucionesController < ApplicationController
 
     respond_to do |format|
       if @institucion.save
-        format.html { redirect_to @institucion, notice: 'La Institucion se creo exitosamente.' }
+        format.html { redirect_to @institucion, notice: 'La Institucion se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @institucion }
       else
         format.html { render :new }

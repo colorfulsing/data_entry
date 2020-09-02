@@ -31,7 +31,7 @@ class SubcuencasController < ApplicationController
 
     respond_to do |format|
       if @subcuenca.save
-        format.html { redirect_to @subcuenca, notice: 'La Subcuenca se creo exitosamente.' }
+        format.html { redirect_to @subcuenca, notice: 'La Subcuenca se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @subcuenca }
       else
         format.html { render :new }
@@ -71,7 +71,7 @@ class SubcuencasController < ApplicationController
     limit = APP_CONFIG['autocomplete_limit']
     @collection = []
     unless search_expression.blank?
-      @collection = Subcuenca.search(query).limit(limit)
+      @collection = Subcuenca.search(query).limit(limit).order(:nombre)
     end
   end
 

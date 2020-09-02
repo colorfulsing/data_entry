@@ -31,7 +31,7 @@ class MicrocuencasController < ApplicationController
 
     respond_to do |format|
       if @microcuenca.save
-        format.html { redirect_to @microcuenca, notice: 'La Microcuenca se creo exitosamente.' }
+        format.html { redirect_to @microcuenca, notice: 'La Microcuenca se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @microcuenca }
       else
         format.html { render :new }
@@ -71,7 +71,7 @@ class MicrocuencasController < ApplicationController
     limit = APP_CONFIG['autocomplete_limit']
     @collection = []
     unless search_expression.blank?
-      @collection = Microcuenca.search(query).limit(limit)
+      @collection = Microcuenca.search(query).limit(limit).order(:nombre)
     end
   end
 

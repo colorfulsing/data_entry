@@ -32,7 +32,7 @@ class StatusesController < ApplicationController
 
     respond_to do |format|
       if @status.save
-        format.html { redirect_to @status, notice: 'El Estado se creo exitosamente.' }
+        format.html { redirect_to @status, notice: 'El Estado se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @status }
       else
         format.html { render :new }
@@ -65,6 +65,7 @@ class StatusesController < ApplicationController
         format.html { redirect_to statuses_url, notice: error_message }
         format.json { render json: [error_message], status: :unprocessable_entity }
       end
+      return
     end
 
     # Delete status permanently

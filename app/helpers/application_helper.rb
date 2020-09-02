@@ -4,4 +4,12 @@ module ApplicationHelper
       form.text_field field, class: 'form-control', placeholder: 'YYYY-MM-DD'
     end
   end
+
+  def html_unescape string
+    CGI::unescapeHTML string
+  end
+
+  def uh string
+    html_unescape string
+  end
 end

@@ -31,7 +31,7 @@ class DepartamentosController < ApplicationController
 
     respond_to do |format|
       if @departamento.save
-        format.html { redirect_to @departamento, notice: 'El Departamento se creo exitosamente.' }
+        format.html { redirect_to @departamento, notice: 'El Departamento se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @departamento }
       else
         format.html { render :new }

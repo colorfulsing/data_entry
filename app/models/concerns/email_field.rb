@@ -2,7 +2,7 @@ module EmailField
   extend ActiveSupport::Concern
 
   included do
-    validate :email_validation
+    #validate :email_validation
 
     def email_valid?
       self.email.blank? || self.email =~ Devise.email_regexp

@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_06_220811) do
+ActiveRecord::Schema.define(version: 20180506220811) do
 
-  create_table "area", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "area", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre", limit: 100, null: false
     t.string "descripcion", limit: 500
     t.integer "id_status"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "area_investigacion", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "area_investigacion", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "id_investigacion", null: false
     t.integer "id_area", null: false
     t.index ["id"], name: "id_UNIQUE", unique: true
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["id_investigacion"], name: "fk14_idx"
   end
 
-  create_table "cuencas", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "cuencas", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "id_vertiente", null: false
     t.string "nombre", limit: 100, null: false
     t.integer "id_status"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "departamentos", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "departamentos", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre", limit: 45, null: false
     t.integer "id_status"
     t.datetime "updated_at"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "facultades_institutos", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "facultades_institutos", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "id_instituciones", null: false
     t.integer "id_tipo_instituto", default: 1, null: false
     t.string "nombre", limit: 150, null: false
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["id_tipo_instituto"], name: "fk123_idx"
   end
 
-  create_table "instituciones", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "instituciones", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre", limit: 150, null: false
     t.string "siglas", limit: 30, default: "N/A"
     t.string "telefono", limit: 30, default: "N/A"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "investigaciones", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "investigaciones", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "id_instituto", null: false
     t.integer "id_microcuenca", null: false
     t.integer "id_municipio"
@@ -115,7 +115,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["id_status"], name: "investigaciones_status_idx"
   end
 
-  create_table "microcuenca", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "microcuenca", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "id_subcuenca", null: false
     t.string "nombre", limit: 100, null: false
     t.integer "id_status"
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["id_subcuenca"], name: "fk8_idx"
   end
 
-  create_table "municipios", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "municipios", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "id_departamento", null: false
     t.string "nombre", limit: 45, null: false
     t.integer "id_status"
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["id_status"], name: "municipios_status_idx"
   end
 
-  create_table "proyecto_area", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "proyecto_area", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "id_proyecto", null: false
     t.integer "id_area", null: false
     t.datetime "updated_at"
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["id_proyecto"], name: "fk1_idx"
   end
 
-  create_table "proyecto_programa", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "proyecto_programa", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "id_instituto", null: false
     t.string "nombre", limit: 200, null: false
     t.string "descripcion", limit: 600, default: "N/A"
@@ -163,13 +163,13 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["id_status"], name: "proyecto_programa_status_idx"
   end
 
-  create_table "status", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "status", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre", limit: 100, null: false
     t.integer "visible", limit: 1, null: false
     t.index ["id", "visible"], name: "index2"
   end
 
-  create_table "subcuencas", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "subcuencas", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "id_cuenca", null: false
     t.string "nombre", limit: 100, null: false
     t.integer "id_status"
@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "tipo_documento", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "tipo_documento", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre", limit: 50, null: false
     t.string "descripcion", limit: 500
     t.integer "id_status"
@@ -194,7 +194,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "tipo_instituto", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "tipo_instituto", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre", limit: 50, null: false
     t.string "descripcion", limit: 500
     t.integer "id_status"
@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -225,7 +225,7 @@ ActiveRecord::Schema.define(version: 2018_05_06_220811) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "vertientes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "vertientes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre", limit: 100, null: false
     t.integer "id_status"
     t.datetime "updated_at"

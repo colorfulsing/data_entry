@@ -32,7 +32,7 @@ class CuencasController < ApplicationController
 
     respond_to do |format|
       if @cuenca.save
-        format.html { redirect_to @cuenca, notice: 'La Cuenca se creo exitosamente.' }
+        format.html { redirect_to @cuenca, notice: 'La Cuenca se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @cuenca }
       else
         format.html { render :new }
@@ -72,7 +72,7 @@ class CuencasController < ApplicationController
     limit = APP_CONFIG['autocomplete_limit']
     @collection = []
     unless search_expression.blank?
-      @collection = Cuenca.search(query).limit(limit)
+      @collection = Cuenca.search(query).limit(limit).order(:nombre)
     end
   end
 

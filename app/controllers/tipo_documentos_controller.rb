@@ -31,7 +31,7 @@ class TipoDocumentosController < ApplicationController
 
     respond_to do |format|
       if @tipo_documento.save
-        format.html { redirect_to @tipo_documento, notice: 'El Tipo documento se creo exitosamente.' }
+        format.html { redirect_to @tipo_documento, notice: 'El Tipo documento se cre&oacute; exitosamente.' }
         format.json { render :show, status: :created, location: @tipo_documento }
       else
         format.html { render :new }
