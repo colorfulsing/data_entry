@@ -1,0 +1,24 @@
+- form_path = tipo_documento.id.nil? ? tipo_documento_path : tipo_documento_path(tipo_documento)
+= form_with(url: form_path, model: tipo_documento, local: true) do |form|
+  - if tipo_documento.errors.any?
+    #error_explanation.alert.alert-danger{role: 'alert'}
+      %h2
+        Existen
+        tipo_documento.errors.count
+        = "error".pluralize(tipo_documento.errors.count, :es)
+      %ul
+        - tipo_documento.errors.full_messages.each do |message|
+          %li= message
+
+  .row
+    .col.col-4.form-group
+      = form.label :nombre
+      = form.text_field :nombre, id: :tipo_documento_nombre
+    .col.col-4.form-group
+      = form.label :descripcion
+      = form.text_field :descripcion, id: :tipo_documento_descripcion
+    .col.col-4.form-group
+      = form.label :id_status, "Estado"
+      = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :tipo_documento_id_status, class: 'form-control'}
+  .actions
+      = form.submit "Guardar", class: 'btn btn-primary pull-right'

@@ -1,0 +1,20 @@
+%p#notice= notice
+%h1 Tipo Documentos
+%table
+  %thead
+    %tr
+      %th Nombre
+      %th Descripcion
+      %th Id status
+      %th{:colspan => "3"}
+  %tbody
+    - @tipo_documentos.each do |tipo_documento|
+      %tr
+        %td= tipo_documento.nombre
+        %td= tipo_documento.descripcion
+        %td= tipo_documento.id_status
+        %td= link_to 'Show', tipo_documento
+        %td= link_to 'Edit', edit_tipo_documento_path(tipo_documento)
+        %td= link_to 'Destroy', tipo_documento, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Tipo Documento', new_tipo_documento_path

@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Id investigacion:
+  = @area_investigacion.id_investigacion
+%p
+  %strong Id area:
+  = @area_investigacion.id_area
+= link_to 'Edit', edit_area_investigacion_path(@area_investigacion)
+|
+= link_to 'Back', area_investigaciones_path

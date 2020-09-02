@@ -1,4 +1,5 @@
 class SubcuencasController < ApplicationController
+  before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_subcuenca, only: [:show, :edit, :update, :destroy]
 
   # GET /subcuencas
@@ -28,7 +29,7 @@ class SubcuencasController < ApplicationController
 
     respond_to do |format|
       if @subcuenca.save
-        format.html { redirect_to @subcuenca, notice: 'Subcuenca was successfully created.' }
+        format.html { redirect_to @subcuenca, notice: 'La Subcuenca se creo exitosamente.' }
         format.json { render :show, status: :created, location: @subcuenca }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class SubcuencasController < ApplicationController
   def update
     respond_to do |format|
       if @subcuenca.update(subcuenca_params)
-        format.html { redirect_to @subcuenca, notice: 'Subcuenca was successfully updated.' }
+        format.html { redirect_to @subcuenca, notice: 'La Subcuenca se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @subcuenca }
       else
         format.html { render :edit }
@@ -54,9 +55,10 @@ class SubcuencasController < ApplicationController
   # DELETE /subcuencas/1
   # DELETE /subcuencas/1.json
   def destroy
-    @subcuenca.destroy
+    @subcuenca.status = Status.find(Status::VALUES[:deleted])
+    @subcuenca.save validate: false
     respond_to do |format|
-      format.html { redirect_to subcuencas_url, notice: 'Subcuenca was successfully destroyed.' }
+      format.html { redirect_to subcuencas_url, notice: 'La Subcuenca se marco como borrada.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +67,10 @@ class SubcuencasController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_subcuenca
       @subcuenca = Subcuenca.find(params[:id])
+    end
+
+    def load_status
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

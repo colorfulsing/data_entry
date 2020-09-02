@@ -1,0 +1,21 @@
+- form_path = area_investigacion.id.nil? ? area_investigacion_path : area_investigacion_path(area_investigacion)
+= form_with(url: form_path, model: area_investigacion, local: true) do |form|
+  - if area_investigacion.errors.any?
+    #error_explanation.alert.alert-danger{role: 'alert'}
+      %h2
+        Existen
+        area_investigacion.errors.count
+        = "error".pluralize(area_investigacion.errors.count, :es)
+      %ul
+        - area_investigacion.errors.full_messages.each do |message|
+          %li= message
+
+  .row
+    .col.col-4.form-group
+      = form.label :id_investigacion
+      = form.number_field :id_investigacion, id: :area_investigacion_id_investigacion
+    .col.col-4.form-group
+      = form.label :id_area
+      = form.number_field :id_area, id: :area_investigacion_id_area
+  .actions
+      = form.submit "Guardar", class: 'btn btn-primary pull-right'

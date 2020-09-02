@@ -1,4 +1,5 @@
 class CuencasController < ApplicationController
+  before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_cuenca, only: [:show, :edit, :update, :destroy]
 
   # GET /cuencas
@@ -28,7 +29,7 @@ class CuencasController < ApplicationController
 
     respond_to do |format|
       if @cuenca.save
-        format.html { redirect_to @cuenca, notice: 'Cuenca was successfully created.' }
+        format.html { redirect_to @cuenca, notice: 'La Cuenca se creo exitosamente.' }
         format.json { render :show, status: :created, location: @cuenca }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class CuencasController < ApplicationController
   def update
     respond_to do |format|
       if @cuenca.update(cuenca_params)
-        format.html { redirect_to @cuenca, notice: 'Cuenca was successfully updated.' }
+        format.html { redirect_to @cuenca, notice: 'La Cuenca se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @cuenca }
       else
         format.html { render :edit }
@@ -54,9 +55,10 @@ class CuencasController < ApplicationController
   # DELETE /cuencas/1
   # DELETE /cuencas/1.json
   def destroy
-    @cuenca.destroy
+    @cuenca.status = Status.find(Status::VALUES[:deleted])
+    @cuenca.save validate: false
     respond_to do |format|
-      format.html { redirect_to cuencas_url, notice: 'Cuenca was successfully destroyed.' }
+      format.html { redirect_to cuencas_url, notice: 'La Cuenca se marco como borrada.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +67,10 @@ class CuencasController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_cuenca
       @cuenca = Cuenca.find(params[:id])
+    end
+
+    def load_status
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

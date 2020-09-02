@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Id vertiente:
+  = @cuenca.id_vertiente
+%p
+  %strong Nombre:
+  = @cuenca.nombre
+%p
+  %strong Id status:
+  = @cuenca.id_status
+= link_to 'Edit', edit_cuenca_path(@cuenca)
+|
+= link_to 'Back', cuencas_path

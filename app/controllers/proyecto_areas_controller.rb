@@ -1,4 +1,5 @@
 class ProyectoAreasController < ApplicationController
+  before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_proyecto_area, only: [:show, :edit, :update, :destroy]
 
   # GET /proyecto_areas
@@ -54,7 +55,8 @@ class ProyectoAreasController < ApplicationController
   # DELETE /proyecto_areas/1
   # DELETE /proyecto_areas/1.json
   def destroy
-    @proyecto_area.destroy
+    @proyecto_area.status = Status.find(Status::VALUES[:deleted])
+    @proyecto_area.save validate: false
     respond_to do |format|
       format.html { redirect_to proyecto_areas_url, notice: 'Proyecto area was successfully destroyed.' }
       format.json { head :no_content }
@@ -65,6 +67,10 @@ class ProyectoAreasController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_proyecto_area
       @proyecto_area = ProyectoArea.find(params[:id])
+    end
+
+    def load_status
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

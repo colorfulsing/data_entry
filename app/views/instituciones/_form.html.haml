@@ -3,8 +3,9 @@
   - if institucion.errors.any?
     #error_explanation.alert.alert-danger{role: 'alert'}
       %h2
-        = pluralize(institucion.errors.count, "error")
-        prohibited this institucion from being saved:
+        Existen
+        institucion.errors.count
+        = "error".pluralize(institucion.errors.count, :es)
 
       %ul
         - institucion.errors.full_messages.each do |message|
@@ -41,4 +42,4 @@
 
 
   .actions
-    = form.submit "Guardar", class: 'btn btn-primary pull-right'
+      = form.submit "Guardar", class: 'btn btn-primary pull-right'

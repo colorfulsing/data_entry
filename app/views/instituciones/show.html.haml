@@ -1,10 +1,4 @@
 .container
-  - if !notice.to_s.strip.empty?
-    .row
-      .col
-        #notice.alert.alert-info{role: 'alert'}
-          = notice
-
   .row
     .col.col-9
       %h1= @institucion.nombre
@@ -121,8 +115,6 @@
                 - else
                   .text-secondary
                     = facultad.status.nombre
-              %td= facultad.sitio_web
-              %td= facultad.id_status
               %td= link_to 'Mostrar', facultad_path(facultad)
               %td= link_to 'Editar', edit_facultad_path(facultad)
               %td= link_to 'Borrar', facultad_path(facultad), method: :delete, data: { confirm: 'Estas seguro?' }

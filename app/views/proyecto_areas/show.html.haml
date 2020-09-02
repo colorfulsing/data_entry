@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Id proyecto:
+  = @proyecto_area.id_proyecto
+%p
+  %strong Id area:
+  = @proyecto_area.id_area
+= link_to 'Edit', edit_proyecto_area_path(@proyecto_area)
+|
+= link_to 'Back', proyecto_areas_path

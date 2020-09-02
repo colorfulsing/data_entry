@@ -1,0 +1,43 @@
+%p#notice= notice
+%p
+  %strong Id instituto:
+  = @investigacion.id_instituto
+%p
+  %strong Id microcuenca:
+  = @investigacion.id_microcuenca
+%p
+  %strong Id municipio:
+  = @investigacion.id_municipio
+%p
+  %strong Id documento:
+  = @investigacion.id_documento
+%p
+  %strong Autor:
+  = @investigacion.autor
+%p
+  %strong Titulo:
+  = @investigacion.titulo
+%p
+  %strong No paginas:
+  = @investigacion.no_paginas
+%p
+  %strong Fecha realizacion:
+  = @investigacion.fecha_realizacion
+%p
+  %strong Fecha publicacion:
+  = @investigacion.fecha_publicacion
+%p
+  %strong Resumen:
+  = @investigacion.resumen
+%p
+  %strong Palabras clave:
+  = @investigacion.palabras_clave
+%p
+  %strong Recurso web:
+  = @investigacion.recurso_web
+%p
+  %strong Id status:
+  = @investigacion.id_status
+= link_to 'Edit', edit_investigacion_path(@investigacion)
+|
+= link_to 'Back', investigaciones_path

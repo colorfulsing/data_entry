@@ -1,0 +1,31 @@
+%p#notice= notice
+%p
+  %strong Id instituciones:
+  = @facultad.id_instituciones
+%p
+  %strong Nombre:
+  = @facultad.nombre
+%p
+  %strong Siglas:
+  = @facultad.siglas
+%p
+  %strong Telefono:
+  = @facultad.telefono
+%p
+  %strong Extension:
+  = @facultad.extension
+%p
+  %strong Direccion:
+  = @facultad.direccion
+%p
+  %strong Correo electronico:
+  = @facultad.correo_electronico
+%p
+  %strong Sitio web:
+  = @facultad.sitio_web
+%p
+  %strong Id status:
+  = @facultad.id_status
+= link_to 'Edit', edit_facultad_path(@facultad)
+|
+= link_to 'Back', facultades_path

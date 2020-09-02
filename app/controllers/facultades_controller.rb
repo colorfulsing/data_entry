@@ -1,4 +1,5 @@
 class FacultadesController < ApplicationController
+  before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_facultad, only: [:show, :edit, :update, :destroy]
 
   # GET /facultades
@@ -66,6 +67,10 @@ class FacultadesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_facultad
       @facultad = Facultad.find(params[:id])
+    end
+
+    def load_status
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

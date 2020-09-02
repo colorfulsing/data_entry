@@ -16,3 +16,12 @@
 //= require ./popper/popper.min.js
 //= require ./bootstrap/bootstrap.min.js
 //= require_tree .
+
+// Fixed alert events
+(function () {
+  $('.fixed-alert .alert .close-alert-trigger').click(function (e) {
+    var myself = $(e.target);
+    var parent = myself.closest('.alert');
+    parent.remove();
+  });
+})();

@@ -1,4 +1,5 @@
 class MicrocuencasController < ApplicationController
+  before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_microcuenca, only: [:show, :edit, :update, :destroy]
 
   # GET /microcuencas
@@ -28,7 +29,7 @@ class MicrocuencasController < ApplicationController
 
     respond_to do |format|
       if @microcuenca.save
-        format.html { redirect_to @microcuenca, notice: 'Microcuenca was successfully created.' }
+        format.html { redirect_to @microcuenca, notice: 'La Microcuenca se creo exitosamente.' }
         format.json { render :show, status: :created, location: @microcuenca }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class MicrocuencasController < ApplicationController
   def update
     respond_to do |format|
       if @microcuenca.update(microcuenca_params)
-        format.html { redirect_to @microcuenca, notice: 'Microcuenca was successfully updated.' }
+        format.html { redirect_to @microcuenca, notice: 'La Microcuenca se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @microcuenca }
       else
         format.html { render :edit }
@@ -54,9 +55,10 @@ class MicrocuencasController < ApplicationController
   # DELETE /microcuencas/1
   # DELETE /microcuencas/1.json
   def destroy
-    @microcuenca.destroy
+    @microcuenca.status = Status.find(Status::VALUES[:deleted])
+    @microcuenca.save validate: false
     respond_to do |format|
-      format.html { redirect_to microcuencas_url, notice: 'Microcuenca was successfully destroyed.' }
+      format.html { redirect_to microcuencas_url, notice: 'La Microcuenca se marco como borrada.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +67,10 @@ class MicrocuencasController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_microcuenca
       @microcuenca = Microcuenca.find(params[:id])
+    end
+
+    def load_status
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

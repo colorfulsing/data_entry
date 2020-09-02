@@ -1,4 +1,5 @@
 class AreasController < ApplicationController
+  before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_area, only: [:show, :edit, :update, :destroy]
 
   # GET /areas
@@ -28,7 +29,7 @@ class AreasController < ApplicationController
 
     respond_to do |format|
       if @area.save
-        format.html { redirect_to @area, notice: 'Area was successfully created.' }
+        format.html { redirect_to @area, notice: 'La Area se creo exitosamente.' }
         format.json { render :show, status: :created, location: @area }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class AreasController < ApplicationController
   def update
     respond_to do |format|
       if @area.update(area_params)
-        format.html { redirect_to @area, notice: 'Area was successfully updated.' }
+        format.html { redirect_to @area, notice: 'La Area se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @area }
       else
         format.html { render :edit }
@@ -54,9 +55,10 @@ class AreasController < ApplicationController
   # DELETE /areas/1
   # DELETE /areas/1.json
   def destroy
-    @area.destroy
+    @area.status = Status.find(Status::VALUES[:deleted])
+    @area.save validate: false
     respond_to do |format|
-      format.html { redirect_to areas_url, notice: 'Area was successfully destroyed.' }
+      format.html { redirect_to areas_url, notice: 'La Area se marco como borrada.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +67,10 @@ class AreasController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_area
       @area = Area.find(params[:id])
+    end
+
+    def load_status
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

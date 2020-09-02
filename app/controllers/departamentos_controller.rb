@@ -1,4 +1,5 @@
 class DepartamentosController < ApplicationController
+  before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_departamento, only: [:show, :edit, :update, :destroy]
 
   # GET /departamentos
@@ -28,7 +29,7 @@ class DepartamentosController < ApplicationController
 
     respond_to do |format|
       if @departamento.save
-        format.html { redirect_to @departamento, notice: 'Departamento was successfully created.' }
+        format.html { redirect_to @departamento, notice: 'La Departamento se creo exitosamente.' }
         format.json { render :show, status: :created, location: @departamento }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class DepartamentosController < ApplicationController
   def update
     respond_to do |format|
       if @departamento.update(departamento_params)
-        format.html { redirect_to @departamento, notice: 'Departamento was successfully updated.' }
+        format.html { redirect_to @departamento, notice: 'La Departamento se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @departamento }
       else
         format.html { render :edit }
@@ -54,9 +55,10 @@ class DepartamentosController < ApplicationController
   # DELETE /departamentos/1
   # DELETE /departamentos/1.json
   def destroy
-    @departamento.destroy
+    @departamento.status = Status.find(Status::VALUES[:deleted])
+    @departamento.save validate: false
     respond_to do |format|
-      format.html { redirect_to departamentos_url, notice: 'Departamento was successfully destroyed.' }
+      format.html { redirect_to departamentos_url, notice: 'La Departamento se marco como borrada.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +67,10 @@ class DepartamentosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_departamento
       @departamento = Departamento.find(params[:id])
+    end
+
+    def load_status
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

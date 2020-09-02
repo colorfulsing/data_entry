@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Id subcuenca:
+  = @microcuenca.id_subcuenca
+%p
+  %strong Nombre:
+  = @microcuenca.nombre
+%p
+  %strong Id status:
+  = @microcuenca.id_status
+= link_to 'Edit', edit_microcuenca_path(@microcuenca)
+|
+= link_to 'Back', microcuencas_path

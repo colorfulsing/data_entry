@@ -1,4 +1,5 @@
 class TipoDocumentosController < ApplicationController
+  before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_tipo_documento, only: [:show, :edit, :update, :destroy]
 
   # GET /tipo_documentos
@@ -54,7 +55,8 @@ class TipoDocumentosController < ApplicationController
   # DELETE /tipo_documentos/1
   # DELETE /tipo_documentos/1.json
   def destroy
-    @tipo_documento.destroy
+    @tipo_documento.status = Status.find(Status::VALUES[:deleted])
+    @tipo_documento.save validate: false
     respond_to do |format|
       format.html { redirect_to tipo_documentos_url, notice: 'Tipo documento was successfully destroyed.' }
       format.json { head :no_content }
@@ -65,6 +67,10 @@ class TipoDocumentosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_tipo_documento
       @tipo_documento = TipoDocumento.find(params[:id])
+    end
+
+    def load_status
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

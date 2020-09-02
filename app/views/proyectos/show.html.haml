@@ -1,0 +1,16 @@
+%p#notice= notice
+%p
+  %strong Id instituto:
+  = @proyecto.id_instituto
+%p
+  %strong Nombre:
+  = @proyecto.nombre
+%p
+  %strong Descripcion:
+  = @proyecto.descripcion
+%p
+  %strong Id status:
+  = @proyecto.id_status
+= link_to 'Edit', edit_proyecto_path(@proyecto)
+|
+= link_to 'Back', proyectos_path

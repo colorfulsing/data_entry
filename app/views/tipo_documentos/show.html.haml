@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Nombre:
+  = @tipo_documento.nombre
+%p
+  %strong Descripcion:
+  = @tipo_documento.descripcion
+%p
+  %strong Id status:
+  = @tipo_documento.id_status
+= link_to 'Edit', edit_tipo_documento_path(@tipo_documento)
+|
+= link_to 'Back', tipo_documentos_path

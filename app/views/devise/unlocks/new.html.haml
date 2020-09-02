@@ -1,0 +1,20 @@
+.container
+  .row
+    .col
+      %h1 Reenviar instrucciones para desbloquear mi cuenta
+
+  .row
+    .col
+
+      = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+        #error_explanation.alert.alert-danger{role: 'alert'}
+          = devise_error_messages!
+
+        .col.col-4.form-group
+          = f.label :email
+          = f.email_field :email, autofocus: true, autocomplete: "email"
+
+        .actions
+          = f.submit "Resend unlock instructions"
+
+      = render "devise/shared/links"

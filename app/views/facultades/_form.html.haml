@@ -1,0 +1,42 @@
+- form_path = facultad.id.nil? ? facultad_path : facultad_path(facultad)
+= form_with(url: form_path, model: facultad, local: true) do |form|
+  - if facultad.errors.any?
+    #error_explanation.alert.alert-danger{role: 'alert'}
+      %h2
+        Existen
+        facultad.errors.count
+        = "error".pluralize(facultad.errors.count, :es)
+      %ul
+        - facultad.errors.full_messages.each do |message|
+          %li= message
+
+  .row
+    .col.col-4.form-group
+      = form.label :id_instituciones
+      = form.number_field :id_instituciones, id: :facultad_id_instituciones
+    .col.col-4.form-group
+      = form.label :nombre
+      = form.text_field :nombre, id: :facultad_nombre
+    .col.col-4.form-group
+      = form.label :siglas
+      = form.text_field :siglas, id: :facultad_siglas
+    .col.col-4.form-group
+      = form.label :telefono
+      = form.text_field :telefono, id: :facultad_telefono
+    .col.col-4.form-group
+      = form.label :extension
+      = form.text_field :extension, id: :facultad_extension
+    .col.col-4.form-group
+      = form.label :direccion
+      = form.text_field :direccion, id: :facultad_direccion
+    .col.col-4.form-group
+      = form.label :correo_electronico
+      = form.text_field :correo_electronico, id: :facultad_correo_electronico
+    .col.col-4.form-group
+      = form.label :sitio_web
+      = form.text_field :sitio_web, id: :facultad_sitio_web
+    .col.col-4.form-group
+      = form.label :id_status, "Estado"
+      = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :facultad_id_status, class: 'form-control'}
+  .actions
+      = form.submit "Guardar", class: 'btn btn-primary pull-right'

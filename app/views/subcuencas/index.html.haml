@@ -1,0 +1,20 @@
+%p#notice= notice
+%h1 Subcuencas
+%table
+  %thead
+    %tr
+      %th Id cuenca
+      %th Nombre
+      %th Id status
+      %th{:colspan => "3"}
+  %tbody
+    - @subcuencas.each do |subcuenca|
+      %tr
+        %td= subcuenca.id_cuenca
+        %td= subcuenca.nombre
+        %td= subcuenca.id_status
+        %td= link_to 'Show', subcuenca
+        %td= link_to 'Edit', edit_subcuenca_path(subcuenca)
+        %td= link_to 'Destroy', subcuenca, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Subcuenca', new_subcuenca_path

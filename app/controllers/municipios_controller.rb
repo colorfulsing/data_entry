@@ -1,4 +1,5 @@
 class MunicipiosController < ApplicationController
+  before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_municipio, only: [:show, :edit, :update, :destroy]
 
   # GET /municipios
@@ -28,7 +29,7 @@ class MunicipiosController < ApplicationController
 
     respond_to do |format|
       if @municipio.save
-        format.html { redirect_to @municipio, notice: 'Municipio was successfully created.' }
+        format.html { redirect_to @municipio, notice: 'La Municipio se creo exitosamente.' }
         format.json { render :show, status: :created, location: @municipio }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class MunicipiosController < ApplicationController
   def update
     respond_to do |format|
       if @municipio.update(municipio_params)
-        format.html { redirect_to @municipio, notice: 'Municipio was successfully updated.' }
+        format.html { redirect_to @municipio, notice: 'La Municipio se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @municipio }
       else
         format.html { render :edit }
@@ -54,9 +55,10 @@ class MunicipiosController < ApplicationController
   # DELETE /municipios/1
   # DELETE /municipios/1.json
   def destroy
-    @municipio.destroy
+    @municipio.status = Status.find(Status::VALUES[:deleted])
+    @municipio.save validate: false
     respond_to do |format|
-      format.html { redirect_to municipios_url, notice: 'Municipio was successfully destroyed.' }
+      format.html { redirect_to municipios_url, notice: 'La Municipio se marco como borrada.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +67,10 @@ class MunicipiosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_municipio
       @municipio = Municipio.find(params[:id])
+    end
+
+    def load_status
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,0 +1,20 @@
+%p#notice= notice
+%h1 Areas
+%table
+  %thead
+    %tr
+      %th Nombre
+      %th Descripcion
+      %th Id status
+      %th{:colspan => "3"}
+  %tbody
+    - @areas.each do |area|
+      %tr
+        %td= area.nombre
+        %td= area.descripcion
+        %td= area.id_status
+        %td= link_to 'Show', area
+        %td= link_to 'Edit', edit_area_path(area)
+        %td= link_to 'Destroy', area, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Area', new_area_path

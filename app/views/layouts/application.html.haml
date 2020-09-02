@@ -2,14 +2,29 @@
 !!! 5
 %html
   %head
-    %title= "#{meta_title.empty? ? '' : ' | '}Estado del Arte"
+    %title= "#{meta_title.empty? ? '' : ' | '}Administracion"
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 %body{class: yield(:page_class)}
+  .fixed-alert
+    .container
+      - if !alert.to_s.strip.blank?
+        .alert.alert-warning{role: "alert"}
+          = alert
+          %a.close-button.close-alert-trigger{href: 'javascript:void(0);'}
+            %i.fa.fa-times
+      - if !notice.to_s.strip.blank?
+        #notice.alert.alert-info{role: "alert"}
+          = notice
+          %a.close-button.close-alert-trigger{href: 'javascript:void(0);'}
+            %i.fa.fa-times
+
   .section-header
     = render 'shared/menu'
   .section-content
     = yield
   .section-footer
     = render 'shared/footer'
+
+  = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  = yield :javascript

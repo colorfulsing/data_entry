@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Id departamento:
+  = @municipio.id_departamento
+%p
+  %strong Nombre:
+  = @municipio.nombre
+%p
+  %strong Id status:
+  = @municipio.id_status
+= link_to 'Edit', edit_municipio_path(@municipio)
+|
+= link_to 'Back', municipios_path

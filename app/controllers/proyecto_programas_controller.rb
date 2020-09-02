@@ -1,4 +1,5 @@
 class ProyectosController < ApplicationController
+  before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_proyecto, only: [:show, :edit, :update, :destroy]
 
   # GET /proyectos
@@ -54,7 +55,8 @@ class ProyectosController < ApplicationController
   # DELETE /proyectos/1
   # DELETE /proyectos/1.json
   def destroy
-    @proyecto.destroy
+    @proyecto.status = Status.find(Status::VALUES[:deleted])
+    @proyecto.save validate: false
     respond_to do |format|
       format.html { redirect_to proyectos_url, notice: 'Proyecto programa was successfully destroyed.' }
       format.json { head :no_content }
@@ -65,6 +67,10 @@ class ProyectosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_proyecto
       @proyecto = Proyecto.find(params[:id])
+    end
+
+    def load_status
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

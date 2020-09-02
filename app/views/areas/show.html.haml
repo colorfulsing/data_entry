@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Nombre:
+  = @area.nombre
+%p
+  %strong Descripcion:
+  = @area.descripcion
+%p
+  %strong Id status:
+  = @area.id_status
+= link_to 'Edit', edit_area_path(@area)
+|
+= link_to 'Back', areas_path

@@ -1,4 +1,5 @@
 class InvestigacionesController < ApplicationController
+  before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_investigacion, only: [:show, :edit, :update, :destroy]
 
   # GET /investigaciones
@@ -28,7 +29,7 @@ class InvestigacionesController < ApplicationController
 
     respond_to do |format|
       if @investigacion.save
-        format.html { redirect_to @investigacion, notice: 'Investigacion was successfully created.' }
+        format.html { redirect_to @investigacion, notice: 'La Investigacion se creo exitosamente.' }
         format.json { render :show, status: :created, location: @investigacion }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class InvestigacionesController < ApplicationController
   def update
     respond_to do |format|
       if @investigacion.update(investigacion_params)
-        format.html { redirect_to @investigacion, notice: 'Investigacion was successfully updated.' }
+        format.html { redirect_to @investigacion, notice: 'La Investigacion se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @investigacion }
       else
         format.html { render :edit }
@@ -54,9 +55,10 @@ class InvestigacionesController < ApplicationController
   # DELETE /investigaciones/1
   # DELETE /investigaciones/1.json
   def destroy
-    @investigacion.destroy
+    @investigacion.status = Status.find(Status::VALUES[:deleted])
+    @investigacion.save validate: false
     respond_to do |format|
-      format.html { redirect_to investigaciones_url, notice: 'Investigacion was successfully destroyed.' }
+      format.html { redirect_to investigaciones_url, notice: 'La Investigacion se marco como borrada.' }
       format.json { head :no_content }
     end
   end
@@ -65,6 +67,10 @@ class InvestigacionesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_investigacion
       @investigacion = Investigacion.find(params[:id])
+    end
+
+    def load_status
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

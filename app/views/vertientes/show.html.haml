@@ -1,0 +1,10 @@
+%p#notice= notice
+%p
+  %strong Nombre:
+  = @vertiente.nombre
+%p
+  %strong Id status:
+  = @vertiente.id_status
+= link_to 'Edit', edit_vertiente_path(@vertiente)
+|
+= link_to 'Back', vertientes_path
