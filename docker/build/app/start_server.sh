@@ -67,6 +67,20 @@ else
   echo "No cached package-lock.json found"
 fi
 
+# Delete yarn.lock file
+if [ -e /var/www/html/yarn.lock ] || [ -L /var/www/html/yarn.lock ]; then
+  echo "Deleting \"./yarn.lock\" file..."
+  rm -Rf /var/www/html/yarn.lock
+  echo "Done"
+fi
+echo "Installing cached yarn.lock file..."
+if [ -f /opt/deploy/dependencies_config/yarn.lock ]; then
+  cp /opt/deploy/dependencies_config/yarn.lock /var/www/html/yarn.lock || exit 1
+  echo "Done"
+else
+  echo "No cached yarn.lock found"
+fi
+
 # Delete node modules directory
 if [ -e /var/www/html/node_modules ] || [ -L /var/www/html/node_modules ]; then
   echo "Deleting \"./node_modules\" directory..."

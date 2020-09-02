@@ -268,6 +268,10 @@ if [ "$BUILD_IMAGE" == "1" ]; then
     echo "\"package-lock.json\" file found"
     cp "$APP_PATH/package-lock.json" ./build/app/data/dependencies_config/ || exit 1
   fi
+  if [ -f "$APP_PATH/yarn.lock" ]; then
+    echo "\"yarn.lock\" file found"
+    cp "$APP_PATH/yarn.lock" ./build/app/data/dependencies_config/ || exit 1
+  fi
   echo "Done"
   sudo_env docker-compose build || exit 1
 fi

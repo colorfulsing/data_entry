@@ -17,6 +17,17 @@ server {
   # this is the internal Docker DNS
   resolver ${DOCKER_RESOLVER_IP};
 
+  proxy_set_header X-Real-IP $remote_addr;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-NginX-Proxy true;
+  proxy_set_header X-Forwarded-Proto: $scheme;
+  proxy_set_header X-Forwarded-Ssl on; # Optional
+  proxy_set_header X-Forwarded-Port $server_port;
+  proxy_set_header X-Forwarded-Host $host;
+  proxy_set_header Host $http_host;
+  proxy_redirect off;
+  #proxy_set_header origin 'https://${WEB_DOMAIN_NAME}';
+
   # Use a variable to bypass upstream validation
   set $upstream http://app:3000;
 
@@ -24,8 +35,6 @@ server {
   include settings/20-cache.${ENV}.conf;
 
   location / {
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $http_host;
     # If the file exists as a static file serve it directly without
     # running all the other rewrite tests on it
     if (-f $request_filename) {

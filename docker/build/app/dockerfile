@@ -23,14 +23,14 @@ COPY ./app/start_server.sh /opt/deploy/bin/start_server.sh
 RUN chmod +x \
   /opt/deploy/bin/template_tools.sh \
   /opt/deploy/bin/load_env.sh \
-  /opt/deploy/bin/start_server.sh
+  /opt/deploy/bin/start_server.sh || exit 1
 
 # Install gems and node dependencies
 COPY ./app/data/dependencies_config/ /opt/deploy/dependencies_config/
 RUN cd /opt/deploy/dependencies_config \
   && gem install bundle \
   && bundle install --jobs=4 \
-  && yarn install
+  && yarn install || exit 1
 
 VOLUME /var/www/html
 WORKDIR /var/www/html
