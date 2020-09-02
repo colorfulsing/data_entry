@@ -1,7 +1,7 @@
 .container
   .row
     .col.col-9
-      %h1 Mostrar Tipo de Instituto
+      %h1 Mostrar tipo de instituto
     .col.col-3
       = link_to 'Editar', edit_tipo_instituto_path(@tipo_instituto), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', tipo_institutos_path, class: 'btn btn-outline-link pull-right'
@@ -17,7 +17,7 @@
       = @tipo_instituto.nombre
   .row
     .col.col-4.font-weight-bold
-      Descripcion:
+      Descripci&oacute;n:
     .col.col-8
       = @tipo_instituto.descripcion
   .row

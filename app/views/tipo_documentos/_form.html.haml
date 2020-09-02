@@ -18,9 +18,9 @@
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :tipo_documento_id_status, class: 'form-control'}
     .col.col-12.form-group
-      = form.label :descripcion
+      = form.label :descripcion, "Descripci&oacute;n".html_safe
       = form.text_area :descripcion, id: :tipo_documento_descripcion, class: 'form-control'
-    
+
   .row
     .col.actions
       = form.submit "Guardar", class: 'btn btn-primary pull-right'

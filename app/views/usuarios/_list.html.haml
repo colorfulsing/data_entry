@@ -9,7 +9,7 @@
       %table.table.table-striped
         %thead
           %tr
-            %th Correo Electronico
+            %th Correo electr&oacute;nico
             %th Role
             %th Estado
             %th{:colspan => "5"}
@@ -44,11 +44,12 @@
               .expand
                 = link_to 'Mostrar', user_path(user)
                 = link_to 'Editar', edit_user_path(user)
-                - if user.status.visible?
-                  = link_to 'Desabilitar', disable_usuario_path(id: user.id), data: { confirm: 'Estas seguro?' }
-                - else
-                  = link_to 'Habilitar', enable_usuario_path(id: user.id), data: { confirm: 'Estas seguro?' }
-                = link_to 'Borrar', delete_usuario_path(id: user.id), method: :delete, data: { confirm: 'Estas seguro?' }
+                - if current_user.id != user.id
+                  - if user.status.visible?
+                    = link_to 'Desabilitar', disable_usuario_path(id: user.id), data: { confirm: 'Estas seguro?' }
+                  - else
+                    = link_to 'Habilitar', enable_usuario_path(id: user.id), data: { confirm: 'Estas seguro?' }
+                  = link_to 'Borrar', delete_usuario_path(id: user.id), method: :delete, data: { confirm: 'Estas seguro?' }
 
 - if !hide_pagination
   .row

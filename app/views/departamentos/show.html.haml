@@ -1,7 +1,7 @@
 .container
   .row
     .col.col-9
-      %h1 Mostrar Departamento
+      %h1 Mostrar departamento
     .col.col-3
       = link_to 'Editar', edit_departamento_path(@departamento), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', departamentos_path, class: 'btn btn-outline-link pull-right'
@@ -28,6 +28,6 @@
     .col.col-8
       %h2 Municipios
     .col.col-4
-      = link_to 'Nuevo Municipio', new_municipio_path, class:"btn btn-primary pull-right"
+      = link_to 'Nuevo municipio', new_municipio_path, class:"btn btn-primary pull-right"
 
   = render 'municipios/list', collection: @departamento.municipios, hide_pagination: true

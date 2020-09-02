@@ -18,13 +18,13 @@
       = form.label :siglas
       = form.text_field :siglas, id: :facultad_siglas, class: 'form-control'
     .col.col-6.form-group
-      = form.label :id_institucion, "Institucion"
+      = form.label :id_institucion, "Instituci&oacute;n".html_safe
       = form.select :id_institucion, @instituciones.collect{|i| [i.nombre, i.id]}, {}, {id: :facultad_id_institucion, class: 'form-control'}
     .col.col-6.form-group
       = form.label :id_tipo_instituto, "Tipo"
       = form.select :id_tipo_instituto, @tipo_institutos.collect{|tipo_instituto| [tipo_instituto.nombre, tipo_instituto.id]}, {}, {id: :facultad_id_tipo_instituto, class: 'form-control'}
     .col.col-6.form-group
-      = form.label :telefono
+      = form.label :telefono, "Tel&eacute;fono".html_safe
       = form.text_field :telefono, id: :facultad_telefono, class: 'form-control'
     .col.col-6.form-group
       = form.label :extension
@@ -33,7 +33,7 @@
       = form.label :direccion
       = form.text_field :direccion, id: :facultad_direccion, class: 'form-control'
     .col.col-6.form-group
-      = form.label :correo_electronico
+      = form.label :correo_electronico, "Correo electr&oacute;nico".html_safe
       = form.text_field :correo_electronico, id: :facultad_correo_electronico, class: 'form-control'
     .col.col-6.form-group
       = form.label :sitio_web

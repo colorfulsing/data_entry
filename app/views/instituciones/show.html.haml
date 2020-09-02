@@ -1,7 +1,7 @@
 .container
   .row
     .col.col-9
-      %h1 Mostrar Institucion
+      %h1 Mostrar instituci&oacute;n
     .col.col-3
       = link_to 'Editar', edit_institucion_path(@institucion), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', instituciones_path, class: 'btn btn-outline-link pull-right'
@@ -24,7 +24,7 @@
 
   .row
     .col.col-4.font-weight-bold
-      Telefono
+      Tel&eacute;fono
     .col.col-8
       = @institucion.telefono
 
@@ -36,7 +36,7 @@
 
   .row
     .col.col-4.font-weight-bold
-      Correo electronico
+      Correo electr&oacute;nico
     .col.col-8
       = render 'shared/email_beautify', item: @institucion
 
@@ -60,6 +60,6 @@
     .col.col-8
       %h2 Facultades e Institutos
     .col.col-4
-      = link_to 'Nueva Facultad o Instituto', new_facultad_path, class:"btn btn-primary pull-right"
+      = link_to 'Nueva facultad o instituto', new_facultad_path, class:"btn btn-primary pull-right"
 
   = render 'facultades/list', collection: @institucion.facultades, hide_pagination: true

@@ -1,7 +1,7 @@
 .container
   .row
     .col.col-9
-      %h1 Mostrar Cuenca
+      %h1 Mostrar cuenca
     .col.col-3
       = link_to 'Editar', edit_cuenca_path(@cuenca), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', cuencas_path, class: 'btn btn-outline-link pull-right'
@@ -33,6 +33,6 @@
     .col.col-8
       %h2 Subcuencas
     .col.col-4
-      = link_to 'Nueva Subcuenca', new_subcuenca_path, class:"btn btn-primary pull-right"
+      = link_to 'Nueva subcuenca', new_subcuenca_path, class:"btn btn-primary pull-right"
 
   = render 'subcuencas/list', collection: @cuenca.subcuencas, hide_pagination: true

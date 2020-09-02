@@ -1,7 +1,7 @@
 .container
   .row
     .col.col-9
-      %h1 Mostrar Tipo de Documento
+      %h1 Mostrar tipo de documento
     .col.col-3
       = link_to 'Editar', edit_tipo_documento_path(@tipo_documento), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', tipo_documentos_path, class: 'btn btn-outline-link pull-right'
@@ -17,7 +17,7 @@
       = @tipo_documento.nombre
   .row
     .col.col-4.font-weight-bold
-      Descripcion:
+      Descripci&oacute;n:
     .col.col-8
       = @tipo_documento.descripcion
   .row

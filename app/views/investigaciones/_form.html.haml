@@ -14,9 +14,13 @@
     .col.col-6.form-group
       = form.label :titulo
       = form.text_field :titulo, id: :investigacion_titulo, class: 'form-control'
-    .col.col-6.form-group
-      = form.label :id_instituto, "Facultad / Instituto"
-      = form.select :id_instituto, @facultades.collect{|i| [i.nombre, i.id]}, {}, {id: :investigacion_id_instituto, class: 'form-control'}
+    = render 'shared/autocomplete_widget',
+      form: form,
+      widget_class: 'col col-6 facultad-field',
+      entity: investigacion.facultad,
+      field: :id_instituto,
+      param_id: :investigacion_id_instituto,
+      label_text: 'Facultad o instituto'.html_safe
     = render 'shared/autocomplete_widget',
       form: form,
       widget_class: 'col col-6 microcuenca-field',
@@ -68,6 +72,12 @@
   :erb
     <script type="text/javascript">
       (function() {
+        // Facultad autocomplete
+        configAutocomplete({
+          queryInputSelector: 'form .facultad-field .query-input',
+          valueInputSelector: 'form .facultad-field .value-input',
+          source: '<%= j facultades_autocomplete_path(format: :json) %>'
+        });
         // Microcuenca autocomplete
         configAutocomplete({
           queryInputSelector: 'form .microcuenca-field .query-input',

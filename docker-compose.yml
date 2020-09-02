@@ -26,6 +26,8 @@ services:
       - rails_network
     links:
       - db
+    # ports:
+    #   - 3000:3000
     deploy:
       #replicas: 2
       #update_config:

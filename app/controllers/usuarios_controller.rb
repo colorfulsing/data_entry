@@ -40,6 +40,7 @@ class UsuariosController < ApplicationController
   end
 
   def enable
+    return if current_user.id == @user.id
     @user.status = Status.find(Status::VALUES[:active])
     @user.save validate: false
     respond_to do |format|
@@ -49,6 +50,7 @@ class UsuariosController < ApplicationController
   end
 
   def disable
+    return if current_user.id == @user.id
     @user.status = Status.find(Status::VALUES[:inactive])
     @user.save validate: false
     respond_to do |format|
@@ -60,6 +62,7 @@ class UsuariosController < ApplicationController
   # DELETE /usuarios/1
   # DELETE /usuarios/1.json
   def destroy
+    return if current_user.id == @user.id
     @user.status = Status.find(Status::VALUES[:deleted])
     @user.save validate: false
     respond_to do |format|

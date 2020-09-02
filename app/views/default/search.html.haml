@@ -4,9 +4,9 @@
   .row
     .col.col-12
       %h1
-        Resultados de la busqueda
+        Resultados de la b&uacute;squeda
       .text
-        Se busco "#{@search_query}" en los nombres y titulos de #{@search_entities.map{|k|k.entity_label.pluralize.downcase}.to_sentence}
+        Se b&uacute;sco "#{@search_query}" en los nombres y titulos de #{@search_entities.map{|k|k.entity_label.pluralize.downcase}.to_sentence}
 
   = render 'default/show_results', entity_class: Area, list_view: 'areas/list'
   = render 'default/show_results', entity_class: Cuenca, list_view: 'cuencas/list'

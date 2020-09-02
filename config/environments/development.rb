@@ -12,6 +12,10 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
+  # this allows us to precompile for non dev and commit, yet still use uncompiled for dev
+  config.assets.prefix = '/dev-assets' # can be anything really
+
+
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
@@ -45,8 +49,9 @@ Rails.application.configure do
   config.assets.debug = true
 
   # Suppress logger output for asset requests.
-  config.assets.quiet = true
+  config.assets.quiet = false
 
+  config.assets.digest = false
   config.assets.compile = true
 
   # Raises error for missing translations

@@ -1,7 +1,7 @@
 .container
   .row
     .col.col-9
-      %h1 Mostrar Investigacion
+      %h1 Mostrar investigaci&oacute;n
     .col.col-3
       = link_to 'Editar', edit_investigacion_path(@investigacion), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', investigaciones_path, class: 'btn btn-outline-link pull-right'
@@ -98,5 +98,5 @@
 .container-fluid
   .row
     .col.col-12
-      %h2 Areas de la investigaci&oacute;n
+      %h2 &Aacute;reas de estudio de la investigaci&oacute;n
   = render 'areas/list', collection: @investigacion.areas, hide_pagination: true

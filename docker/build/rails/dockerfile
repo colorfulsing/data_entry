@@ -5,9 +5,10 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update && apt-get install -y yarn nodejs
+COPY ./load_env.sh /load_env.sh
 COPY ./start_server.sh /start_server.sh
-RUN chmod +x /start_server.sh
+RUN chmod +x /start_server.sh && chmod +x /load_env.sh
 VOLUME /var/www/html
 WORKDIR /var/www/html
-#ENTRYPOINT ["bundle", "exec"]
-CMD /start_server.sh
+ENTRYPOINT ["/load_env.sh"]
+CMD ["/start_server.sh"]

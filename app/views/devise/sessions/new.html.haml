@@ -11,18 +11,15 @@
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .row
         .col
-          %h1 Iniciar Sesion
+          %h1 Iniciar Sesi&oacute;n
 
       - errors = devise_error_messages!
       - if !errors.blank?
         #error_explanation.alert.alert-danger{role: 'alert'}
-          %h2
-            Existen errores:
-
           = errors
       .row
         .col.col-12.form-group
-          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Correo electronico'
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Correo electr&oacute;nico'.html_safe
         .col.col-12.form-group
           = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: raw('Contrase&ntilde;a')
         - if devise_mapping.rememberable?

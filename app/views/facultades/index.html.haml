@@ -1,8 +1,8 @@
 .container-fluid
   .row
     .col.col-8
-      %h1 Facultades e Institutos
+      %h1 Facultades e institutos
     .col.col-4
-      = link_to 'Nuevo Facultades Instituto', new_facultad_path, class:"btn btn-primary pull-right"
+      = link_to 'Nueva facultad o instituto', new_facultad_path, class:"btn btn-primary pull-right"
 
   = render 'facultades/list', collection: @facultades, hide_pagination: true

@@ -4,8 +4,8 @@
 = form_with(url: form_path, local: true) do |form|
   .row
     .col.col-8.form-group
-      = form.label :id_area, "Area"
+      = form.label :id_area, "&Aacute;rea de estudio".html_safe
       = form.select :id_area, areas.collect{|i| [i.nombre, i.id]}, {}, {id: :investigacion_area_id_area, name: 'investigacion_area[id_area]', class: 'form-control'}
     .col.col-4.actions
       %br/
-      = form.submit "Agregar o quitar area", class: 'btn btn-primary pull-right'
+      = form.submit "Agregar o quitar &aacute;rea de estudio".html_safe, class: 'btn btn-primary pull-right'

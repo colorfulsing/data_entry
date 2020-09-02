@@ -1,7 +1,7 @@
 .container
   .row
     .col.col-9
-      %h1 Mostrar Proyecto
+      %h1 Mostrar proyecto o programa
     .col.col-3
       = link_to 'Editar', edit_proyecto_path(@proyecto), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', proyectos_path, class: 'btn btn-outline-link pull-right'
@@ -22,12 +22,12 @@
       = @proyecto.facultad.try(:nombre)
   .row
     .col.col-4.font-weight-bold
-      Institucion:
+      Instituci&oacute;n:
     .col.col-8
       = @proyecto.facultad.try(:institucion).try(:nombre)
   .row
     .col.col-4.font-weight-bold
-      Descripcion:
+      Descripci&oacute;n:
     .col.col-8
       = @proyecto.descripcion
   .row
@@ -47,5 +47,5 @@
 .container-fluid
   .row
     .col.col-12
-      %h2 Areas del proyecto
+      %h2 &Aacute;reas de estudio del proyecto o programa
   = render 'areas/list', collection: @proyecto.areas, hide_pagination: true

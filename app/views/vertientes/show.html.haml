@@ -1,7 +1,7 @@
 .container
   .row
     .col.col-9
-      %h1 Mostrar Vertiente
+      %h1 Mostrar vertiente
     .col.col-3
       = link_to 'Editar', edit_vertiente_path(@vertiente), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', vertientes_path, class: 'btn btn-outline-link pull-right'
@@ -29,6 +29,6 @@
     .col.col-8
       %h2 Cuencas
     .col.col-4
-      = link_to 'Nueva Cuenca', new_cuenca_path, class:"btn btn-primary pull-right"
+      = link_to 'Nueva cuenca', new_cuenca_path, class:"btn btn-primary pull-right"
 
   = render 'cuencas/list', collection: @vertiente.cuencas, hide_pagination: true

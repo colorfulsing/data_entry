@@ -3,6 +3,6 @@
     .col.col-8
       %h1 Instituciones
     .col.col-4
-      = link_to 'Nueva Institucion', new_institucion_path, class:"btn btn-primary pull-right"
+      = link_to 'Nueva instituci&oacute;n'.html_safe, new_institucion_path, class:"btn btn-primary pull-right"
 
   = render 'instituciones/list', collection: @instituciones

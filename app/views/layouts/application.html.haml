@@ -6,31 +6,32 @@
   %head
     %title= "#{meta_title.empty? ? '' : (h(meta_title) + ' | ')}Sistematizaci&oacute;n".html_safe
     = csrf_meta_tags
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-%body{class: yield(:page_class)}
-  .fixed-alert
-    .container
-      - if !alert.to_s.strip.blank?
-        .alert.alert-warning{role: "alert"}
-          = alert
-          %a.close-button.close-alert-trigger{href: 'javascript:void(0);'}
-            %i.fa.fa-times
-      - if !notice.to_s.strip.blank?
-        #notice.alert.alert-info{role: "alert"}
-          = notice
-          %a.close-button.close-alert-trigger{href: 'javascript:void(0);'}
-            %i.fa.fa-times
+    = stylesheet_link_tag 'application', media: 'all' #, 'data-turbolinks-track': 'reload'
+    %meta{name: "robots", content: "NOINDEX"}
+  %body{class: yield(:page_class)}
+    .fixed-alert
+      .container
+        - if !alert.to_s.strip.blank?
+          .alert.alert-warning{role: "alert"}
+            = alert
+            %a.close-button.close-alert-trigger{href: 'javascript:void(0);'}
+              %i.fa.fa-times
+        - if !notice.to_s.strip.blank?
+          #notice.alert.alert-info{role: "alert"}
+            = notice
+            %a.close-button.close-alert-trigger{href: 'javascript:void(0);'}
+              %i.fa.fa-times
 
-  - if !@disable_header
-    .section-header
-      = render 'shared/menu'
-  .section-content
-    = yield
-  - if !@disable_footer
-    .section-footer
-      = render 'shared/footer'
+    - if !@disable_header
+      .section-header
+        = render 'shared/menu'
+    .section-content
+      = yield
+    - if !@disable_footer
+      .section-footer
+        = render 'shared/footer'
 
-  = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-  = yield :javascript
+    = javascript_include_tag 'application' #, 'data-turbolinks-track': 'reload'
+    = yield :javascript
 
-  <!-- Creado y donado a ICC por Ing. Eduardo Jos&etilde; Rosales Alconero -->
+    <!-- Creado y donado a ICC por Ing. Eduardo Jos&etilde; Rosales Alconero -->

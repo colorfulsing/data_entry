@@ -75,8 +75,12 @@ class User < ApplicationRecord
 
   private
     def at_least_one_admin
-      return if self.admin?
-      admin_count = User.where(role: :admin).where('id <> ?', [self.id]).count
+      return if self.admin? && !self.inactive_status?
+      query = User.all
+      query = query.left_joins(:status).where('status.visible = ?', 1)
+      query = query.where(role: User.roles[:admin])
+      query = query.where('users.id <> ?', [self.id]) unless self.id.nil?
+      admin_count = query.count
       return if admin_count > 0
       self.errors.add(:role, 'Debe existir al menos un Administrador en el sistema!')
     end

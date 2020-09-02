@@ -20,7 +20,7 @@
           = errors
       .row
         .col.col-4.form-group
-          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Correo electronico'
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Correo electr&oacute;nico'.html_safe
       .row
         .col
           = render "devise/shared/links"

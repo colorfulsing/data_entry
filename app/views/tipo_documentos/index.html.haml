@@ -1,8 +1,8 @@
 .container-fluid
   .row
     .col.col-8
-      %h1 Tipo Documentos
+      %h1 Tipos de documento
     .col.col-4
-      = link_to 'Nuevo Tipo Documento', new_tipo_documento_path, class:"btn btn-primary pull-right"
+      = link_to 'Nuevo tipo de documento', new_tipo_documento_path, class:"btn btn-primary pull-right"
 
   = render 'tipo_documentos/list', collection: @tipo_documentos

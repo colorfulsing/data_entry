@@ -20,9 +20,9 @@
       entity: proyecto.facultad,
       field: :id_instituto,
       param_id: :proyecto_id_instituto,
-      label_text: 'Facultad / Instituto'
+      label_text: 'Facultad o instituto'
     .col.col-12.form-group
-      = form.label :descripcion
+      = form.label :descripcion, "Descripci&oacute;n".html_safe
       = form.text_area :descripcion, id: :proyecto_descripcion, class: 'form-control'
     .col.col-6.form-group
       = form.label :id_status, "Estado"

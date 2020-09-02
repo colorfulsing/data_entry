@@ -1,5 +1,8 @@
 - status ||= nil
-- if status.visible?
+- if status.nil?
+  .text-secondary
+    ???
+- elsif status.visible?
   .text-success
     = status.nombre
 - elsif status.deleted?

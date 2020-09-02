@@ -1,8 +1,8 @@
 .container-fluid
   .row
     .col.col-8
-      %h1 Proyectos
+      %h1 Proyectos y programas
     .col.col-4
-      = link_to 'Nuevo Proyecto Programa', new_proyecto_path, class:"btn btn-primary pull-right"
+      = link_to 'Nuevo proyecto o programa', new_proyecto_path, class:"btn btn-primary pull-right"
 
   = render 'proyectos/list', collection: @proyectos

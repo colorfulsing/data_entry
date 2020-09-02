@@ -15,7 +15,7 @@
             Instituciones
           .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
             %a.dropdown-item{href: new_institucion_path}
-              Nueva institucion
+              Nueva instituci&oacute;n
             %a.dropdown-item{href: instituciones_path}
               Ver todas las instituciones
         %li.nav-item.dropdown
@@ -34,9 +34,17 @@
                 Nuevo proyecto
               %a.dropdown-item{href: proyectos_path}
                 Ver todos los proyectos
+          %li.nav-item.dropdown
+            %a.nav-link.dropdown-toggle{id: "navbar_proyectos", href: "#", role: "button", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}}
+              Investigaciones
+            .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
+              %a.dropdown-item{href: new_investigacion_path}
+                Nueva investigaci&oacute;n
+              %a.dropdown-item{href: investigaciones_path}
+                Ver todas las investigaciones
         %li.nav-item.dropdown
           %a.nav-link.dropdown-toggle{id: "navbar_departamentos", href: "#", role: "button", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}}
-            Ubicacion
+            Ubicaci&oacute;n
           .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
             %a.dropdown-item{href: new_departamento_path}
               Nuevo departamento
@@ -49,7 +57,7 @@
               Ver todas las vertientes
         %li.nav-item.dropdown
           %a.nav-link.dropdown-toggle{id: "navbar_configuraciones", href: "#", role: "button", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}}
-            Configuracion
+            Configuraci&oacute;n
           .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
             - if current_user.admin?
               %a.dropdown-item{href: new_status_path}
@@ -58,7 +66,7 @@
                 Ver todos los estados
               .dropdown-divider
 
-              = link_to "Nuevo Usuario", new_user_path, class: 'dropdown-item'
+              = link_to "Nuevo usuario", new_user_path, class: 'dropdown-item'
               %a.dropdown-item{href: usuarios_path}
                 Ver todos los usuarios
               .dropdown-divider
@@ -73,9 +81,9 @@
               Ver todos los tipos de instituto
             .dropdown-divider
             %a.dropdown-item{href: new_area_path}
-              Nueva area de estudio
+              Nueva &aacute;rea de estudio
             %a.dropdown-item{href: areas_path}
-              Ver todas las areas de estudio
+              Ver todas las &aacute;reas de estudio
             -#.dropdown-divider
             -#.dropdown-divider
             -#%a.dropdown-item{href: new__path}
@@ -84,7 +92,7 @@
             -#%a.dropdown-item{href: _path}
             -#  Ver todos los
           %li.nav-item
-            = link_to 'Cerrar Sesion', destroy_user_session_path, method: :delete, class: 'nav-link'
+            = link_to 'Cerrar Sesi&oacute;n'.html_safe, destroy_user_session_path, method: :delete, class: 'nav-link'
 
 
 

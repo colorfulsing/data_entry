@@ -1,7 +1,7 @@
 .container
   .row
     .col.col-9
-      %h1 Mostrar Facultad
+      %h1 Mostrar facultad
     .col.col-3
       = link_to 'Editar', edit_facultad_path(@facultad), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', facultades_path, class: 'btn btn-outline-link pull-right'
@@ -22,7 +22,7 @@
       = @facultad.siglas
   .row
     .col.col-4.font-weight-bold
-      Institucion:
+      Instituci&oacute;n:
     .col.col-8
       = @facultad.institucion.nombre
   .row
@@ -32,7 +32,7 @@
       = @facultad.tipo_instituto.nombre
   .row
     .col.col-4.font-weight-bold
-      Telefono:
+      Tel&eacute;fono:
     .col.col-8
       = @facultad.telefono
   .row
@@ -47,7 +47,7 @@
       = @facultad.direccion
   .row
     .col.col-4.font-weight-bold
-      Correo electronico:
+      Correo electr&oacute;nico:
     .col.col-8
       = render 'shared/email_beautify', item: @facultad
   .row
@@ -69,7 +69,7 @@
     .col.col-8
       %h2 Proyectos
     .col.col-4
-      = link_to 'Nuevo Proyecto', new_proyecto_path, class:"btn btn-primary pull-right"
+      = link_to 'Nuevo proyecto', new_proyecto_path, class:"btn btn-primary pull-right"
 
   = render 'proyectos/list', collection: @facultad.proyectos, hide_pagination: true
 
@@ -81,6 +81,6 @@
     .col.col-8
       %h2 Investigaciones
     .col.col-4
-      = link_to 'Nueva Investigacion', new_investigacion_path, class:"btn btn-primary pull-right"
+      = link_to 'Nueva investigaci&oacute;n', new_investigacion_path, class:"btn btn-primary pull-right"
 
   = render 'investigaciones/list', collection: @facultad.investigaciones, hide_pagination: true

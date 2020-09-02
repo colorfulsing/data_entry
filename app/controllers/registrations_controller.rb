@@ -10,8 +10,8 @@ class RegistrationsController < Devise::RegistrationsController
     yield resource if block_given?
     if resource.persisted?
       respond_to do |format|
-        format.html { redirect_to usuarios_path, notice: 'El Usuario se creo exitosamente.' }
-        format.json { render :show, status: :created, location: usuarios_path }
+        format.html { redirect_to edit_user_path(resource), notice: 'El Usuario se creo exitosamente.' }
+        format.json { render :edit, status: :created, location: edit_user_path(resource) }
       end
     else
       clean_up_passwords resource
