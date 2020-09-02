@@ -8,7 +8,7 @@ Requirements:
 * Ruby 2.4.2
 * Nginx 1.13.12
 
-##Docker
+## Docker
 You can use the included docker-compose file for both development and production.
 
 Every change perform on the current code at the host will be reflected on the rails container created by this docker-compose.
