@@ -1,13 +1,12 @@
 #!/bin/bash
 
-IS_PROD="" || exit 1
+IS_PROD="1" || exit 1
+export RAILS_ENV="production" || exit 1
 
 # Detect prod env
-if [ "$RAILS_ENV" == '' ] || [ "$RAILS_ENV" == "production" ]; then
-  IS_PROD="1" || exit 1
-  export RAILS_ENV="production" || exit 1
+if [ "$ENV" == 'dev' ]; then
+  export RAILS_ENV="development" || exit 1
 fi
-export RAKE_ENV="$RAILS_ENV" || exit 1
 
 # Remove existing server process ID
 if [ -d ./tmp ] && [ -d ./tmp/pids ] && [ -f ./tmp/pids/server.pid ]; then
@@ -25,7 +24,12 @@ cp ./config/database.yml.template ./config/database.yml || exit 1
 gem install bundle || exit 1
 bundle install --jobs=4 $(if [ "$IS_PROD" == "1" ]; then echo "--without development test"; fi) || exit 1
 rails db:migrate || exit 1
-if [ "$RAILS_ENV" == "production" ]; then
+
+# Execute test when
+if [ "$ENV" == 'dev' ] && [ "$EXEC_TEST" == '1' ]; then
+  rails test || exit 1
+fi
+if [ "$IS_PROD" == "1" ]; then
   rake assets:precompile || exit 1
 fi
 rails s || exit 1
