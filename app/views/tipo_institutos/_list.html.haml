@@ -1,0 +1,44 @@
+- collection ||= []
+- param_name ||= :page
+- hide_pagination ||= false
+- report_mode ||= @report_mode
+
+.row
+  - if report_mode
+    .col
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Nombre
+            %th Descripcion
+            %th Estado
+            %th{:colspan => "3"}
+        %tbody
+          - collection.each do |tipo_instituto|
+            %tr
+              %td= tipo_instituto.nombre
+              %td= tipo_instituto.descripcion
+              %td= render 'shared/status_beautify', status: tipo_instituto.status
+              %td= link_to 'Mostrar', tipo_instituto
+              %td= link_to 'Editar', edit_tipo_instituto_path(tipo_instituto)
+              %td= link_to 'Borrar', tipo_instituto, method: :delete, data: { confirm: 'Estas seguro?' }
+  - else
+    - collection.each do |tipo_instituto|
+      .col.col-xs-12.col-md-4.col-lg-3
+        .col.box-item
+          = link_to tipo_instituto.nombre, tipo_instituto, class: 'title'
+          .data= render 'shared/status_beautify', status: tipo_instituto.status
+          .data-id= tipo_instituto.id
+          .options
+            .aux
+              .icon
+                %i.fa.fa-ellipsis-v
+              .expand
+                = link_to 'Mostrar', tipo_instituto
+                = link_to 'Editar', edit_tipo_instituto_path(tipo_instituto)
+                = link_to 'Borrar', tipo_instituto, class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
+
+- if !hide_pagination
+  .row
+    .col
+      = paginate collection, param_name: param_name

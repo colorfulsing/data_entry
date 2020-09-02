@@ -17,6 +17,9 @@ class Institucion < ApplicationRecord
   #  end
   #end
 
+  validates :nombre, presence: true
+  validates :status, presence: true
+
   #alias_attribute :institutos, :facultades
 
   class << self

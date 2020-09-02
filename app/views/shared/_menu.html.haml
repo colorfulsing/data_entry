@@ -16,7 +16,6 @@
           .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
             %a.dropdown-item{href: new_institucion_path}
               Nueva institucion
-            .dropdown-divider
             %a.dropdown-item{href: instituciones_path}
               Ver todas las instituciones
         %li.nav-item.dropdown
@@ -25,7 +24,6 @@
           .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
             %a.dropdown-item{href: new_facultad_path}
               Nueva facultad
-            .dropdown-divider
             %a.dropdown-item{href: facultades_path}
               Ver todas las facultades
           %li.nav-item.dropdown
@@ -34,7 +32,6 @@
             .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
               %a.dropdown-item{href: new_proyecto_path}
                 Nuevo proyecto
-              .dropdown-divider
               %a.dropdown-item{href: proyectos_path}
                 Ver todos los proyectos
         %li.nav-item.dropdown
@@ -46,10 +43,8 @@
             %a.dropdown-item{href: departamentos_path}
               Ver todos los departamentos
             .dropdown-divider
-            .dropdown-divider
             %a.dropdown-item{href: new_vertiente_path}
               Nueva vertiente
-            .dropdown-divider
             %a.dropdown-item{href: vertientes_path}
               Ver todas las vertientes
         %li.nav-item.dropdown
@@ -59,21 +54,26 @@
             - if current_user.admin?
               %a.dropdown-item{href: new_status_path}
                 Nuevo estado
-              .dropdown-divider
               %a.dropdown-item{href: statuses_path}
                 Ver todos los estados
               .dropdown-divider
+
+              = link_to "Nuevo Usuario", new_user_path, class: 'dropdown-item'
+              %a.dropdown-item{href: usuarios_path}
+                Ver todos los usuarios
               .dropdown-divider
             %a.dropdown-item{href: new_tipo_documento_path}
               Nuevo tipo de documento
-            .dropdown-divider
             %a.dropdown-item{href: tipo_documentos_path}
               Ver todos los tipos de documentos
             .dropdown-divider
+            %a.dropdown-item{href: new_tipo_instituto_path}
+              Nuevo tipo de instituto
+            %a.dropdown-item{href: tipo_institutos_path}
+              Ver todos los tipos de instituto
             .dropdown-divider
             %a.dropdown-item{href: new_area_path}
               Nueva area de estudio
-            .dropdown-divider
             %a.dropdown-item{href: areas_path}
               Ver todas las areas de estudio
             -#.dropdown-divider

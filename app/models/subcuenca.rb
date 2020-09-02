@@ -5,6 +5,9 @@ class Subcuenca < ApplicationRecord
   belongs_to :cuenca, class_name: 'Cuenca', foreign_key: 'id_cuenca', inverse_of: :subcuencas
   has_many :microcuencas, class_name: 'Microcuenca', foreign_key: 'id_subcuenca', inverse_of: :subcuenca
 
+  validates :nombre, presence: true
+  validates :status, presence: true
+
   class << self
     def search_entity_class parent = nil
       value = self.name

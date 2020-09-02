@@ -4,6 +4,9 @@ class Departamento < ApplicationRecord
   belongs_to :status, class_name: 'Status', foreign_key: 'id_status'
   has_many :municipios, class_name: 'Municipio', foreign_key: 'id_departamento', inverse_of: :departamento
 
+  validates :nombre, presence: true
+  validates :status, presence: true
+
   class << self
     def search_entity_class parent = nil
       value = self.name

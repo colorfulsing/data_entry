@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180216050210) do
+ActiveRecord::Schema.define(version: 20180409105235) do
 
   create_table "area", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre", limit: 100, null: false
@@ -196,6 +196,10 @@ ActiveRecord::Schema.define(version: 20180216050210) do
 
   create_table "tipo_instituto", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre", limit: 50, null: false
+    t.string "descripcion", limit: 300
+    t.integer "id_status"
+    t.datetime "updated_at"
+    t.datetime "created_at"
     t.index ["id"], name: "id_UNIQUE", unique: true
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
@@ -214,6 +218,9 @@ ActiveRecord::Schema.define(version: 20180216050210) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role"
+    t.integer "id_status"
+    t.string "nombre"
+    t.string "telefono"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -21,6 +21,9 @@
       = form.label :id_institucion, "Institucion"
       = form.select :id_institucion, @instituciones.collect{|i| [i.nombre, i.id]}, {}, {id: :facultad_id_institucion, class: 'form-control'}
     .col.col-6.form-group
+      = form.label :id_tipo_instituto, "Tipo"
+      = form.select :id_tipo_instituto, @tipo_institutos.collect{|tipo_instituto| [tipo_instituto.nombre, tipo_instituto.id]}, {}, {id: :facultad_id_tipo_instituto, class: 'form-control'}
+    .col.col-6.form-group
       = form.label :telefono
       = form.text_field :telefono, id: :facultad_telefono, class: 'form-control'
     .col.col-6.form-group

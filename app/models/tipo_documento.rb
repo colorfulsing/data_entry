@@ -4,6 +4,9 @@ class TipoDocumento < ApplicationRecord
   belongs_to :status, class_name: 'Status', foreign_key: 'id_status'
   has_many :investigaciones, class_name: 'Investigacion', foreign_key: 'id_documento', inverse_of: :tipo_documento
 
+  validates :nombre, presence: true
+  validates :status, presence: true
+
   class << self
     def search_entity_class parent = nil
       value = self.name

@@ -55,4 +55,7 @@ es:
         last_word_connector: ', y '
   activerecord:
     errors:
-      
+      url: "no tiene un formato valido."
+  errors:
+    messages:
+      url: "no tiene un formato valido."

@@ -1,0 +1,56 @@
+- collection ||= []
+- param_name ||= :page
+- hide_pagination ||= false
+- report_mode ||= @report_mode
+
+.row
+  - if report_mode
+    .col
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Correo Electronico
+            %th Role
+            %th Estado
+            %th{:colspan => "5"}
+        %tbody
+          - collection.each do |user|
+            %tr
+              %td= user.nombre
+              %td= user.email
+              %td= user.role_label
+              %td= render 'shared/status_beautify', status: user.status
+              %td= link_to 'Mostrar', user_path(user)
+              %td= link_to 'Editar', edit_user_path(user)
+              %td
+                - if user.status.visible?
+                  = link_to 'Desabilitar', usuario_disable_path, data: { confirm: 'Estas seguro?' }
+                - else
+                  = link_to 'Habilitar', usuario_enable_path, data: { confirm: 'Estas seguro?' }
+              %td= link_to 'Borrar', delete_usuario_path(id: user.id), data: { confirm: 'Estas seguro?' }
+  - else
+    - collection.each do |user|
+      .col.col-xs-12.col-md-4.col-lg-3
+        .col.box-item
+          .title= user.nombre.blank? ? 'N/A' : user.nombre
+          .data= user.email
+          .data= user.role_label
+          .data= render 'shared/status_beautify', status: user.status
+          .data-id= user.id
+          .options
+            .aux
+              .icon
+                %i.fa.fa-ellipsis-v
+              .expand
+                = link_to 'Mostrar', user_path(user)
+                = link_to 'Editar', edit_user_path(user)
+                - if user.status.visible?
+                  = link_to 'Desabilitar', disable_usuario_path(id: user.id), data: { confirm: 'Estas seguro?' }
+                - else
+                  = link_to 'Habilitar', enable_usuario_path(id: user.id), data: { confirm: 'Estas seguro?' }
+                = link_to 'Borrar', delete_usuario_path(id: user.id), method: :delete, data: { confirm: 'Estas seguro?' }
+
+- if !hide_pagination
+  .row
+    .col
+      = paginate collection, param_name: param_name

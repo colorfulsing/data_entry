@@ -36,8 +36,12 @@ class DefaultController < ApplicationController
       Status,
       Subcuenca,
       TipoDocumento,
+      TipoInstituto,
       Vertiente
     ]
+    if current_user.admin?
+      @allowed_entities << User
+    end
     @search_entities = @allowed_entities
     if !search_args.strip.empty?
       @search_entities = @allowed_entities.select{|e| search_types.include? e.name}

@@ -1,0 +1,8 @@
+.container-fluid
+  .row
+    .col.col-8
+      %h1 Tipos de Instituto
+    .col.col-4
+      = link_to 'Nuevo Tipo Instituto', new_tipo_instituto_path, class:"btn btn-primary pull-right"
+
+  = render 'tipo_institutos/list', collection: @tipo_institutos

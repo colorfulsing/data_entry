@@ -10,6 +10,9 @@ class Proyecto < ApplicationRecord
       join_table: 'proyecto_area',
       inverse_of: :proyectos
 
+  validates :nombre, presence: true
+  validates :status, presence: true
+
   class << self
     def search_entity_class parent = nil
       value = self.name

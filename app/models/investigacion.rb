@@ -14,6 +14,9 @@ class Investigacion < ApplicationRecord
     association_foreign_key: "id_area",
     join_table: 'area_investigacion'
 
+  validates :nombre, presence: true
+  validates :status, presence: true
+
   class << self
     def search_entity_class parent = nil
       value = self.name

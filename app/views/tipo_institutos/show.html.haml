@@ -1,0 +1,27 @@
+.container
+  .row
+    .col.col-9
+      %h1 Mostrar Tipo de Instituto
+    .col.col-3
+      = link_to 'Editar', edit_tipo_instituto_path(@tipo_instituto), class: 'btn btn-outline-primary pull-right'
+      = link_to 'Volver', tipo_institutos_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      ID:
+    .col.col-8
+      = @tipo_instituto.id
+  .row
+    .col.col-4.font-weight-bold
+      Nombre:
+    .col.col-8
+      = @tipo_instituto.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Descripcion:
+    .col.col-8
+      = @tipo_instituto.descripcion
+  .row
+    .col.col-4.font-weight-bold
+      Estado
+    .col.col-8
+      = render 'shared/status_beautify', status: @tipo_instituto.status

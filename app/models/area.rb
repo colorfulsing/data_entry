@@ -15,6 +15,9 @@ class Area < ApplicationRecord
     join_table: 'area_investigacion',
     inverse_of: :areas
 
+  validates :nombre, presence: true
+  validates :status, presence: true
+
   class << self
     def search_entity_class parent = nil
       value = self.name

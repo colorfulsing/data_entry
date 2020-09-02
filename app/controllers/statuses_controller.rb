@@ -1,10 +1,9 @@
 class StatusesController < ApplicationController
   before_action :authenticate_user!
+  before_action :admin_only_access
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_status, only: [:show, :edit, :update, :destroy]
   before_action :load_config
-  before_action :admin_only_access
-  before_action :authenticate_user!
 
   # GET /statuses
   # GET /statuses.json
@@ -59,10 +58,19 @@ class StatusesController < ApplicationController
   # DELETE /statuses/1
   # DELETE /statuses/1.json
   def destroy
-    @status.status = Status.find(Status::VALUES[:deleted])
-    @status.save validate: false
+    # Validate if status can be deleted
+    unless @status.can_be_deleted?
+      error_message = 'El Estado no puede borrarse porque esta en uso.'
+      respond_to do |format|
+        format.html { redirect_to statuses_url, notice: error_message }
+        format.json { render json: [error_message], status: :unprocessable_entity }
+      end
+    end
+
+    # Delete status permanently
+    @status.delete!
     respond_to do |format|
-      format.html { redirect_to statuses_url, notice: 'El Estado se marco como borrado.' }
+      format.html { redirect_to statuses_url, notice: 'El Estado se elimino permanentemente.' }
       format.json { head :no_content }
     end
   end

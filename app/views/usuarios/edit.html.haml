@@ -1,0 +1,19 @@
+- is_current_user = current_user.id == @user.id
+.container
+  .row
+    .col.col-9
+      %h1
+        Editar
+        - if is_current_user
+          mi usuario
+        - else
+          usuario
+    .col.col-3
+      = link_to 'Mostrar', user_path(@user), class: 'btn btn-outline-info pull-right'
+      - if !current_user.admin? && is_current_user
+        = link_to 'Volver', home_path, class: 'btn btn-outline-link pull-right'
+      - else
+        = link_to 'Volver', usuarios_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col
+      = render 'form', user: @user

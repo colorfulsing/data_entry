@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     end
 
     def admin_only_access
-      redirect_to root_path if !current_user.admin?
+      redirect_to home_path if !current_user.admin?
     end
 
 end

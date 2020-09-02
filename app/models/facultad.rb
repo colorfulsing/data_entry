@@ -10,8 +10,12 @@ class Facultad < ApplicationRecord
 
   belongs_to :status, class_name: 'Status', foreign_key: 'id_status'
   belongs_to :institucion, class_name: 'Institucion', foreign_key: 'id_instituciones', inverse_of: :facultades
+  belongs_to :tipo_instituto, class_name: 'TipoInstituto', foreign_key: 'id_tipo_instituto', inverse_of: :facultades
   has_many :investigaciones, class_name: 'Investigacion', foreign_key: 'id_instituto', inverse_of: :facultad
   has_many :proyectos, class_name: 'Proyecto', foreign_key: 'id_instituto', inverse_of: :facultad
+
+  validates :nombre, presence: true
+  validates :status, presence: true
 
   class << self
     def search_entity_class parent = nil

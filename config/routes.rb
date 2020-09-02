@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, skip: [:new, :create]
+  devise_scope :user do
+   resources :users, path: "usuarios", only: [:new, :create], controller: 'registrations'
+   resources :users, path: "usuarios", only: [:show, :edit, :update], controller: 'usuarios'
+  end
+
   get '/', to: 'default#home', as: :home
   get '/buscar', to: 'default#search', as: :search
 
   resources :vertientes
   resources :tipo_documentos
+  resources :tipo_institutos
   resources :subcuencas
   resources :statuses
   resources :proyectos
@@ -52,6 +58,12 @@ Rails.application.routes.draw do
   get "/autocomplete/microcuencas", to: 'microcuencas#autocomplete', as: :microcuencas_autocomplete
   get "/autocomplete/municipios", to: 'municipios#autocomplete', as: :municipios_autocomplete
   get "/autocomplete/facultades", to: 'facultades#autocomplete', as: :facultades_autocomplete
+
+  # Add user routes
+  get "/usuarios", to: 'usuarios#index', as: :usuarios
+  get "/usuarios/:id(.:format)/enable", to: 'usuarios#enable', as: :enable_usuario
+  get "/usuarios/:id(.:format)/disable", to: 'usuarios#disable', as: :disable_usuario
+  delete "/usuarios/:id(.:format)", to: 'usuarios#destroy', as: :delete_usuario
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

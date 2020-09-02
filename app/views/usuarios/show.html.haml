@@ -1,0 +1,47 @@
+- is_current_user = current_user.id == @user.id
+.container
+  .row
+    .col.col-9
+      %h1
+        Mostrar
+        - if is_current_user
+          mi usuario
+        - else
+          usuario
+    .col.col-3
+      = link_to 'Editar', edit_user_path(@user), class: 'btn btn-outline-primary pull-right'
+      - if !current_user.admin? && is_current_user
+        = link_to 'Volver', home_path, class: 'btn btn-outline-link pull-right'
+      - else
+        = link_to 'Volver', usuarios_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      ID:
+    .col.col-8
+      = @user.id
+  .row
+    .col.col-4.font-weight-bold
+      Nombre:
+    .col.col-8
+      = @user.nombre
+
+  .row
+    .col.col-4.font-weight-bold
+      Correo electronico
+    .col.col-8
+      = render 'shared/email_beautify', item: @user
+  .row
+    .col.col-4.font-weight-bold
+      Telefono
+    .col.col-8
+      = @user.telefono
+  .row
+    .col.col-4.font-weight-bold
+      Rol del Usuario
+    .col.col-8
+      = @user.role_label
+  .row
+    .col.col-4.font-weight-bold
+      Estado
+    .col.col-8
+      = render 'shared/status_beautify', status: @user.status

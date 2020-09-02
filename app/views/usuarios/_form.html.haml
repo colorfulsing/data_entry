@@ -1,0 +1,51 @@
+- is_current_user = current_user.id == @user.id
+
+- form_path = user.id.nil? ? usuarios_path : user_path(user)
+= form_with(url: form_path, model: user, local: true) do |form|
+  - if user.errors.any?
+    #error_explanation.alert.alert-danger{role: 'alert'}
+      %h2
+        Existen
+        = user.errors.count
+        = "error".pluralize(user.errors.count, :es)
+      %ul
+        - user.errors.full_messages.each do |message|
+          %li= message.html_safe
+
+  .row
+    - if current_user.admin?
+      .col.col-6.form-group
+        = form.label :email
+        = form.text_field :email, id: :user_email, class: 'form-control'
+
+    .col.col-6.form-group
+      = form.label :nombre
+      = form.text_field :nombre, id: :user_nombre, class: 'form-control'
+
+    .col.col-6.form-group
+      = form.label :password, 'NuevaContrase&ntilde;a'.html_safe
+      = form.password_field :password, id: :user_password, class: 'form-control'
+    .col.col-6.form-group
+      = form.label :password_confirmation, 'Confirmar Contrase&ntilde;a'.html_safe
+      = form.password_field :password_confirmation, id: :user_password_confirmation, class: 'form-control'
+
+    .col.col-6.form-group
+      = form.label :telefono
+      = form.text_field :telefono, id: :user_telefono, class: 'form-control'
+
+    - if is_current_user
+      .col.col-6.form-group
+        = form.label :current_password, 'Contrase&ntilde;a Actual'.html_safe
+        = form.password_field :current_password, id: :user_current_password, class: 'form-control'
+
+    - if current_user.admin?
+      .col.col-6.form-group
+        = form.label :role, "Rol del Usuario"
+        = form.select :role, User::ROLES.collect{|role| [User.role_label(role), role]}, {}, {id: :user_role, class: 'form-control'}
+
+      .col.col-6.form-group
+        = form.label :id_status, "Estado"
+        = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :user_id_status, class: 'form-control'}
+  .row
+    .col.actions
+      = form.submit "Guardar", class: 'btn btn-primary pull-right'
