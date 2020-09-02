@@ -44,15 +44,15 @@ You will also need to create or reuse a database storage volume called **"db_vol
 
 To execute as development, use the following command:
 
-    env PWD="$PWD" ENV="dev" docker-composer up
+    env PWD="$PWD" ENV="dev" docker-compose up
 
 To execute as development and perform the automated tests, use the following command:
 
-    env PWD="$PWD" ENV="dev" EXEC_TEST=1 docker-composer up
+    env PWD="$PWD" ENV="dev" EXEC_TEST=1 docker-compose up
 
 To execute as production, use the following command:
 
-    env PWD="$PWD" docker-composer up
+    env PWD="$PWD" docker-compose up
 
 Once the containers are initialized, we can use "start" and "stop" commands.
 
