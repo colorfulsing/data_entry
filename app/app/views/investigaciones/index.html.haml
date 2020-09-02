@@ -3,6 +3,6 @@
     .col.col-8
       %h1 Investigaciones
     .col.col-4
-      = link_to 'Nuevo investigaci&oacute;n', new_investigacion_path, class:"btn btn-primary pull-right"
+      = link_to 'Nueva investigaci&oacute;n'.html_safe, new_investigacion_path, class:"btn btn-primary pull-right"
 
   = render 'investigaciones/list', collection: @investigaciones

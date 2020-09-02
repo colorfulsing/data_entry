@@ -12,7 +12,7 @@
 
   .row
     .col.col-6.form-group
-      = form.label :titulo
+      = form.label :titulo, 'T&iacute;tulo'.html_safe
       = form.text_field :titulo, id: :investigacion_titulo, class: 'form-control'
     = render 'shared/autocomplete_widget',
       form: form,
@@ -42,15 +42,15 @@
       = form.label :autor
       = form.text_field :autor, id: :investigacion_autor, class: 'form-control'
     .col.col-6.form-group
-      = form.label :no_paginas
+      = form.label :no_paginas, 'N&uacute;mero de p&aacute;ginas'.html_safe
       = form.number_field :no_paginas, id: :investigacion_no_paginas, class: 'form-control'
   .row
     .col.col-6.form-group
-      = form.label :fecha_realizacion
-      = form.text_field :fecha_realizacion, id: :investigacion_fecha_realizacion, class: 'form-control', data: {provide: :datepicker, 'date-format': APP_CONFIG['date_format']}
+      = form.label :fecha_realizacion, 'Fecha de realizaci&oacute;n'.html_safe
+      = form.text_field :fecha_realizacion, id: :investigacion_fecha_realizacion, class: 'form-control date-picker', data: {provide: :datepicker, 'date-format': APP_CONFIG['date_format']}
     .col.col-6.form-group
-      = form.label :fecha_publicacion
-      = form.text_field :fecha_publicacion, id: :investigacion_fecha_publicacion, class: 'form-control', data: {provide: :datepicker, 'date-format': APP_CONFIG['date_format']}
+      = form.label :fecha_publicacion, 'Fecha de publicaci&oacute;n'.html_safe
+      = form.text_field :fecha_publicacion, id: :investigacion_fecha_publicacion, class: 'form-control date-picker', data: {provide: :datepicker, 'date-format': APP_CONFIG['date_format']}
   .row
     .col.col-12.form-group
       = form.label :resumen
@@ -90,5 +90,8 @@
           valueInputSelector: 'form .municipio-field .value-input',
           source: '<%= j municipios_autocomplete_path(format: :json) %>'
         });
+
+        // Date picker
+        $('.date-picker').datepicker();
       })();
     </script>

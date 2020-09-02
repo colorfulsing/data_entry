@@ -12,7 +12,7 @@
             %th Nombre
             %th Siglas
             %th Tel&eacute;fono
-            %th Direccion
+            %th Direcci&oacute;n
             %th Correo electr&oacute;nico
             %th Sitio web
             %th Estado
@@ -30,7 +30,7 @@
               %td= render 'shared/status_beautify', status: institucion.status
               %td= link_to 'Mostrar', institucion_path(institucion)
               %td= link_to 'Editar', edit_institucion_path(institucion)
-              %td= link_to 'Borrar', institucion_path(institucion), method: :delete, data: { confirm: 'Estas seguro?' }
+              %td= link_to 'Borrar', institucion_path(institucion), method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
   - else
     - collection.each do |institucion|
       .col.col-xs-12.col-md-4.col-lg-3
@@ -48,7 +48,7 @@
               .expand
                 = link_to 'Mostrar', institucion_path(institucion)
                 = link_to 'Editar', edit_institucion_path(institucion)
-                = link_to 'Borrar', institucion_path(institucion), class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
+                = link_to 'Borrar', institucion_path(institucion), class: 'text-danger', method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
 - if !hide_pagination
   .row
     .col

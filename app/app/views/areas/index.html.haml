@@ -3,6 +3,6 @@
     .col.col-8
       %h1 &Aacute;reas de estudio
     .col.col-4
-      = link_to 'Nueva &aacute;rea de estudio', new_area_path, class:"btn btn-primary pull-right"
+      = link_to 'Nueva &aacute;rea de estudio'.html_safe, new_area_path, class:"btn btn-primary pull-right"
 
   = render 'areas/list', collection: @areas

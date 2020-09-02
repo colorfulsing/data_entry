@@ -21,7 +21,7 @@
               %td= render 'shared/status_beautify', status: cuenca.status
               %td= link_to 'Mostrar', cuenca
               %td= link_to 'Editar', edit_cuenca_path(cuenca)
-              %td= link_to 'Borrar', cuenca, method: :delete, data: { confirm: 'Estas seguro?' }
+              %td= link_to 'Borrar', cuenca, method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
   - else
     - collection.each do |cuenca|
       .col.col-xs-12.col-md-4.col-lg-3
@@ -37,7 +37,7 @@
               .expand
                 = link_to 'Mostrar', cuenca
                 = link_to 'Editar', edit_cuenca_path(cuenca)
-                = link_to 'Borrar', cuenca, class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
+                = link_to 'Borrar', cuenca, class: 'text-danger', method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
 
 - if !hide_pagination
   .row

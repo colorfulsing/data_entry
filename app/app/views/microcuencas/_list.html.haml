@@ -21,7 +21,7 @@
               %td= render 'shared/status_beautify', status: microcuenca.status
               %td= link_to 'Mostrar', microcuenca
               %td= link_to 'Editar', edit_microcuenca_path(microcuenca)
-              %td= link_to 'Borrar', microcuenca, method: :delete, data: { confirm: 'Estas seguro?' }
+              %td= link_to 'Borrar', microcuenca, method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
   - else
     - collection.each do |microcuenca|
       .col.col-xs-12.col-md-4.col-lg-3
@@ -38,7 +38,7 @@
               .expand
                 = link_to 'Mostrar', microcuenca
                 = link_to 'Editar', edit_microcuenca_path(microcuenca)
-                = link_to 'Borrar', microcuenca, class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
+                = link_to 'Borrar', microcuenca, class: 'text-danger', method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
 - if !hide_pagination
   .row
     .col

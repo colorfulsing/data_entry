@@ -19,7 +19,7 @@
               %td= render 'shared/status_beautify', status: vertiente.status
               %td= link_to 'Mostrar', vertiente
               %td= link_to 'Editar', edit_vertiente_path(vertiente)
-              %td= link_to 'Borrar', vertiente, method: :delete, data: { confirm: 'Estas seguro?' }
+              %td= link_to 'Borrar', vertiente, method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
   - else
     - collection.each do |vertiente|
       .col.col-xs-12.col-md-4.col-lg-3
@@ -34,7 +34,7 @@
               .expand
                 = link_to 'Mostrar', vertiente
                 = link_to 'Editar', edit_vertiente_path(vertiente)
-                = link_to 'Borrar', vertiente, class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
+                = link_to 'Borrar', vertiente, class: 'text-danger', method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
 
 - if !hide_pagination
   .row

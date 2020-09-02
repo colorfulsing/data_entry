@@ -9,12 +9,12 @@
       %table.table.table-striped
         %thead
           %tr
-            %th Institucion
+            %th Instituci&oacute;n
             %th Nombre
             %th Siglas
             %th Tel&eacute;fono
             %th Extension
-            %th Direccion
+            %th Direcci&oacute;n
             %th Correo electr&oacute;nico
             %th Sitio web
             %th Estado
@@ -33,7 +33,7 @@
               %td= render 'shared/status_beautify', status: facultad.status
               %td= link_to 'Mostrar', facultad_path(facultad)
               %td= link_to 'Editar', edit_facultad_path(facultad)
-              %td= link_to 'Borrar', facultad_path(facultad), method: :delete, data: { confirm: 'Estas seguro?' }
+              %td= link_to 'Borrar', facultad_path(facultad), method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
   - else
     - collection.each do |facultad|
       .col.col-xs-12.col-md-4.col-lg-3
@@ -52,7 +52,7 @@
               .expand
                 = link_to 'Mostrar', facultad_path(facultad)
                 = link_to 'Editar', edit_facultad_path(facultad)
-                = link_to 'Borrar', facultad_path(facultad), class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
+                = link_to 'Borrar', facultad_path(facultad), class: 'text-danger', method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
 - if !hide_pagination
   .row
     .col

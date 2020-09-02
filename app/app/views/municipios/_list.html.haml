@@ -21,7 +21,7 @@
               %td= render 'shared/status_beautify', status: municipio.status
               %td= link_to 'Mostrar', municipio
               %td= link_to 'Editar', edit_municipio_path(municipio)
-              %td= link_to 'Borrar', municipio, method: :delete, data: { confirm: 'Estas seguro?' }
+              %td= link_to 'Borrar', municipio, method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
   - else
     - collection.each do |municipio|
       .col.col-xs-12.col-md-4.col-lg-3
@@ -37,7 +37,7 @@
               .expand
                 = link_to 'Mostrar', municipio
                 = link_to 'Editar', edit_municipio_path(municipio)
-                = link_to 'Borrar', municipio, class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
+                = link_to 'Borrar', municipio, class: 'text-danger', method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
 - if !hide_pagination
   .row
     .col

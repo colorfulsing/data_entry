@@ -19,7 +19,7 @@
               %td= render 'shared/flag_beautify', flag: status.visible
               %td= link_to 'Mostrar', status
               %td= link_to 'Editar', edit_status_path(status)
-              %td= link_to 'Borrar', status, method: :delete, data: { confirm: 'Estas seguro?' }
+              %td= link_to 'Borrar', status, method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
   - else
     - collection.each do |status|
       .col.col-xs-12.col-md-4.col-lg-3
@@ -36,7 +36,7 @@
               .expand
                 = link_to 'Mostrar', status
                 = link_to 'Editar', edit_status_path(status)
-                = link_to 'Borrar', status, class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
+                = link_to 'Borrar', status, class: 'text-danger', method: :delete, data: { confirm: '&iquest;Est&aacute; seguro?'.html_safe }
 
 - if !hide_pagination
   .row
