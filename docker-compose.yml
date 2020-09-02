@@ -47,8 +47,8 @@ services:
       - db_seed_volume:/docker-entrypoint-initdb.d
     networks:
       - rails_network
-    ports:
-      - 3306:3306
+    # ports:
+    #   - 3306:3306
     deploy:
       restart_policy:
         condition: on-failure
@@ -65,8 +65,8 @@ services:
       - rails_volume:/var/www/html
     networks:
       - rails_network
-    ports:
-      - 8080:80
+    # ports:
+    #   - 8080:80
     links:
       - rails
     command: /bin/bash -c "if [ \"$ENV\" == \"dev\" ]; then cp /etc/nginx/conf.d/site_config_dev.conf.template /etc/nginx/conf.d/default.conf; else cp /etc/nginx/conf.d/site_config_prod.conf.template /etc/nginx/conf.d/default.conf; fi; nginx -g 'daemon off;'"
