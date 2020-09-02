@@ -7,7 +7,8 @@ RUN apt-get install -y \
   libpq-dev \
   default-libmysqlclient-dev \
   apt-transport-https \
-  gettext-base
+  gettext-base \
+  sqlite3
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
   && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
@@ -23,6 +24,13 @@ RUN chmod +x \
   /opt/deploy/bin/template_tools.sh \
   /opt/deploy/bin/load_env.sh \
   /opt/deploy/bin/start_server.sh
+
+# Install gems and node dependencies
+COPY ./app/data/dependencies_config/ /opt/deploy/dependencies_config/
+RUN cd /opt/deploy/dependencies_config \
+  && gem install bundle \
+  && bundle install --jobs=4 \
+  && yarn install
 
 VOLUME /var/www/html
 WORKDIR /var/www/html

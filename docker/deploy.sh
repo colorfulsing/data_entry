@@ -17,12 +17,28 @@ PROC_ID_LIST=
 PROC_ID_SEED=0
 
 # Flags
+REQUIRE_SUDO=0
+SUDO_ENV_COMMAND=
 IS_FIRST_PARAM=1
 YES_TO_ALL=0
 START=0
 BUILD=0
 DOWN=0
 STOP=0
+BUILD_IMAGE=0
+SWARM_MODE=0
+
+# Load environment variables
+while read LINE; do
+  if [ "$(echo "$LINE" | grep -e '^\s*[^\#]')" != "" ]; then
+    export "$LINE" || exit 1
+  fi
+done < "$SCRIPT_DIR/.env"
+
+# Get app dir
+cd "$APP_PATH" || exit 1
+export APP_PATH="$(pwd -P)"
+cd "$SCRIPT_DIR"
 
 # Display a confirmation message
 function confirm () {
@@ -68,6 +84,8 @@ Actions:
   start                    Start the existing containers.
   rebuild                  Build or rebuild the containers.
   destroy                  Delete the containers.
+  build-image              Build all images.
+  publish                  Deploy services to docker swarm.
 
 Options:
   -y, --yes                respond yes to all questions
@@ -109,8 +127,6 @@ done
 case "$ACTION" in
   start)
     START=1
-    DOWN=0
-    BUILD=0
     STOP=1
     ;;
   rebuild)
@@ -120,10 +136,14 @@ case "$ACTION" in
     STOP=1
     ;;
   destroy)
-    START=0
     DOWN=1
-    BUILD=0
     STOP=1
+    ;;
+  swarm-mode)
+    SWARM_MODE=1
+    ;;
+  build-image)
+    BUILD_IMAGE=1
     ;;
   *)
     echo "Error: Invalid action \"$ACTION\". $HELP_MESSAGE"
@@ -145,13 +165,30 @@ echo ""
 ! confirm "  Do you want to continue? (y/n) [y]" && exit 0
 echo ""
 
-# Ask for root access only once
-sudo -v
-# Keep-alive: update existing sudo time stamp if set, otherwise do nothing.
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+# Detect possible permission deny
+echo "Testing docker access, executing \"docker info\" command..."
+if [ "$(docker info | grep -i -E "^server\\s+version\\s*\\:\\s*")" == "" ]; then
+  echo "Failed, it could be a permission issue, will try again using sudo..."
+
+  # Ask for root access only once
+  sudo -v
+  # Keep-alive: update existing sudo time stamp if set, otherwise do nothing.
+  while true; do sudo docker -v >> /dev/null; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+  # Test again with sudo
+  if [ "$(sudo docker info | grep -i -E "^server\\s+version\\s*\\:\\s*")" == "" ]; then
+    echo "Failed, please check that docker service is running"
+    exit 1
+  fi
+  echo "Test successful, will use sudo for docker commands"
+  REQUIRE_SUDO=1
+  SUDO_ENV_COMMAND="sudo"
+else
+  echo "Test successful"
+fi
 
 function sudo_env() {
-  sudo env PWD="$PWD" $*
+  $SUDO_ENV_COMMAND $*
 }
 
 function store_background_job() {
@@ -209,9 +246,34 @@ if [ "$DOWN" == "1" ]; then
   echo "Done."
 fi
 
+if [ "$BUILD_IMAGE" == "1" ]; then
+  cd "$SCRIPT_DIR"
+  if [ "$(ls -1q ./build/app/data/dependencies_config | wc -l)" != "0" ]; then
+    rm -Rf ./build/app/data/dependencies_config/* || exit 1
+  fi
+  echo "Copy Gemfile and node package files to app image build context before build..."
+  if [ -f "$APP_PATH/Gemfile" ]; then
+    echo "\"Gemfile\" file found"
+    cp "$APP_PATH/Gemfile" ./build/app/data/dependencies_config/ || exit 1
+  fi
+  if [ -f "$APP_PATH/Gemfile.lock" ]; then
+    echo "\"Gemfile.lock\" file found"
+    cp "$APP_PATH/Gemfile.lock" ./build/app/data/dependencies_config/ || exit 1
+  fi
+  if [ -f "$APP_PATH/package.json" ]; then
+    echo "\"package.json\" file found"
+    cp "$APP_PATH/package.json" ./build/app/data/dependencies_config/ || exit 1
+  fi
+  if [ -f "$APP_PATH/package-lock.json" ]; then
+    echo "\"package-lock.json\" file found"
+    cp "$APP_PATH/package-lock.json" ./build/app/data/dependencies_config/ || exit 1
+  fi
+  echo "Done"
+  sudo_env docker-compose build || exit 1
+fi
+
 if [ "$BUILD" == "1" ]; then
   echo "Building project's containers..."
-  sudo_env docker-compose build || exit 1
   sudo_env docker-compose up --no-start || exit 1
   echo "Done."
 fi
@@ -222,7 +284,10 @@ if [ "$START" == "1" ]; then
   sudo_env docker-compose logs -f &
   store_background_job $!
   wait_background_jobs
+  catch_ctrl_c
   echo "Done."
 fi
 
-catch_ctrl_c
+if [ "$SWARM_MODE" == "1" ]; then
+  sudo_env docker stack -c ./docker-compose.yml -c ./docker-compose.prod.yml
+fi
