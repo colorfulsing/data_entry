@@ -20,6 +20,20 @@ if [ -d /var/www/html/tmp ] && [ -d /var/www/html/tmp/pids ] && [ -f /var/www/ht
   echo "Done"
 fi
 
+# Delete Gemfile.lock file
+if [ -e /var/www/html/Gemfile.lock ] || [ -L /var/www/html/Gemfile.lock ]; then
+  echo "Deleting \"./Gemfile.lock\" file..."
+  rm -Rf /var/www/html/Gemfile.lock
+  echo "Done"
+fi
+echo "Installing cached Gemfile.lock file..."
+if [ -f /opt/deploy/dependencies_config/Gemfile.lock ]; then
+  cp /opt/deploy/dependencies_config/Gemfile.lock /var/www/html/Gemfile.lock || exit 1
+  echo "Done"
+else
+  echo "No cached Gemfile.lock found"
+fi
+
 # Delete vendors directory content
 if [ -e /var/www/html/vendor ] || [ -L /var/www/html/vendor ]; then
   if [ "$(ls -1q /var/www/html/vendor | wc -l)" != "0" ]; then
@@ -37,6 +51,20 @@ if [ -d /opt/deploy/dependencies_config/vendor ]; then
   echo "Done"
 else
   echo "No cached gem vendors found"
+fi
+
+# Delete package-lock.json file
+if [ -e /var/www/html/package-lock.json ] || [ -L /var/www/html/package-lock.json ]; then
+  echo "Deleting \"./package-lock.json\" file..."
+  rm -Rf /var/www/html/package-lock.json
+  echo "Done"
+fi
+echo "Installing cached package-lock.json file..."
+if [ -f /opt/deploy/dependencies_config/package-lock.json ]; then
+  cp /opt/deploy/dependencies_config/package-lock.json /var/www/html/package-lock.json || exit 1
+  echo "Done"
+else
+  echo "No cached package-lock.json found"
 fi
 
 # Delete node modules directory

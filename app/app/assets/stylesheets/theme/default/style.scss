@@ -1,11 +1,11 @@
-@import '../../elements.less';
-@import '../../variables.less';
+@import '../../elements.scss';
+@import '../../variables.scss';
 
-body { color: @textColor; }
+body { color: $textColor; }
 
 .fixed-alert { width: 100%; position: fixed; bottom: 0; left: 0; z-index: 9999;
-  .alert { margin-bottom: 0; top: 0; .opacity(1); .transition();
-    &.hide-alert { height: 1px; padding:0; margin:0; overflow: hidden; position: absolute; top: -1px; .opacity(0); }
+  .alert { margin-bottom: 0; top: 0; @include opacity(1); @include transition();
+    &.hide-alert { height: 1px; padding:0; margin:0; overflow: hidden; position: absolute; top: -1px; @include opacity(0); }
     .close-button { float: right; color: inherit;
       &:hover { text-decoration: none; }
     }
@@ -43,21 +43,21 @@ body { color: @textColor; }
 }
 
 .section-content { padding: 20px 0;
-  h1 { display: block; .ellipsis(); }
-  form { display: block; background-color: #fff; margin-top: 10px; padding: 7px @padding 12px @padding; position: relative; .box-shadow(0 0 3px rgba(33, 33, 33, 0.2)); }
+  h1 { display: block; @include ellipsis(); }
+  form { display: block; background-color: #fff; margin-top: 10px; padding: 7px $padding 12px $padding; position: relative; @include box-shadow(0 0 3px rgba(33, 33, 33, 0.2)); }
 
   .table {
     td { max-width: 300px; word-wrap: break-word; }
   }
-  .box-item { background-color: #fff; margin-top: 10px; padding: 7px @padding 12px @padding; position: relative; .box-shadow(0 0 3px rgba(33, 33, 33, 0.2));
-    .title { display: block; padding-right: 50px; font-size: 18px; color: @textColor; .ellipsis(); }
-    .data { font-size: 14px; .ellipsis(); }
-    .data-id { font-size: 14px; color: @textWeakColor; position: absolute; bottom: 10px; right: @padding;
-      &:before { content: 'ID: '; color: @textWeakColor; }
+  .box-item { background-color: #fff; margin-top: 10px; padding: 7px $padding 12px $padding; position: relative; @include box-shadow(0 0 3px rgba(33, 33, 33, 0.2));
+    .title { display: block; padding-right: 50px; font-size: 18px; color: $textColor; @include ellipsis(); }
+    .data { font-size: 14px; @include ellipsis(); }
+    .data-id { font-size: 14px; color: $textWeakColor; position: absolute; bottom: 10px; right: $padding;
+      &:before { content: 'ID: '; color: $textWeakColor; }
     }
-    .options { padding: 5px @padding 5px 10px; position: absolute; top: 0; right: 0;
+    .options { padding: 5px $padding 5px 10px; position: absolute; top: 0; right: 0;
       &:hover {
-        .expand { width: auto; height: auto; padding: 5px 10px; overflow: visible; top: -25px; left: -20px; .opacity(1);
+        .expand { width: auto; height: auto; padding: 5px 10px; overflow: visible; top: -25px; left: -20px; @include opacity(1);
           a { font-size: 14px; }
           a:first-child { top: 0;
             + a { top: 0; left: 0;
@@ -67,8 +67,8 @@ body { color: @textColor; }
         }
       }
       .aux { position: relative; }
-      .icon { text-decoration: none; font-size: 16px; color: @linkColor; }
-      .expand { width: 1px; height: 1px; background-color: #fff; overflow: hidden; position: absolute; top: 10px; left: 3px; z-index: 2; .rounded(10px); .box-shadow(0 0 3px rgba(33, 33, 33, 0.2)); .opacity(0); .transition();
+      .icon { text-decoration: none; font-size: 16px; color: $linkColor; }
+      .expand { width: 1px; height: 1px; background-color: #fff; overflow: hidden; position: absolute; top: 10px; left: 3px; z-index: 2; @include rounded(10px); @include box-shadow(0 0 3px rgba(33, 33, 33, 0.2)); @include opacity(0); @include transition();
 
         a:first-child { position: relative; top: -20px;
           + a { position: relative; top: 0; left: 0;
@@ -78,8 +78,8 @@ body { color: @textColor; }
       }
     }
   }
-  .pagination { display: block; margin-top: @padding; text-align: center;
-    .page, .first, .prev, .next, .last { display: inline-block; height: 35px; border: 1px solid @borderColor; padding: 0 10px; line-height: 30px; vertical-align: middle; .rounded(3px);
+  .pagination { display: block; margin-top: $padding; text-align: center;
+    .page, .first, .prev, .next, .last { display: inline-block; height: 35px; border: 1px solid $borderColor; padding: 0 10px; line-height: 30px; vertical-align: middle; @include rounded(3px);
       &.current { background-color: #007bff; color: #fff; }
     }
     .first, .prev, .next, .last { line-height: 25px; font-size: 1.5em; }
@@ -90,7 +90,7 @@ body { color: @textColor; }
       .edit-hidden { display: block; }
       .read-hidden { display: none; }
 
-      .item-name { padding-top: 5px; .ellipsis();
+      .item-name { padding-top: 5px; @include ellipsis();
         .text { font-weight: bold; }
         .edit-icon { display: inline-block; margin-left: 5px; }
       }

@@ -1,0 +1,12 @@
+@import '../../../elements.scss';
+@import '../../../variables.scss';
+
+.sign-in-page {
+  .section-content {
+    .logo { text-align: center; }
+    h1 { font-size: 20px; }
+    .form-sign-in { display: block; width: 100%; max-width: 350px; margin: $padding auto 0 auto;
+      form { display: block; margin-top: $padding; }
+    }
+  }
+}

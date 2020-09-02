@@ -1,0 +1,10 @@
+@import '../../../elements.scss';
+@import '../../../variables.scss';
+
+.home-page {
+  .section-content {
+    h1 { display: block; margin-top: 30px; text-align: center; font-size: 26px; color: $textColor; }
+    .icon { padding-top: 30px; text-align: center; font-size: 90px; color: $textWeakColor; }
+    .text { text-align: center; font-size: 16px; color: $textWeakColor; }
+  }
+}
