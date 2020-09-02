@@ -1,10 +1,18 @@
-%p#notice= notice
-%p
-  %strong Id investigacion:
-  = @area_investigacion.id_investigacion
-%p
-  %strong Id area:
-  = @area_investigacion.id_area
-= link_to 'Edit', edit_area_investigacion_path(@area_investigacion)
+.container
+  .row
+    .col.col-9
+      %h1= @
+    .col.col-3
+  .row
+    .col.col-4.font-weight-bold
+      Id investigacion:
+    .col.col-8
+      = @area_investigacion.id_investigacion
+  .row
+    .col.col-4.font-weight-bold
+      Id area:
+    .col.col-8
+      = @area_investigacion.id_area
+= link_to 'Editar', edit_area_investigacion_path(@area_investigacion), class: 'btn btn-outline-primary pull-right'
 |
-= link_to 'Back', area_investigaciones_path
+= link_to 'Volver', area_investigaciones_path, class: 'btn btn-outline-link pull-right'

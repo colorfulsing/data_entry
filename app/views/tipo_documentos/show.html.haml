@@ -1,13 +1,22 @@
-%p#notice= notice
-%p
-  %strong Nombre:
-  = @tipo_documento.nombre
-%p
-  %strong Descripcion:
-  = @tipo_documento.descripcion
-%p
-  %strong Id status:
-  = @tipo_documento.id_status
-= link_to 'Edit', edit_tipo_documento_path(@tipo_documento)
-|
-= link_to 'Back', tipo_documentos_path
+.container
+  .row
+    .col.col-9
+      %h1= @tipo_documento.nombre
+    .col.col-3
+      = link_to 'Editar', edit_tipo_documento_path(@tipo_documento), class: 'btn btn-outline-primary pull-right'
+      = link_to 'Volver', tipo_documentos_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      Nombre:
+    .col.col-8
+      = @tipo_documento.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Descripcion:
+    .col.col-8
+      = @tipo_documento.descripcion
+  .row
+    .col.col-4.font-weight-bold
+      Estado
+    .col.col-8
+      = render 'shared/status_beautify', status: @tipo_documento.status

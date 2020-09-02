@@ -1,21 +1,41 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = devise_error_messages!
-    .col.col-4.form-group
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-    .col.col-4.form-group
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "off"
-    .col.col-4.form-group
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+- @disable_header = true
+- @disable_footer = true
+- content_for(:page_class){'sign-in-page no-header'}
+
+.container
+  .row
+    .col.logo
+      = image_tag 'images/logo.png'
+  .form-sign-in
+    .row
+      .col
+        %h1 Registrarse
+
+    .row
+      .col
+
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          - errors = devise_error_messages!
+          - if !errors.blank?
+            #error_explanation.alert.alert-danger{role: 'alert'}
+              %h2
+                Existen errores:
+
+              = errors
+
+          .row
+            .col.col-12.form-group
+              = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Correo electronico'
+            .col.col-12.form-group
+              - if @minimum_password_length
+                %em
+                  (Minimo #{@minimum_password_length} caracteres)
+              = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: raw('Contrase&ntilde;a')
+            .col.col-12.form-group
+              = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: raw('Confirmar contrase&ntilde;a')
+
+          .row
+            .col
+              = render "devise/shared/links"
+          .actions
+            = f.submit "Guardar", class: 'btn btn-primary pull-right'

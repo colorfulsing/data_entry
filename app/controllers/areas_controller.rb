@@ -5,7 +5,7 @@ class AreasController < ApplicationController
   # GET /areas
   # GET /areas.json
   def index
-    @areas = Area.all
+    @areas = Area.all.includes([:status]).order(:nombre).page params[:page]
   end
 
   # GET /areas/1

@@ -1,13 +1,22 @@
-%p#notice= notice
-%p
-  %strong Id departamento:
-  = @municipio.id_departamento
-%p
-  %strong Nombre:
-  = @municipio.nombre
-%p
-  %strong Id status:
-  = @municipio.id_status
-= link_to 'Edit', edit_municipio_path(@municipio)
-|
-= link_to 'Back', municipios_path
+.container
+  .row
+    .col.col-9
+      %h1= @municipio.nombre
+    .col.col-3
+      = link_to 'Editar', edit_municipio_path(@municipio), class: 'btn btn-outline-primary pull-right'
+      = link_to 'Volver', municipios_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      Id departamento:
+    .col.col-8
+      = @municipio.id_departamento
+  .row
+    .col.col-4.font-weight-bold
+      Nombre:
+    .col.col-8
+      = @municipio.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Estado
+    .col.col-8
+      = render 'shared/status_beautify', status: @municipio.status

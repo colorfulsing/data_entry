@@ -5,7 +5,7 @@ class StatusesController < ApplicationController
   # GET /statuses
   # GET /statuses.json
   def index
-    @statuses = Status.all
+    @statuses = Status.all.order(:nombre).page params[:page]
   end
 
   # GET /statuses/1
@@ -29,7 +29,7 @@ class StatusesController < ApplicationController
 
     respond_to do |format|
       if @status.save
-        format.html { redirect_to @status, notice: 'La Status se creo exitosamente.' }
+        format.html { redirect_to @status, notice: 'El Estado se creo exitosamente.' }
         format.json { render :show, status: :created, location: @status }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class StatusesController < ApplicationController
   def update
     respond_to do |format|
       if @status.update(status_params)
-        format.html { redirect_to @status, notice: 'La Status se actualizo correctamente.' }
+        format.html { redirect_to @status, notice: 'El Estado se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @status }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class StatusesController < ApplicationController
     @status.status = Status.find(Status::VALUES[:deleted])
     @status.save validate: false
     respond_to do |format|
-      format.html { redirect_to statuses_url, notice: 'La Status se marco como borrada.' }
+      format.html { redirect_to statuses_url, notice: 'El Estado se marco como borrado.' }
       format.json { head :no_content }
     end
   end

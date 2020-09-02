@@ -1,4 +1,4 @@
-- form_path = microcuenca.id.nil? ? microcuenca_path : microcuenca_path(microcuenca)
+- form_path = microcuenca.id.nil? ? microcuencas_path : microcuenca_path(microcuenca)
 = form_with(url: form_path, model: microcuenca, local: true) do |form|
   - if microcuenca.errors.any?
     #error_explanation.alert.alert-danger{role: 'alert'}
@@ -21,4 +21,4 @@
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :microcuenca_id_status, class: 'form-control'}
   .actions
-      = form.submit "Guardar", class: 'btn btn-primary pull-right'
+    = form.submit "Guardar", class: 'btn btn-primary pull-right'

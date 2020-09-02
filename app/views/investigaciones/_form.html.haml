@@ -1,4 +1,4 @@
-- form_path = investigacion.id.nil? ? investigacion_path : investigacion_path(investigacion)
+- form_path = investigacion.id.nil? ? investigaciones_path : investigacion_path(investigacion)
 = form_with(url: form_path, model: investigacion, local: true) do |form|
   - if investigacion.errors.any?
     #error_explanation.alert.alert-danger{role: 'alert'}
@@ -51,4 +51,4 @@
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :investigacion_id_status, class: 'form-control'}
   .actions
-      = form.submit "Guardar", class: 'btn btn-primary pull-right'
+    = form.submit "Guardar", class: 'btn btn-primary pull-right'

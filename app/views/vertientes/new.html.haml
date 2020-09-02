@@ -1,3 +1,10 @@
-%h1 New Vertiente
-= render 'form', vertiente: @vertiente
-= link_to 'Back', vertientes_path
+.container
+  .row
+    .col
+      %h1 Nueva Vertiente
+  .row
+    .col
+      = link_to 'Volver', vertientes_path, class: 'btn btn-ouline-link pull-right'
+  .row
+    .col
+      = render 'form', vertiente: @vertiente

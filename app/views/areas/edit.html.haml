@@ -1,5 +1,12 @@
-%h1 Editing Area
-= render 'form', area: @area
-= link_to 'Show', @area
-|
-= link_to 'Back', areas_path
+.container
+  .row
+    .col
+      %h1 Editar Area
+
+  .row
+    .col
+      = link_to 'Mostrar', area_path(@area), class: 'btn btn-outline-info pull-right'
+      = link_to 'Volver', areas_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col
+      = render 'form', area: @area

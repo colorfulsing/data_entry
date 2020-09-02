@@ -1,3 +1,8 @@
+@import '../../elements.less';
+@import '../../variables.less';
+
+body { color: @textColor; }
+
 .fixed-alert { width: 100%; position: absolute; top: 0; left: 0; z-index: 9999;
   .alert {
     .close-button { float: right; color: inherit;
@@ -6,13 +11,28 @@
   }
 }
 
+.no-header {
+  .section-header { display: none; }
+}
+
 .section-header {
   .navbar {
     &.navbar-theme { border-bottom: 1px solid #dcdcdc; }
+
+    .navbar-brand {
+      img { height: 40px; width: auto; }
+    }
   }
 }
 
-.section-content { padding: 20px 0; }
+.section-content { padding: 20px 0;
+  .pagination { display: block; text-align: center;
+    .page, .first, .prev, .next, .last { display: inline-block; height: 35px; border: 1px solid @borderColor; padding: 0 10px; line-height: 30px; vertical-align: middle; .rounded(3px);
+      &.current { background-color: #007bff; color: #fff; }
+    }
+    .first, .prev, .next, .last { line-height: 25px; font-size: 1.5em; }
+  }
+}
 
 .section-footer {
 

@@ -1,5 +1,12 @@
-%h1 Editing Cuenca
-= render 'form', cuenca: @cuenca
-= link_to 'Show', @cuenca
-|
-= link_to 'Back', cuencas_path
+.container
+  .row
+    .col
+      %h1 Editar Cuenca
+
+  .row
+    .col
+      = link_to 'Mostrar', cuenca_path(@cuenca), class: 'btn btn-outline-info pull-right'
+      = link_to 'Volver', cuencas_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col
+      = render 'form', cuenca: @cuenca

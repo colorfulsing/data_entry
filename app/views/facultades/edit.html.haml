@@ -1,5 +1,12 @@
-%h1 Editing Facultades Instituto
-= render 'form', facultad: @facultad
-= link_to 'Show', @facultad
-|
-= link_to 'Back', facultades_path
+.container
+  .row
+    .col
+      %h1 Editar Facultades Instituto
+
+  .row
+    .col
+      = link_to 'Mostrar', facultad_path(@facultad), class: 'btn btn-outline-info pull-right'
+      = link_to 'Volver', facultades_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col
+      = render 'form', facultad: @facultad

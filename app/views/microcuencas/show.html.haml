@@ -1,13 +1,22 @@
-%p#notice= notice
-%p
-  %strong Id subcuenca:
-  = @microcuenca.id_subcuenca
-%p
-  %strong Nombre:
-  = @microcuenca.nombre
-%p
-  %strong Id status:
-  = @microcuenca.id_status
-= link_to 'Edit', edit_microcuenca_path(@microcuenca)
-|
-= link_to 'Back', microcuencas_path
+.container
+  .row
+    .col.col-9
+      %h1= @microcuenca.nombre
+    .col.col-3
+      = link_to 'Editar', edit_microcuenca_path(@microcuenca), class: 'btn btn-outline-primary pull-right'
+      = link_to 'Volver', microcuencas_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      Id subcuenca:
+    .col.col-8
+      = @microcuenca.id_subcuenca
+  .row
+    .col.col-4.font-weight-bold
+      Nombre:
+    .col.col-8
+      = @microcuenca.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Estado
+    .col.col-8
+      = render 'shared/status_beautify', status: @microcuenca.status

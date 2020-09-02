@@ -1,5 +1,12 @@
-%h1 Editing Proyecto Area
-= render 'form', proyecto_area: @proyecto_area
-= link_to 'Show', @proyecto_area
-|
-= link_to 'Back', proyecto_areas_path
+.container
+  .row
+    .col
+      %h1 Editar Proyecto Area
+
+  .row
+    .col
+      = link_to 'Mostrar', proyecto_area_path(@proyecto_area), class: 'btn btn-outline-info pull-right'
+      = link_to 'Volver', proyecto_areas_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col
+      = render 'form', proyecto_area: @proyecto_area

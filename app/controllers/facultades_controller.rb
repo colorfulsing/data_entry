@@ -5,7 +5,7 @@ class FacultadesController < ApplicationController
   # GET /facultades
   # GET /facultades.json
   def index
-    @facultades = Facultad.all
+    @facultades = Facultad.all.includes([:status]).order(:nombre).page params[:page]
   end
 
   # GET /facultades/1
@@ -29,7 +29,7 @@ class FacultadesController < ApplicationController
 
     respond_to do |format|
       if @facultad.save
-        format.html { redirect_to @facultad, notice: 'Facultades instituto was successfully created.' }
+        format.html { redirect_to @facultad, notice: 'Facultades instituto se creo exitosamente.' }
         format.json { render :show, status: :created, location: @facultad }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class FacultadesController < ApplicationController
   def update
     respond_to do |format|
       if @facultad.update(facultad_params)
-        format.html { redirect_to @facultad, notice: 'Facultades instituto was successfully updated.' }
+        format.html { redirect_to @facultad, notice: 'Facultades instituto se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @facultad }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class FacultadesController < ApplicationController
     @facultad.status = Status.find(Status::VALUES[:deleted])
     @facultad.save validate: false
     respond_to do |format|
-      format.html { redirect_to facultades_url, notice: 'Facultades instituto was successfully destroyed.' }
+      format.html { redirect_to facultades_url, notice: 'Facultades instituto se marco como borrada..' }
       format.json { head :no_content }
     end
   end

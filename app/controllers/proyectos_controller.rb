@@ -5,7 +5,7 @@ class ProyectosController < ApplicationController
   # GET /proyectos
   # GET /proyectos.json
   def index
-    @proyectos = Proyecto.all
+    @proyectos = Proyecto.all.includes([:status]).order(:nombre).page params[:page]
   end
 
   # GET /proyectos/1
@@ -29,7 +29,7 @@ class ProyectosController < ApplicationController
 
     respond_to do |format|
       if @proyecto.save
-        format.html { redirect_to @proyecto, notice: 'Proyecto programa was successfully created.' }
+        format.html { redirect_to @proyecto, notice: 'Proyecto programa se creo exitosamente.' }
         format.json { render :show, status: :created, location: @proyecto }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class ProyectosController < ApplicationController
   def update
     respond_to do |format|
       if @proyecto.update(proyecto_params)
-        format.html { redirect_to @proyecto, notice: 'Proyecto programa was successfully updated.' }
+        format.html { redirect_to @proyecto, notice: 'Proyecto programa se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @proyecto }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class ProyectosController < ApplicationController
     @proyecto.status = Status.find(Status::VALUES[:deleted])
     @proyecto.save validate: false
     respond_to do |format|
-      format.html { redirect_to proyectos_url, notice: 'Proyecto programa was successfully destroyed.' }
+      format.html { redirect_to proyectos_url, notice: 'Proyecto programa se marco como borrado.' }
       format.json { head :no_content }
     end
   end

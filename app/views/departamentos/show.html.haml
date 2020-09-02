@@ -1,10 +1,17 @@
-%p#notice= notice
-%p
-  %strong Nombre:
-  = @departamento.nombre
-%p
-  %strong Id status:
-  = @departamento.id_status
-= link_to 'Edit', edit_departamento_path(@departamento)
-|
-= link_to 'Back', departamentos_path
+.container
+  .row
+    .col.col-9
+      %h1= @departamento.nombre
+    .col.col-3
+      = link_to 'Editar', edit_departamento_path(@departamento), class: 'btn btn-outline-primary pull-right'
+      = link_to 'Volver', departamentos_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      Nombre:
+    .col.col-8
+      = @departamento.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Estado
+    .col.col-8
+      = render 'shared/status_beautify', status: @departamento.status

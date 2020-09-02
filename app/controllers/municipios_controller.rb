@@ -5,7 +5,7 @@ class MunicipiosController < ApplicationController
   # GET /municipios
   # GET /municipios.json
   def index
-    @municipios = Municipio.all
+    @municipios = Municipio.all.includes([:status]).order(:nombre).page params[:page]
   end
 
   # GET /municipios/1
@@ -29,7 +29,7 @@ class MunicipiosController < ApplicationController
 
     respond_to do |format|
       if @municipio.save
-        format.html { redirect_to @municipio, notice: 'La Municipio se creo exitosamente.' }
+        format.html { redirect_to @municipio, notice: 'El Municipio se creo exitosamente.' }
         format.json { render :show, status: :created, location: @municipio }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class MunicipiosController < ApplicationController
   def update
     respond_to do |format|
       if @municipio.update(municipio_params)
-        format.html { redirect_to @municipio, notice: 'La Municipio se actualizo correctamente.' }
+        format.html { redirect_to @municipio, notice: 'El Municipio se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @municipio }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class MunicipiosController < ApplicationController
     @municipio.status = Status.find(Status::VALUES[:deleted])
     @municipio.save validate: false
     respond_to do |format|
-      format.html { redirect_to municipios_url, notice: 'La Municipio se marco como borrada.' }
+      format.html { redirect_to municipios_url, notice: 'El Municipio se marco como borrado.' }
       format.json { head :no_content }
     end
   end

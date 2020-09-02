@@ -1,3 +1,10 @@
-%h1 New Status
-= render 'form', status: @status
-= link_to 'Back', statuses_path
+.container
+  .row
+    .col
+      %h1 Nuevo Estado
+  .row
+    .col
+      = link_to 'Volver', statuses_path, class: 'btn btn-ouline-link pull-right'
+  .row
+    .col
+      = render 'form', status: @status

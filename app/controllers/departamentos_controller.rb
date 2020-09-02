@@ -5,7 +5,7 @@ class DepartamentosController < ApplicationController
   # GET /departamentos
   # GET /departamentos.json
   def index
-    @departamentos = Departamento.all
+    @departamentos = Departamento.all.includes([:status]).order(:nombre).page params[:page]
   end
 
   # GET /departamentos/1
@@ -29,7 +29,7 @@ class DepartamentosController < ApplicationController
 
     respond_to do |format|
       if @departamento.save
-        format.html { redirect_to @departamento, notice: 'La Departamento se creo exitosamente.' }
+        format.html { redirect_to @departamento, notice: 'El Departamento se creo exitosamente.' }
         format.json { render :show, status: :created, location: @departamento }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class DepartamentosController < ApplicationController
   def update
     respond_to do |format|
       if @departamento.update(departamento_params)
-        format.html { redirect_to @departamento, notice: 'La Departamento se actualizo correctamente.' }
+        format.html { redirect_to @departamento, notice: 'El Departamento se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @departamento }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class DepartamentosController < ApplicationController
     @departamento.status = Status.find(Status::VALUES[:deleted])
     @departamento.save validate: false
     respond_to do |format|
-      format.html { redirect_to departamentos_url, notice: 'La Departamento se marco como borrada.' }
+      format.html { redirect_to departamentos_url, notice: 'El Departamento se marco como borrado.' }
       format.json { head :no_content }
     end
   end

@@ -1,3 +1,10 @@
-%h1 New Subcuenca
-= render 'form', subcuenca: @subcuenca
-= link_to 'Back', subcuencas_path
+.container
+  .row
+    .col
+      %h1 Nueva Subcuenca
+  .row
+    .col
+      = link_to 'Volver', subcuencas_path, class: 'btn btn-ouline-link pull-right'
+  .row
+    .col
+      = render 'form', subcuenca: @subcuenca

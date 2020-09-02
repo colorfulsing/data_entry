@@ -1,43 +1,72 @@
-%p#notice= notice
-%p
-  %strong Id instituto:
-  = @investigacion.id_instituto
-%p
-  %strong Id microcuenca:
-  = @investigacion.id_microcuenca
-%p
-  %strong Id municipio:
-  = @investigacion.id_municipio
-%p
-  %strong Id documento:
-  = @investigacion.id_documento
-%p
-  %strong Autor:
-  = @investigacion.autor
-%p
-  %strong Titulo:
-  = @investigacion.titulo
-%p
-  %strong No paginas:
-  = @investigacion.no_paginas
-%p
-  %strong Fecha realizacion:
-  = @investigacion.fecha_realizacion
-%p
-  %strong Fecha publicacion:
-  = @investigacion.fecha_publicacion
-%p
-  %strong Resumen:
-  = @investigacion.resumen
-%p
-  %strong Palabras clave:
-  = @investigacion.palabras_clave
-%p
-  %strong Recurso web:
-  = @investigacion.recurso_web
-%p
-  %strong Id status:
-  = @investigacion.id_status
-= link_to 'Edit', edit_investigacion_path(@investigacion)
-|
-= link_to 'Back', investigaciones_path
+.container
+  .row
+    .col.col-9
+      %h1= @investigacion.titulo
+    .col.col-3
+      = link_to 'Editar', edit_investigacion_path(@investigacion), class: 'btn btn-outline-primary pull-right'
+      = link_to 'Volver', investigaciones_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      Id instituto:
+    .col.col-8
+      = @investigacion.id_instituto
+  .row
+    .col.col-4.font-weight-bold
+      Id microcuenca:
+    .col.col-8
+      = @investigacion.id_microcuenca
+  .row
+    .col.col-4.font-weight-bold
+      Id municipio:
+    .col.col-8
+      = @investigacion.id_municipio
+  .row
+    .col.col-4.font-weight-bold
+      Id documento:
+    .col.col-8
+      = @investigacion.id_documento
+  .row
+    .col.col-4.font-weight-bold
+      Autor:
+    .col.col-8
+      = @investigacion.autor
+  .row
+    .col.col-4.font-weight-bold
+      Titulo:
+    .col.col-8
+      = @investigacion.titulo
+  .row
+    .col.col-4.font-weight-bold
+      No paginas:
+    .col.col-8
+      = @investigacion.no_paginas
+  .row
+    .col.col-4.font-weight-bold
+      Fecha realizacion:
+    .col.col-8
+      = @investigacion.fecha_realizacion
+  .row
+    .col.col-4.font-weight-bold
+      Fecha publicacion:
+    .col.col-8
+      = @investigacion.fecha_publicacion
+  .row
+    .col.col-4.font-weight-bold
+      Resumen:
+    .col.col-8
+      = @investigacion.resumen
+  .row
+    .col.col-4.font-weight-bold
+      Palabras clave:
+    .col.col-8
+      = @investigacion.palabras_clave
+  .row
+    .col.col-4.font-weight-bold
+      Recurso web:
+    .col.col-8
+      = @investigacion.recurso_web
+  .row
+    .col.col-4.font-weight-bold
+      Estado
+    .col.col-8
+      = render 'shared/status_beautify', status: @investigacion.status

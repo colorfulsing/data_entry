@@ -1,3 +1,10 @@
-%h1 New Investigacion
-= render 'form', investigacion: @investigacion
-= link_to 'Back', investigaciones_path
+.container
+  .row
+    .col
+      %h1 Nueva Investigacion
+  .row
+    .col
+      = link_to 'Volver', investigaciones_path, class: 'btn btn-ouline-link pull-right'
+  .row
+    .col
+      = render 'form', investigacion: @investigacion

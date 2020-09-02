@@ -11,8 +11,8 @@
       %tr
         %td= proyecto_area.id_proyecto
         %td= proyecto_area.id_area
-        %td= link_to 'Show', proyecto_area
-        %td= link_to 'Edit', edit_proyecto_area_path(proyecto_area)
-        %td= link_to 'Destroy', proyecto_area, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Mostrar', proyecto_area
+        %td= link_to 'Editar', edit_proyecto_area_path(proyecto_area)
+        %td= link_to 'Borrar', proyecto_area, method: :delete, data: { confirm: 'Estas seguro?' }
 %br/
-= link_to 'New Proyecto Area', new_proyecto_area_path
+= link_to 'Nuevo Proyecto Area', new_proyecto_area_path

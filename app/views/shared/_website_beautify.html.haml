@@ -1,0 +1,6 @@
+- item ||= nil
+- if item.website_valid?
+  %a{href: item.website}
+    = item.website
+- else
+  = item.website

@@ -29,7 +29,7 @@ class ProyectoAreasController < ApplicationController
 
     respond_to do |format|
       if @proyecto_area.save
-        format.html { redirect_to @proyecto_area, notice: 'Proyecto area was successfully created.' }
+        format.html { redirect_to @proyecto_area, notice: 'Proyecto area se creo exitosamente.' }
         format.json { render :show, status: :created, location: @proyecto_area }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class ProyectoAreasController < ApplicationController
   def update
     respond_to do |format|
       if @proyecto_area.update(proyecto_area_params)
-        format.html { redirect_to @proyecto_area, notice: 'Proyecto area was successfully updated.' }
+        format.html { redirect_to @proyecto_area, notice: 'Proyecto area se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @proyecto_area }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class ProyectoAreasController < ApplicationController
     @proyecto_area.status = Status.find(Status::VALUES[:deleted])
     @proyecto_area.save validate: false
     respond_to do |format|
-      format.html { redirect_to proyecto_areas_url, notice: 'Proyecto area was successfully destroyed.' }
+      format.html { redirect_to proyecto_areas_url, notice: 'Proyecto area se marco como borrada.' }
       format.json { head :no_content }
     end
   end

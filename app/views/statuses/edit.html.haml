@@ -1,5 +1,12 @@
-%h1 Editing Status
-= render 'form', status: @status
-= link_to 'Show', @status
-|
-= link_to 'Back', statuses_path
+.container
+  .row
+    .col
+      %h1 Editar Estado
+
+  .row
+    .col
+      = link_to 'Mostrar', status_path(@status), class: 'btn btn-outline-info pull-right'
+      = link_to 'Volver', statuses_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col
+      = render 'form', status: @status

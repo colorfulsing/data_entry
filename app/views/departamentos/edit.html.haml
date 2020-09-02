@@ -1,5 +1,12 @@
-%h1 Editing Departamento
-= render 'form', departamento: @departamento
-= link_to 'Show', @departamento
-|
-= link_to 'Back', departamentos_path
+.container
+  .row
+    .col
+      %h1 Editar Departamento
+
+  .row
+    .col
+      = link_to 'Mostrar', departamento_path(@departamento), class: 'btn btn-outline-info pull-right'
+      = link_to 'Volver', departamentos_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col
+      = render 'form', departamento: @departamento

@@ -1,31 +1,60 @@
-%p#notice= notice
-%p
-  %strong Id instituciones:
-  = @facultad.id_instituciones
-%p
-  %strong Nombre:
-  = @facultad.nombre
-%p
-  %strong Siglas:
-  = @facultad.siglas
-%p
-  %strong Telefono:
-  = @facultad.telefono
-%p
-  %strong Extension:
-  = @facultad.extension
-%p
-  %strong Direccion:
-  = @facultad.direccion
-%p
-  %strong Correo electronico:
-  = @facultad.correo_electronico
-%p
-  %strong Sitio web:
-  = @facultad.sitio_web
-%p
-  %strong Id status:
-  = @facultad.id_status
-= link_to 'Edit', edit_facultad_path(@facultad)
-|
-= link_to 'Back', facultades_path
+.container
+  .row
+    .col.col-9
+      %h1= @facultad.nombre
+    .col.col-3
+      = link_to 'Editar', edit_facultad_path(@facultad), class: 'btn btn-outline-primary pull-right'
+      = link_to 'Volver', facultades_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      Id instituciones:
+    .col.col-8
+      = @facultad.id_instituciones
+  .row
+    .col.col-4.font-weight-bold
+      Nombre:
+    .col.col-8
+      = @facultad.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Siglas:
+    .col.col-8
+      = @facultad.siglas
+  .row
+    .col.col-4.font-weight-bold
+      Telefono:
+    .col.col-8
+      = @facultad.telefono
+  .row
+    .col.col-4.font-weight-bold
+      Extension:
+    .col.col-8
+      = @facultad.extension
+  .row
+    .col.col-4.font-weight-bold
+      Direccion:
+    .col.col-8
+      = @facultad.direccion
+  .row
+    .col.col-4.font-weight-bold
+      Correo electronico:
+    .col.col-8
+      - if @facultad.correo_electronico_valid?
+        %a{href: "mailto:#{@facultad.correo_electronico}"}
+          = @facultad.correo_electronico
+      - else
+        = @facultad.correo_electronico
+  .row
+    .col.col-4.font-weight-bold
+      Sitio web:
+    .col.col-8
+      - if @facultad.sitio_web_valid?
+        %a{href: @facultad.sitio_web}
+          = @facultad.sitio_web
+      - else
+        = @facultad.sitio_web
+  .row
+    .col.col-4.font-weight-bold
+      Estado
+    .col.col-8
+      = render 'shared/status_beautify', status: @facultad.status

@@ -5,7 +5,7 @@ class InvestigacionesController < ApplicationController
   # GET /investigaciones
   # GET /investigaciones.json
   def index
-    @investigaciones = Investigacion.all
+    @investigaciones = Investigacion.all.includes([:status]).order(:nombre).page params[:page]
   end
 
   # GET /investigaciones/1

@@ -1,20 +1,29 @@
-%p#notice= notice
-%h1 Microcuencas
-%table
-  %thead
-    %tr
-      %th Id subcuenca
-      %th Nombre
-      %th Id status
-      %th{:colspan => "3"}
-  %tbody
-    - @microcuencas.each do |microcuenca|
-      %tr
-        %td= microcuenca.id_subcuenca
-        %td= microcuenca.nombre
-        %td= microcuenca.id_status
-        %td= link_to 'Show', microcuenca
-        %td= link_to 'Edit', edit_microcuenca_path(microcuenca)
-        %td= link_to 'Destroy', microcuenca, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Microcuenca', new_microcuenca_path
+.container-fluid
+  .row
+    .col.col-8
+      %h1 Microcuencas
+    .col.col-4
+      = link_to 'Nuevo Microcuenca', new_microcuenca_path, class:"btn btn-primary pull-right"
+
+  .row
+    .col
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Subcuenca
+            %th Nombre
+            %th Estado
+            %th{:colspan => "3"}
+        %tbody
+          - @microcuencas.each do |microcuenca|
+            %tr
+              %td= microcuenca.subcuenca.nombre
+              %td= microcuenca.nombre
+              %td= render 'shared/status_beautify', status: microcuenca.status
+              %td= link_to 'Mostrar', microcuenca
+              %td= link_to 'Editar', edit_microcuenca_path(microcuenca)
+              %td= link_to 'Borrar', microcuenca, method: :delete, data: { confirm: 'Estas seguro?' }
+
+  .row
+    .col
+      = paginate @microcuencas

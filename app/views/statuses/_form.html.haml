@@ -1,4 +1,4 @@
-- form_path = status.id.nil? ? status_path : status_path(status)
+- form_path = status.id.nil? ? statuses_path : status_path(status)
 = form_with(url: form_path, model: status, local: true) do |form|
   - if status.errors.any?
     #error_explanation.alert.alert-danger{role: 'alert'}
@@ -18,4 +18,4 @@
       = form.label :visible
       = form.number_field :visible, id: :status_visible, class: 'form-control'
   .actions
-      = form.submit "Guardar", class: 'btn btn-primary pull-right'
+    = form.submit "Guardar", class: 'btn btn-primary pull-right'

@@ -1,5 +1,12 @@
-%h1 Editing Microcuenca
-= render 'form', microcuenca: @microcuenca
-= link_to 'Show', @microcuenca
-|
-= link_to 'Back', microcuencas_path
+.container
+  .row
+    .col
+      %h1 Editar Microcuenca
+
+  .row
+    .col
+      = link_to 'Mostrar', microcuenca_path(@microcuenca), class: 'btn btn-outline-info pull-right'
+      = link_to 'Volver', microcuencas_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col
+      = render 'form', microcuenca: @microcuenca

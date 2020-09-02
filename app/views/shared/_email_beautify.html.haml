@@ -1,0 +1,6 @@
+- item ||= nil
+- if item.email_valid?
+  %a{href: "mailto:#{item.email}"}
+    = item.email
+- else
+  = item.email

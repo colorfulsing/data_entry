@@ -5,13 +5,13 @@ class InstitucionesController < ApplicationController
   # GET /instituciones
   # GET /instituciones.json
   def index
-    @instituciones = Institucion.all.includes([:status])
+    @instituciones = Institucion.all.includes([:status]).order(:nombre).page params[:page]
   end
 
   # GET /instituciones/1
   # GET /instituciones/1.json
   def show
-    @facultades = @institucion.facultades.includes([:status])
+    @facultades = @institucion.facultades.includes([:status]).order(:nombre).page params[:page]
   end
 
   # GET /instituciones/new

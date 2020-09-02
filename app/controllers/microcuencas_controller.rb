@@ -5,7 +5,7 @@ class MicrocuencasController < ApplicationController
   # GET /microcuencas
   # GET /microcuencas.json
   def index
-    @microcuencas = Microcuenca.all
+    @microcuencas = Microcuenca.all.includes([:status]).order(:nombre).page params[:page]
   end
 
   # GET /microcuencas/1

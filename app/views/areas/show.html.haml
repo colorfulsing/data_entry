@@ -1,13 +1,22 @@
-%p#notice= notice
-%p
-  %strong Nombre:
-  = @area.nombre
-%p
-  %strong Descripcion:
-  = @area.descripcion
-%p
-  %strong Id status:
-  = @area.id_status
-= link_to 'Edit', edit_area_path(@area)
-|
-= link_to 'Back', areas_path
+.container
+  .row
+    .col.col-9
+      %h1= @area.nombre
+    .col.col-3
+      = link_to 'Editar', edit_area_path(@area), class: 'btn btn-outline-primary pull-right'
+      = link_to 'Volver', areas_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      Nombre:
+    .col.col-8
+      = @area.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Descripcion:
+    .col.col-8
+      = @area.descripcion
+  .row
+    .col.col-4.font-weight-bold
+      Estado
+    .col.col-8
+      = render 'shared/status_beautify', status: @area.status

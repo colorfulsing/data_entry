@@ -1,13 +1,22 @@
-%p#notice= notice
-%p
-  %strong Id vertiente:
-  = @cuenca.id_vertiente
-%p
-  %strong Nombre:
-  = @cuenca.nombre
-%p
-  %strong Id status:
-  = @cuenca.id_status
-= link_to 'Edit', edit_cuenca_path(@cuenca)
-|
-= link_to 'Back', cuencas_path
+.container
+  .row
+    .col.col-9
+      %h1= @cuenca.nombre
+    .col.col-3
+      = link_to 'Editar', edit_cuenca_path(@cuenca), class: 'btn btn-outline-primary pull-right'
+      = link_to 'Volver', cuencas_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      Id vertiente:
+    .col.col-8
+      = @cuenca.id_vertiente
+  .row
+    .col.col-4.font-weight-bold
+      Nombre:
+    .col.col-8
+      = @cuenca.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Estado
+    .col.col-8
+      = render 'shared/status_beautify', status: @cuenca.status

@@ -1,0 +1,10 @@
+- status ||= nil
+- if status.visible?
+  .text-success
+    = status.nombre
+- elsif status.deleted?
+  .text-danger.font-italic
+    = status.nombre
+- else
+  .text-secondary
+    = status.nombre

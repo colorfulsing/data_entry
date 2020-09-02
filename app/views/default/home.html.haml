@@ -1,27 +1,9 @@
 - content_for(:page_class){'home-page'}
 
-.container-fuild
+.container
   .row
-    .col-xs-12
-      %h1 Bienvenido
-  .row
-    .col-xs-12
-      %h2 Opciones
-  .row
-    .col-xs-12
-      .row
-        .col-xs-6
-          %ul.options
-            %li
-              %a{href: instituciones_path}
-                Listado de Instituciones
-              %ul
-                %li
-                  %a{href: new_institucion_path}
-                    Nuevo
-                %li.search-button
-                  %input.form-control{id: 'instituciones_search', type: 'text', placeholder: 'Buscar'}
-                  %button{id: 'instituciones_search_button', title: 'Buscar'}
-                    %i.fa.fa-search
-        .col-xs-6
-          %ul.options
+    .col.col-12
+      .icon
+        %i.fa.fa-user-o
+      %h1 Bienvenido #{current_user.email}
+      .text Puedes ingresar datos usando las opciones del menu superior.

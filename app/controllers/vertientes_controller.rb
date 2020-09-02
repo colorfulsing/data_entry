@@ -5,7 +5,7 @@ class VertientesController < ApplicationController
   # GET /vertientes
   # GET /vertientes.json
   def index
-    @vertientes = Vertiente.all
+    @vertientes = Vertiente.all.includes([:status]).order(:nombre).page params[:page]
   end
 
   # GET /vertientes/1

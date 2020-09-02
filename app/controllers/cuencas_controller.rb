@@ -5,7 +5,7 @@ class CuencasController < ApplicationController
   # GET /cuencas
   # GET /cuencas.json
   def index
-    @cuencas = Cuenca.all
+    @cuencas = Cuenca.all.includes([:status]).order(:nombre).page params[:page]
   end
 
   # GET /cuencas/1

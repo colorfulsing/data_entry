@@ -28,35 +28,19 @@
     .col.col-4.font-weight-bold
       Correo electronico
     .col.col-8
-      - if @institucion.correo_electronico_valid?
-        %a{href: "mailto:#{@institucion.correo_electronico}"}
-          = @institucion.correo_electronico
-      - else
-        = @institucion.correo_electronico
+      = render 'shared/email_beautify', item: @institucion
 
   .row
     .col.col-4.font-weight-bold
       Sitio web
     .col.col-8
-      - if @institucion.sitio_web_valid?
-        %a{href: @institucion.sitio_web}
-          = @institucion.sitio_web
-      - else
-        = @institucion.sitio_web
+      = render 'shared/website_beautify', item: @institucion
 
   .row
     .col.col-4.font-weight-bold
       Estado
     .col.col-8
-      - if @institucion.status.visible?
-        .text-success
-          = @institucion.status.nombre
-      - elsif @institucion.status.deleted?
-        .text-danger.font-italic
-          = @institucion.status.nombre
-      - else
-        .text-secondary
-          = @institucion.status.nombre
+      = render 'shared/status_beautify', @institucio.status
 
   %br/
   %br/
@@ -73,7 +57,7 @@
       %table.table.table-striped
         %thead
           %tr
-            %th Id instituciones
+            %th Institucion
             %th Nombre
             %th Siglas
             %th Telefono
@@ -81,40 +65,21 @@
             %th Direccion
             %th Correo electronico
             %th Sitio web
-            %th Id status
+            %th Estado
             %th{colspan: "3"}
 
         %tbody
           - @facultades.each do |facultad|
             %tr
-              %td= facultad.id_instituciones
+              %td= facultad.institucion.nombre
               %td= facultad.nombre
               %td= facultad.siglas
               %td= facultad.telefono
               %td= facultad.extension
               %td= facultad.direccion
-              %td
-                - if facultad.correo_electronico_valid?
-                  %a{href: "mailto:#{facultad.correo_electronico}"}
-                    = facultad.correo_electronico
-                - else
-                  = facultad.correo_electronico
-              %td
-                - if facultad.sitio_web_valid?
-                  %a{href: facultad.sitio_web}
-                    = facultad.sitio_web
-                - else
-                  = facultad.sitio_web
-              %td
-                - if facultad.status.visible?
-                  .text-success
-                    = facultad.status.nombre
-                - elsif facultad.status.deleted?
-                  .text-danger.font-italic
-                    = facultad.status.nombre
-                - else
-                  .text-secondary
-                    = facultad.status.nombre
+              %td= render 'shared/email_beautify', item: facultad
+              %td= render 'shared/website_beautify', item: facultad
+              %td= render 'shared/status_beautify', item: facultad.status
               %td= link_to 'Mostrar', facultad_path(facultad)
               %td= link_to 'Editar', edit_facultad_path(facultad)
               %td= link_to 'Borrar', facultad_path(facultad), method: :delete, data: { confirm: 'Estas seguro?' }

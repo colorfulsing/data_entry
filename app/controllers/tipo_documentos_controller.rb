@@ -5,7 +5,7 @@ class TipoDocumentosController < ApplicationController
   # GET /tipo_documentos
   # GET /tipo_documentos.json
   def index
-    @tipo_documentos = TipoDocumento.all
+    @tipo_documentos = TipoDocumento.all.includes([:status]).order(:nombre).page params[:page]
   end
 
   # GET /tipo_documentos/1
@@ -29,7 +29,7 @@ class TipoDocumentosController < ApplicationController
 
     respond_to do |format|
       if @tipo_documento.save
-        format.html { redirect_to @tipo_documento, notice: 'Tipo documento was successfully created.' }
+        format.html { redirect_to @tipo_documento, notice: 'El Tipo documento se creo exitosamente.' }
         format.json { render :show, status: :created, location: @tipo_documento }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class TipoDocumentosController < ApplicationController
   def update
     respond_to do |format|
       if @tipo_documento.update(tipo_documento_params)
-        format.html { redirect_to @tipo_documento, notice: 'Tipo documento was successfully updated.' }
+        format.html { redirect_to @tipo_documento, notice: 'El Tipo documento se actualizo correctamente.' }
         format.json { render :show, status: :ok, location: @tipo_documento }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class TipoDocumentosController < ApplicationController
     @tipo_documento.status = Status.find(Status::VALUES[:deleted])
     @tipo_documento.save validate: false
     respond_to do |format|
-      format.html { redirect_to tipo_documentos_url, notice: 'Tipo documento was successfully destroyed.' }
+      format.html { redirect_to tipo_documentos_url, notice: 'El Tipo documento se marco como borrado.' }
       format.json { head :no_content }
     end
   end

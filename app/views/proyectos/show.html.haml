@@ -1,16 +1,27 @@
-%p#notice= notice
-%p
-  %strong Id instituto:
-  = @proyecto.id_instituto
-%p
-  %strong Nombre:
-  = @proyecto.nombre
-%p
-  %strong Descripcion:
-  = @proyecto.descripcion
-%p
-  %strong Id status:
-  = @proyecto.id_status
-= link_to 'Edit', edit_proyecto_path(@proyecto)
-|
-= link_to 'Back', proyectos_path
+.container
+  .row
+    .col.col-9
+      %h1= @proyecto.nombre
+    .col.col-3
+      = link_to 'Editar', edit_proyecto_path(@proyecto), class: 'btn btn-outline-primary pull-right'
+      = link_to 'Volver', proyectos_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      Id instituto:
+    .col.col-8
+      = @proyecto.id_instituto
+  .row
+    .col.col-4.font-weight-bold
+      Nombre:
+    .col.col-8
+      = @proyecto.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Descripcion:
+    .col.col-8
+      = @proyecto.descripcion
+  .row
+    .col.col-4.font-weight-bold
+      Estado
+    .col.col-8
+      = render 'shared/status_beautify', status: @proyecto.status

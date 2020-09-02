@@ -1,5 +1,12 @@
-%h1 Editing Vertiente
-= render 'form', vertiente: @vertiente
-= link_to 'Show', @vertiente
-|
-= link_to 'Back', vertientes_path
+.container
+  .row
+    .col
+      %h1 Editar Vertiente
+
+  .row
+    .col
+      = link_to 'Mostrar', vertiente_path(@vertiente), class: 'btn btn-outline-info pull-right'
+      = link_to 'Volver', vertientes_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col
+      = render 'form', vertiente: @vertiente

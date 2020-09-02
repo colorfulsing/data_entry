@@ -1,10 +1,17 @@
-%p#notice= notice
-%p
-  %strong Nombre:
-  = @status.nombre
-%p
-  %strong Visible:
-  = @status.visible
-= link_to 'Edit', edit_status_path(@status)
-|
-= link_to 'Back', statuses_path
+.container
+  .row
+    .col.col-9
+      %h1= @status.nombre
+    .col.col-3
+      = link_to 'Editar', edit_status_path(@status), class: 'btn btn-outline-primary pull-right'
+      = link_to 'Volver', statuses_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      Nombre:
+    .col.col-8
+      = @status.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Visible:
+    .col.col-8
+      = render 'shared/flag_beautify', flag: @status.visible

@@ -1,5 +1,12 @@
-%h1 Editing Proyecto Programa
-= render 'form', proyecto: @proyecto
-= link_to 'Show', @proyecto
-|
-= link_to 'Back', proyectos_path
+.container
+  .row
+    .col
+      %h1 Editar Proyecto
+
+  .row
+    .col
+      = link_to 'Mostrar', proyecto_path(@proyecto), class: 'btn btn-outline-info pull-right'
+      = link_to 'Volver', proyectos_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col
+      = render 'form', proyecto: @proyecto

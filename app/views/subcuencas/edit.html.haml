@@ -1,5 +1,12 @@
-%h1 Editing Subcuenca
-= render 'form', subcuenca: @subcuenca
-= link_to 'Show', @subcuenca
-|
-= link_to 'Back', subcuencas_path
+.container
+  .row
+    .col
+      %h1 Editar Subcuenca
+
+  .row
+    .col
+      = link_to 'Mostrar', subcuenca_path(@subcuenca), class: 'btn btn-outline-info pull-right'
+      = link_to 'Volver', subcuencas_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col
+      = render 'form', subcuenca: @subcuenca

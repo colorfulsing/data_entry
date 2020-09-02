@@ -1,24 +1,93 @@
-%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.navbar-theme
+%nav.navbar.navbar-expand-lg.navbar-white.bg-white.navbar-theme
   %a.navbar-brand{href: home_path}
-    Administracion
+    = image_tag("images/logo.png")
   %button.navbar-toggler{type: "button", data: {toggle: "collapse", target: "#navbarSupportedContent"}, aria: {controls: "navbarSupportedContent", expanded: "false", label: "Toggle Navigation"}}
     %span.navbar-toggler-icon
 
-  .collapse.navbar-collapse{id: "navbarSupportedContent"}
+  .collapse.navbar-collapse{id: "navbar_supported_content"}
     %ul.navbar-nav.mr-auto
       %li.nav-item
         %a.nav-link{href: home_path}
           Inicio
-      %li.nav-item.dropdown
-        %a.nav-link.dropdown-toggle{id: "navbarInstituciones", href: instituciones_path, role: "button", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}}
-          Instituciones
-        .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
-          %a.dropdown-item{href: "javascript:void(0);"}
-            Action 1
-          .dropdown-divider
-          %a.dropdown-item{href: "javascript:void(0);"}
-            Action 2
+      - if user_signed_in?
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle{id: "navbar_instituciones", href: "#", role: "button", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}}
+            Instituciones
+          .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
+            %a.dropdown-item{href: new_institucion_path}
+              Nueva institucion
+            .dropdown-divider
+            %a.dropdown-item{href: instituciones_path}
+              Ver todas las instituciones
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle{id: "navbar_facultades", href: "#", role: "button", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}}
+            Facultades
+          .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
+            %a.dropdown-item{href: new_facultad_path}
+              Nueva facultad
+            .dropdown-divider
+            %a.dropdown-item{href: facultades_path}
+              Ver todas las facultades
+          %li.nav-item.dropdown
+            %a.nav-link.dropdown-toggle{id: "navbar_proyectos", href: "#", role: "button", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}}
+              Proyectos
+            .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
+              %a.dropdown-item{href: new_proyecto_path}
+                Nuevo proyecto
+              .dropdown-divider
+              %a.dropdown-item{href: proyectos_path}
+                Ver todos los proyectos
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle{id: "navbar_departamentos", href: "#", role: "button", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}}
+            Ubicacion
+          .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
+            %a.dropdown-item{href: new_departamento_path}
+              Nuevo departamento
+            %a.dropdown-item{href: departamentos_path}
+              Ver todos los departamentos
+            .dropdown-divider
+            .dropdown-divider
+            %a.dropdown-item{href: new_vertiente_path}
+              Nueva vertiente
+            .dropdown-divider
+            %a.dropdown-item{href: vertientes_path}
+              Ver todas las vertientes
+        %li.nav-item.dropdown
+          %a.nav-link.dropdown-toggle{id: "navbar_configuraciones", href: "#", role: "button", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}}
+            Configuracion
+          .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
+            %a.dropdown-item{href: new_status_path}
+              Nuevo estado
+            .dropdown-divider
+            %a.dropdown-item{href: statuses_path}
+              Ver todos los estados
+            .dropdown-divider
+            .dropdown-divider
+            %a.dropdown-item{href: new_tipo_documento_path}
+              Nuevo tipo de documento
+            .dropdown-divider
+            %a.dropdown-item{href: tipo_documentos_path}
+              Ver todos los tipos de documentos
+            .dropdown-divider
+            .dropdown-divider
+            %a.dropdown-item{href: new_area_path}
+              Nueva area de estudio
+            .dropdown-divider
+            %a.dropdown-item{href: areas_path}
+              Ver todas las areas de estudio
+            -#.dropdown-divider
+            -#.dropdown-divider
+            -#%a.dropdown-item{href: new__path}
+            -#  Nuevo
+            -#.dropdown-divider
+            -#%a.dropdown-item{href: _path}
+            -#  Ver todos los
+          %li.nav-item
+            = link_to 'Cerrar Sesion', destroy_user_session_path, method: :delete, class: 'nav-link'
+
+
+
     %form.form-inline.my-2.my-lg-0
-      %input.form-control.mr-sm-2{type: "search", placeholder: "Search", aria: {label: "Search"}}
+      %input.form-control.mr-sm-2{type: "search", placeholder: "Buscar", aria: {label: "Buscar"}}
       %button.btn.btn-outline-info.my-2.my-sm-0{type: "submit"}
-        Buscar
+        %i.fa.fa-search

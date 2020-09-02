@@ -1,20 +1,31 @@
+- content_for(:page_class){'sign-in-page'}
+
 .container
   .row
-    .col
-      %h1 Reenviar instrucciones para desbloquear mi cuenta
+    .col.logo
+      = image_tag 'images/logo.png'
+  .form-sign-in
+    .row
+      .col
+        %h1 Reenviar instrucciones para desbloquear mi cuenta
 
-  .row
-    .col
+    .row
+      .col
 
-      = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
-        #error_explanation.alert.alert-danger{role: 'alert'}
-          = devise_error_messages!
+        = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+          - errors = devise_error_messages!
+          - if !errors.blank?
+            #error_explanation.alert.alert-danger{role: 'alert'}
+              %h2
+                Existen errores:
 
-        .col.col-4.form-group
-          = f.label :email
-          = f.email_field :email, autofocus: true, autocomplete: "email"
+              = errors
+          .row
+            .col.col-4.form-group
+              = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Correo electronico'
+          .row
+            .col
+              = render "devise/shared/links"
 
-        .actions
-          = f.submit "Resend unlock instructions"
-
-      = render "devise/shared/links"
+          .actions
+            = f.submit "Resend unlock instructions"
