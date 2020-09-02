@@ -4,18 +4,21 @@
     #error_explanation.alert.alert-danger{role: 'alert'}
       %h2
         Existen
-        status.errors.count
+        = status.errors.count
         = "error".pluralize(status.errors.count, :es)
       %ul
         - status.errors.full_messages.each do |message|
           %li= message
 
   .row
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :nombre
       = form.text_field :nombre, id: :status_nombre, class: 'form-control'
-    .col.col-4.form-group
-      = form.label :visible
-      = form.number_field :visible, id: :status_visible, class: 'form-control'
-  .actions
-    = form.submit "Guardar", class: 'btn btn-primary pull-right'
+    .col.col-6.form-group
+      %label= "&nbsp;".html_safe
+      .form-check
+        = form.check_box :visible, id: :status_visible, class: 'form-check-input'
+        = form.label :visible, "Es visible", class: "form-check-label"
+  .row
+    .col.actions
+      = form.submit "Guardar", class: 'btn btn-primary pull-right'

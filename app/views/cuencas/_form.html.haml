@@ -4,21 +4,22 @@
     #error_explanation.alert.alert-danger{role: 'alert'}
       %h2
         Existen
-        cuenca.errors.count
+        = cuenca.errors.count
         = "error".pluralize(cuenca.errors.count, :es)
       %ul
         - cuenca.errors.full_messages.each do |message|
           %li= message
 
   .row
-    .col.col-4.form-group
-      = form.label :id_vertiente
-      = form.number_field :id_vertiente, id: :cuenca_id_vertiente, class: 'form-control'
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :nombre
       = form.text_field :nombre, id: :cuenca_nombre, class: 'form-control'
-    .col.col-4.form-group
+    .col.col-6.form-group
+      = form.label :id_vertiente, "Vertiente"
+      = form.select :id_vertiente, @vertientes.collect{|i| [i.nombre, i.id]}, {}, {id: :cuenca_id_vertiente, class: 'form-control'}
+    .col.col-6.form-group
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :cuenca_id_status, class: 'form-control'}
-  .actions
-    = form.submit "Guardar", class: 'btn btn-primary pull-right'
+  .row
+    .col.actions
+      = form.submit "Guardar", class: 'btn btn-primary pull-right'

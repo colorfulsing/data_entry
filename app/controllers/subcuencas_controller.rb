@@ -3,10 +3,6 @@ class SubcuencasController < ApplicationController
   before_action :set_subcuenca, only: [:show, :edit, :update, :destroy]
   before_action :load_config
 
-  def search_entity_class
-    Subcuenca.name
-  end
-
   # GET /subcuencas
   # GET /subcuencas.json
   def index
@@ -84,6 +80,6 @@ class SubcuencasController < ApplicationController
     end
 
     def load_config
-      @search_type = [search_entity_class]
+      @search_type = [Subcuenca.search_entity_class]
     end
 end

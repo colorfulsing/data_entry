@@ -3,10 +3,6 @@ class DepartamentosController < ApplicationController
   before_action :set_departamento, only: [:show, :edit, :update, :destroy]
   before_action :load_config
 
-  def search_entity_class
-    Departamento.name
-  end
-
   # GET /departamentos
   # GET /departamentos.json
   def index
@@ -84,6 +80,6 @@ class DepartamentosController < ApplicationController
     end
 
     def load_config
-      @search_type = [search_entity_class]
+      @search_type = [Departamento.search_entity_class]
     end
 end

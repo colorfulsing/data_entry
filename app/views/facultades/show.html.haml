@@ -1,7 +1,7 @@
 .container
   .row
     .col.col-9
-      %h1= @facultad.nombre
+      %h1 Mostrar Facultad
     .col.col-3
       = link_to 'Editar', edit_facultad_path(@facultad), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', facultades_path, class: 'btn btn-outline-link pull-right'
@@ -39,20 +39,12 @@
     .col.col-4.font-weight-bold
       Correo electronico:
     .col.col-8
-      - if @facultad.correo_electronico_valid?
-        %a{href: "mailto:#{@facultad.correo_electronico}"}
-          = @facultad.correo_electronico
-      - else
-        = @facultad.correo_electronico
+      = render 'shared/email_beautify', item: @facultad
   .row
     .col.col-4.font-weight-bold
       Sitio web:
     .col.col-8
-      - if @facultad.sitio_web_valid?
-        %a{href: @facultad.sitio_web}
-          = @facultad.sitio_web
-      - else
-        = @facultad.sitio_web
+      = render 'shared/website_beautify', item: @facultad
   .row
     .col.col-4.font-weight-bold
       Estado

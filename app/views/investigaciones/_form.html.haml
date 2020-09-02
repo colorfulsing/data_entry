@@ -4,51 +4,54 @@
     #error_explanation.alert.alert-danger{role: 'alert'}
       %h2
         Existen
-        investigacion.errors.count
+        = investigacion.errors.count
         = "error".pluralize(investigacion.errors.count, :es)
       %ul
         - investigacion.errors.full_messages.each do |message|
           %li= message
 
   .row
-    .col.col-4.form-group
-      = form.label :id_instituto
-      = form.number_field :id_instituto, id: :investigacion_id_instituto, class: 'form-control'
-    .col.col-4.form-group
-      = form.label :id_microcuenca
-      = form.number_field :id_microcuenca, id: :investigacion_id_microcuenca, class: 'form-control'
-    .col.col-4.form-group
-      = form.label :id_municipio
-      = form.number_field :id_municipio, id: :investigacion_id_municipio, class: 'form-control'
-    .col.col-4.form-group
-      = form.label :id_documento
-      = form.number_field :id_documento, id: :investigacion_id_documento, class: 'form-control'
-    .col.col-4.form-group
-      = form.label :autor
-      = form.text_field :autor, id: :investigacion_autor, class: 'form-control'
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :titulo
       = form.text_field :titulo, id: :investigacion_titulo, class: 'form-control'
-    .col.col-4.form-group
+    .col.col-6.form-group
+      = form.label :id_instituto, "Facultad / Instituto"
+      = form.select :id_instituto, @facultades.collect{|i| [i.nombre, i.id]}, {}, {id: :investigacion_id_instituto, class: 'form-control'}
+    .col.col-6.form-group
+      = form.label :id_microcuenca
+      = form.number_field :id_microcuenca, id: :investigacion_id_microcuenca, class: 'form-control'
+    .col.col-6.form-group
+      = form.label :id_municipio
+      = form.number_field :id_municipio, id: :investigacion_id_municipio, class: 'form-control'
+    .col.col-6.form-group
+      = form.label :id_documento, "Tipo de documento"
+      = form.select :id_documento, @tipo_documentos.collect{|i| [i.nombre, i.id]}, {}, {id: :investigacion_id_documento, class: 'form-control'}
+    .col.col-6.form-group
+      = form.label :autor
+      = form.text_field :autor, id: :investigacion_autor, class: 'form-control'
+    .col.col-6.form-group
       = form.label :no_paginas
       = form.number_field :no_paginas, id: :investigacion_no_paginas, class: 'form-control'
-    .col.col-4.form-group
+  .row
+    .col.col-6.form-group
       = form.label :fecha_realizacion
       = form.text_field :fecha_realizacion, id: :investigacion_fecha_realizacion, class: 'form-control'
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :fecha_publicacion
       = form.text_field :fecha_publicacion, id: :investigacion_fecha_publicacion, class: 'form-control'
-    .col.col-4.form-group
+  .row
+    .col.col-12.form-group
       = form.label :resumen
       = form.text_area :resumen, id: :investigacion_resumen, class: 'form-control'
-    .col.col-4.form-group
-      = form.label :palabras_clave
-      = form.text_field :palabras_clave, id: :investigacion_palabras_clave, class: 'form-control'
-    .col.col-4.form-group
+    .col.col-12.form-group
       = form.label :recurso_web
       = form.text_area :recurso_web, id: :investigacion_recurso_web, class: 'form-control'
-    .col.col-4.form-group
+    .col.col-6.form-group
+      = form.label :palabras_clave
+      = form.text_field :palabras_clave, id: :investigacion_palabras_clave, class: 'form-control'
+    .col.col-6.form-group
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :investigacion_id_status, class: 'form-control'}
-  .actions
-    = form.submit "Guardar", class: 'btn btn-primary pull-right'
+  .row
+    .col.actions
+      = form.submit "Guardar", class: 'btn btn-primary pull-right'

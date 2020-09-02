@@ -1,23 +1,42 @@
 - collection ||= []
 - param_name ||= :page
 - hide_pagination ||= false
+- report_mode ||= @report_mode
 
 .row
-  .col
-    %table.table.table-striped
-      %thead
-        %tr
-          %th Nombre
-          %th Visible
-          %th{:colspan => "3"}
-      %tbody
-        - collection.each do |status|
+  - if report_mode
+    .col
+      %table.table.table-striped
+        %thead
           %tr
-            %td= status.nombre
-            %td= render 'shared/flag_beautify', flag: status.visible
-            %td= link_to 'Mostrar', status
-            %td= link_to 'Editar', edit_status_path(status)
-            %td= link_to 'Borrar', status, method: :delete, data: { confirm: 'Estas seguro?' }
+            %th Nombre
+            %th Visible
+            %th{:colspan => "3"}
+        %tbody
+          - collection.each do |status|
+            %tr
+              %td= status.nombre
+              %td= render 'shared/flag_beautify', flag: status.visible
+              %td= link_to 'Mostrar', status
+              %td= link_to 'Editar', edit_status_path(status)
+              %td= link_to 'Borrar', status, method: :delete, data: { confirm: 'Estas seguro?' }
+  - else
+    - collection.each do |status|
+      .col.col-xs-12.col-md-4.col-lg-3
+        .col.box-item
+          = link_to status.nombre, status, class: 'title'
+          .data
+            Es visible:
+            = render 'shared/flag_beautify', flag: status.visible
+          .data-id= status.id
+          .options
+            .aux
+              .icon
+                %i.fa.fa-ellipsis-v
+              .expand
+                = link_to 'Mostrar', status
+                = link_to 'Editar', edit_status_path(status)
+                = link_to 'Borrar', status, class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
 
 - if !hide_pagination
   .row

@@ -1,25 +1,43 @@
 - collection ||= []
 - param_name ||= :page
 - hide_pagination ||= false
+- report_mode ||= @report_mode
 
 .row
-  .col
-    %table.table.table-striped
-      %thead
-        %tr
-          %th Cuenca
-          %th Nombre
-          %th Estado
-          %th{:colspan => "3"}
-      %tbody
-        - collection.each do |subcuenca|
+  - if report_mode
+    .col
+      %table.table.table-striped
+        %thead
           %tr
-            %td= subcuenca.cuenca.nombre
-            %td= subcuenca.nombre
-            %td= render 'shared/status_beautify', status: subcuenca.status
-            %td= link_to 'Mostrar', subcuenca
-            %td= link_to 'Editar', edit_subcuenca_path(subcuenca)
-            %td= link_to 'Borrar', subcuenca, method: :delete, data: { confirm: 'Estas seguro?' }
+            %th Cuenca
+            %th Nombre
+            %th Estado
+            %th{:colspan => "3"}
+        %tbody
+          - collection.each do |subcuenca|
+            %tr
+              %td= subcuenca.nombre
+              %td= subcuenca.cuenca.nombre
+              %td= render 'shared/status_beautify', status: subcuenca.status
+              %td= link_to 'Mostrar', subcuenca
+              %td= link_to 'Editar', edit_subcuenca_path(subcuenca)
+              %td= link_to 'Borrar', subcuenca, method: :delete, data: { confirm: 'Estas seguro?' }
+  - else
+    - collection.each do |subcuenca|
+      .col.col-xs-12.col-md-4.col-lg-3
+        .col.box-item
+          = link_to subcuenca.nombre, subcuenca, class: 'title'
+          .data= subcuenca.cuenca.nombre
+          .data= render 'shared/status_beautify', status: subcuenca.status
+          .data-id= subcuenca.id
+          .options
+            .aux
+              .icon
+                %i.fa.fa-ellipsis-v
+              .expand
+                = link_to 'Mostrar', subcuenca
+                = link_to 'Editar', edit_subcuenca_path(subcuenca)
+                = link_to 'Borrar', subcuenca, class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
 
 - if !hide_pagination
   .row

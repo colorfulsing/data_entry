@@ -1,7 +1,7 @@
 .container
   .row
     .col.col-9
-      %h1= @subcuenca.nombre
+      %h1 Mostrar Subcuenca
     .col.col-3
       = link_to 'Editar', edit_subcuenca_path(@subcuenca), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', subcuencas_path, class: 'btn btn-outline-link pull-right'
@@ -19,7 +19,7 @@
     .col.col-4.font-weight-bold
       Estado
     .col.col-8
-      = render 'shared/status_beautify', item: @subcuenca.status
+      = render 'shared/status_beautify', status: @subcuenca.status
 
   %br/
   %br/

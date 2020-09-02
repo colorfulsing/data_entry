@@ -1,10 +1,15 @@
 .container
   .row
     .col.col-9
-      %h1= @departamento.nombre
+      %h1 Mostrar Departamento
     .col.col-3
       = link_to 'Editar', edit_departamento_path(@departamento), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', departamentos_path, class: 'btn btn-outline-link pull-right'
+  .row
+    .col.col-4.font-weight-bold
+      ID:
+    .col.col-8
+      = @departamento.id
   .row
     .col.col-4.font-weight-bold
       Nombre:

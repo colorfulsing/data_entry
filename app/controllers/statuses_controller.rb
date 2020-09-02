@@ -3,10 +3,6 @@ class StatusesController < ApplicationController
   before_action :set_status, only: [:show, :edit, :update, :destroy]
   before_action :load_config
 
-  def search_entity_class
-    Status.name
-  end
-
   # GET /statuses
   # GET /statuses.json
   def index
@@ -84,6 +80,6 @@ class StatusesController < ApplicationController
     end
 
     def load_config
-      @search_type = [search_entity_class]
+      @search_type = [Status.search_entity_class]
     end
 end

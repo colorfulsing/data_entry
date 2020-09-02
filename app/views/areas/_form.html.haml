@@ -4,21 +4,22 @@
     #error_explanation.alert.alert-danger{role: 'alert'}
       %h2
         Existen
-        area.errors.count
+        = area.errors.count
         = "error".pluralize(area.errors.count, :es)
       %ul
         - area.errors.full_messages.each do |message|
           %li= message
 
   .row
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :nombre
       = form.text_field :nombre, id: :area_nombre, class: 'form-control'
-    .col.col-4.form-group
-      = form.label :descripcion
-      = form.text_field :descripcion, id: :area_descripcion, class: 'form-control'
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :area_id_status, class: 'form-control'}
-  .actions
-    = form.submit "Guardar", class: 'btn btn-primary pull-right'
+    .col.col-12.form-group
+      = form.label :descripcion
+      = form.text_area :descripcion, id: :area_descripcion, class: 'form-control'
+  .row
+    .col.actions
+      = form.submit "Guardar", class: 'btn btn-primary pull-right'

@@ -5,7 +5,7 @@
 - if @search_results.has_key? entity_name
   - collection = @search_results[entity_name]
   .result-detail
-    - if collection.count < 1
+    - if collection.total_count < 1
       -# When empty
       .row
         .col.col-xs-12
@@ -14,6 +14,6 @@
       -# When has items
       .row
         .col.col-xs-12
-          %h2 Se encontraron #{pluralize(collection.count, entity_label.downcase)}
+          %h2 Se encontraron #{pluralize(collection.total_count, entity_label.downcase)}
 
       = render list_view, collection: collection, param_name: "page_#{entity_name.downcase}"

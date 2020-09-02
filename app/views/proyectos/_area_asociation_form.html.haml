@@ -1,0 +1,11 @@
+- proyecto ||= @proyecto
+- areas ||= @areas
+- form_path = proyecto_asociate_area_path id: proyecto.id
+= form_with(url: form_path, local: true) do |form|
+  .row
+    .col.col-8.form-group
+      = form.label :id_area, "Area"
+      = form.select :id_area, areas.collect{|i| [i.nombre, i.id]}, {}, {id: :proyecto_area_id_area, name: 'proyecto_area[id_area]', class: 'form-control'}
+    .col.col-4.actions
+      %br/
+      = form.submit "Agregar o quitar area", class: 'btn btn-primary pull-right'

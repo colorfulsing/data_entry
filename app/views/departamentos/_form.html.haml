@@ -4,18 +4,19 @@
     #error_explanation.alert.alert-danger{role: 'alert'}
       %h2
         Existen
-        departamento.errors.count
+        = departamento.errors.count
         = "error".pluralize(departamento.errors.count, :es)
       %ul
         - departamento.errors.full_messages.each do |message|
           %li= message
 
   .row
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :nombre
       = form.text_field :nombre, id: :departamento_nombre, class: 'form-control'
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :departamento_id_status, class: 'form-control'}
-  .actions
-    = form.submit "Guardar", class: 'btn btn-primary pull-right'
+  .row
+    .col.actions
+      = form.submit "Guardar", class: 'btn btn-primary pull-right'

@@ -3,10 +3,6 @@ class MicrocuencasController < ApplicationController
   before_action :set_microcuenca, only: [:show, :edit, :update, :destroy]
   before_action :load_config
 
-  def search_entity_class
-    Microcuenca.name
-  end
-
   # GET /microcuencas
   # GET /microcuencas.json
   def index
@@ -84,6 +80,6 @@ class MicrocuencasController < ApplicationController
     end
 
     def load_config
-      @search_type = [search_entity_class]
+      @search_type = [Microcuenca.search_entity_class]
     end
 end

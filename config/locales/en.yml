@@ -53,3 +53,6 @@ es:
       array:
         two_words_connector: ' y '
         last_word_connector: ', y '
+  activerecord:
+    errors:
+      

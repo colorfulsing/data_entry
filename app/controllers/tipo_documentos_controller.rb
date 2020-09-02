@@ -3,10 +3,6 @@ class TipoDocumentosController < ApplicationController
   before_action :set_tipo_documento, only: [:show, :edit, :update, :destroy]
   before_action :load_config
 
-  def search_entity_class
-    TipoDocumento.name
-  end
-
   # GET /tipo_documentos
   # GET /tipo_documentos.json
   def index
@@ -84,6 +80,6 @@ class TipoDocumentosController < ApplicationController
     end
 
     def load_config
-      @search_type = [search_entity_class]
+      @search_type = [TipoDocumento.search_entity_class]
     end
 end

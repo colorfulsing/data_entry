@@ -1,10 +1,8 @@
 .container
   .row
-    .col
+    .col.col-9
       %h1 Editar Departamento
-
-  .row
-    .col
+    .col.col-3
       = link_to 'Mostrar', departamento_path(@departamento), class: 'btn btn-outline-info pull-right'
       = link_to 'Volver', departamentos_path, class: 'btn btn-outline-link pull-right'
   .row

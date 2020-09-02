@@ -1,10 +1,8 @@
 .container
   .row
-    .col
+    .col.col-9
       %h1 Editar Cuenca
-
-  .row
-    .col
+    .col.col-3
       = link_to 'Mostrar', cuenca_path(@cuenca), class: 'btn btn-outline-info pull-right'
       = link_to 'Volver', cuencas_path, class: 'btn btn-outline-link pull-right'
   .row

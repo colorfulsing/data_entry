@@ -14,7 +14,8 @@
 // require turbolinks
 //= require ./jquery/jquery-3.3.1.min.js
 //= require ./popper/popper.min.js
-// require ./bootstrap/bootstrap.min.js
+//= require ./bootstrap/bootstrap.min.js
+//= require bootstrap-datepicker
 //= require_tree .
 
 // Fixed alert events

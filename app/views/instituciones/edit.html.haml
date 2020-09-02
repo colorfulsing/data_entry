@@ -1,10 +1,8 @@
 .container
   .row
-    .col
+    .col.col-9
       %h1 Editar Institucion
-
-  .row
-    .col
+    .col.col-3
       = link_to 'Mostrar', institucion_path(@institucion), class: 'btn btn-outline-info pull-right'
       = link_to 'Volver', instituciones_path, class: 'btn btn-outline-link pull-right'
 

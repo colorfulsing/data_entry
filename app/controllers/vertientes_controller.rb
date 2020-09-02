@@ -3,10 +3,6 @@ class VertientesController < ApplicationController
   before_action :set_vertiente, only: [:show, :edit, :update, :destroy]
   before_action :load_config
 
-  def search_entity_class
-    Vertiente.name
-  end
-
   # GET /vertientes
   # GET /vertientes.json
   def index
@@ -84,6 +80,6 @@ class VertientesController < ApplicationController
     end
 
     def load_config
-      @search_type = [search_entity_class]
+      @search_type = [Vertiente.search_entity_class]
     end
 end

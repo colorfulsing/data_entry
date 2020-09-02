@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   resources :subcuencas
   resources :statuses
   resources :proyectos
-  resources :proyecto_areas
   resources :municipios
   resources :microcuencas
 
@@ -41,7 +40,11 @@ Rails.application.routes.draw do
 
   resources :departamentos
   resources :cuencas
-  resources :area_investigaciones
   resources :areas
+
+  # Add asociation route names
+  post "/proyectos/:id/asociate_area/(.:format)", to: 'proyectos#asociate_area', as: :proyecto_asociate_area
+  post "/investigaciones/:id/asociate_area/(.:format)", to: 'investigaciones#asociate_area', as: :investigacion_asociate_area
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

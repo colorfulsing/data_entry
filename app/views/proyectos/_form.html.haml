@@ -4,24 +4,25 @@
     #error_explanation.alert.alert-danger{role: 'alert'}
       %h2
         Existen
-        proyecto.errors.count
+        = proyecto.errors.count
         = "error".pluralize(proyecto.errors.count, :es)
       %ul
         - proyecto.errors.full_messages.each do |message|
           %li= message
 
   .row
-    .col.col-4.form-group
-      = form.label :id_instituto
-      = form.number_field :id_instituto, id: :proyecto_id_instituto, class: 'form-control'
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :nombre
       = form.text_field :nombre, id: :proyecto_nombre, class: 'form-control'
-    .col.col-4.form-group
+    .col.col-6.form-group
+      = form.label :id_instituto, "Facultad / Instituto"
+      = form.select :id_instituto, @facultades.collect{|i| [i.nombre, i.id]}, {}, {id: :proyecto_id_instituto, class: 'form-control'}
+    .col.col-12.form-group
       = form.label :descripcion
-      = form.text_field :descripcion, id: :proyecto_descripcion, class: 'form-control'
-    .col.col-4.form-group
+      = form.text_area :descripcion, id: :proyecto_descripcion, class: 'form-control'
+    .col.col-6.form-group
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :proyecto_id_status, class: 'form-control'}
-  .actions
-    = form.submit "Guardar", class: 'btn btn-primary pull-right'
+  .row
+    .col.actions
+      = form.submit "Guardar", class: 'btn btn-primary pull-right'

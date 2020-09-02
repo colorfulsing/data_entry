@@ -3,10 +3,6 @@ class AreasController < ApplicationController
   before_action :set_area, only: [:show, :edit, :update, :destroy]
   before_action :load_config
 
-  def search_entity_class
-    Area.name
-  end
-
   # GET /areas
   # GET /areas.json
   def index
@@ -84,6 +80,6 @@ class AreasController < ApplicationController
     end
 
     def load_config
-      @search_type = [search_entity_class]
+      @search_type = [Area.search_entity_class]
     end
 end

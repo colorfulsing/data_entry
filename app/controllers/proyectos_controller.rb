@@ -1,11 +1,9 @@
 class ProyectosController < ApplicationController
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
-  before_action :set_proyecto, only: [:show, :edit, :update, :destroy]
+  before_action :load_facultad, only: [:edit, :update, :new, :create]
+  before_action :set_proyecto, only: [:show, :edit, :update, :destroy, :asociate_area]
+  before_action :load_area, only: [:show]
   before_action :load_config
-
-  def search_entity_class
-    Proyecto.name
-  end
 
   # GET /proyectos
   # GET /proyectos.json
@@ -68,6 +66,25 @@ class ProyectosController < ApplicationController
     end
   end
 
+  def asociate_area
+    form_params = proyecto_area_params
+    area_id = form_params[:id_area]
+    @area = Area.find(area_id)
+    existing_asociation = ProyectoArea.where(id_area: area_id, id_proyecto: @proyecto.id)
+
+    respond_to do |format|
+      if existing_asociation.blank?
+        ProyectoArea.create id_proyecto: @proyecto.id, id_area: area_id
+        format.html { redirect_to @proyecto, notice: "Se agrego el area \"#{@area.nombre}\" exitosamente." }
+        format.json { render :show, status: :ok, location: @proyecto }
+      else
+        existing_asociation.delete_all
+        format.html { redirect_to @proyecto, notice: "Se quito el area \"#{@area.nombre}\" exitosamente." }
+        format.json { render :show, status: :ok, location: @proyecto }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_proyecto
@@ -78,12 +95,24 @@ class ProyectosController < ApplicationController
       @statuses = Status.all
     end
 
+    def load_facultad
+      @facultades = Facultad.all
+    end
+
+    def load_area
+      @areas = Area.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def proyecto_params
       params.require(:proyecto).permit(:id_instituto, :nombre, :descripcion, :id_status)
     end
 
+    def proyecto_area_params
+      params.require(:proyecto_area).permit(:id_area)
+    end
+
     def load_config
-      @search_type = [search_entity_class]
+      @search_type = [Proyecto.search_entity_class]
     end
 end

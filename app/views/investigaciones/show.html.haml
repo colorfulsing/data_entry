@@ -1,30 +1,50 @@
 .container
   .row
     .col.col-9
-      %h1= @investigacion.titulo
+      %h1 Mostrar Investigacion
     .col.col-3
       = link_to 'Editar', edit_investigacion_path(@investigacion), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', investigaciones_path, class: 'btn btn-outline-link pull-right'
   .row
     .col.col-4.font-weight-bold
-      Id instituto:
+      Facultado / Instituto:
     .col.col-8
-      = @investigacion.id_instituto
+      = @investigacion.facultad.try(:nombre)
   .row
     .col.col-4.font-weight-bold
-      Id microcuenca:
+      Vertiente:
     .col.col-8
-      = @investigacion.id_microcuenca
+      = @investigacion.microcuenca.try(:subcuenca).try(:cuenca).try(:vertiente).try(:nombre)
   .row
     .col.col-4.font-weight-bold
-      Id municipio:
+      Cuenca:
     .col.col-8
-      = @investigacion.id_municipio
+      = @investigacion.microcuenca.try(:subcuenca).try(:cuenca).try(:nombre)
   .row
     .col.col-4.font-weight-bold
-      Id documento:
+      Subcuenca:
     .col.col-8
-      = @investigacion.id_documento
+      = @investigacion.microcuenca.try(:subcuenca).try(:nombre)
+  .row
+    .col.col-4.font-weight-bold
+      Microcuenca:
+    .col.col-8
+      = @investigacion.microcuenca.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Departmento:
+    .col.col-8
+      = @investigacion.municipio.try(:departamento).try(:nombre)
+  .row
+    .col.col-4.font-weight-bold
+      Municipio:
+    .col.col-8
+      = @investigacion.municipio.try(:nombre)
+  .row
+    .col.col-4.font-weight-bold
+      Tipo de documento:
+    .col.col-8
+      = @investigacion.tipo_documento.try(:nombre)
   .row
     .col.col-4.font-weight-bold
       Autor:
@@ -70,3 +90,17 @@
       Estado
     .col.col-8
       = render 'shared/status_beautify', status: @investigacion.status
+
+  %br/
+
+.container
+  .row
+    .col.col-12
+      = render 'investigaciones/area_asociation_form'
+  %br/
+  %br/
+.container-fluid
+  .row
+    .col.col-12
+      %h2 Areas de la investigaci&oacute;n
+  = render 'areas/list', collection: @investigacion.areas, hide_pagination: true

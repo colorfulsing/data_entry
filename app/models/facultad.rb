@@ -6,6 +6,7 @@ class Facultad < ApplicationRecord
 
   alias_attribute :email, :correo_electronico
   alias_attribute :website, :sitio_web
+  alias_attribute :id_institucion, :id_instituciones
 
   belongs_to :status, class_name: 'Status', foreign_key: 'id_status'
   belongs_to :institucion, class_name: 'Institucion', foreign_key: 'id_instituciones', inverse_of: :facultades
@@ -13,9 +14,19 @@ class Facultad < ApplicationRecord
   has_many :proyectos, class_name: 'Proyecto', foreign_key: 'id_instituto', inverse_of: :facultad
 
   class << self
-    def search query
-      where("nombre RLIKE ?", [query])
+    def search_entity_class parent = nil
+      value = self.name
+      value = "#{value}#{self::SEARCH_JOIN_TOKEN}#{parent}" if !parent.blank?
+      value
+    end
+
+    def search query, opts = {}
+      parent = opts.delete(:parent)
+      results = self
+      results = where(institucion: parent) if !parent.blank?
+      results.where("nombre RLIKE ?", [query])
         .includes(:institucion, :status)
+        .order(:nombre)
     end
   end
 end

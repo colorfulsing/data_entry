@@ -1,27 +1,46 @@
 - collection ||= []
 - param_name ||= :page
 - hide_pagination ||= false
+- report_mode ||= @report_mode
 
 .row
-  .col
-    %table.table.table-striped
-      %thead
-        %tr
-          %th Facultad
-          %th Nombre
-          %th Descripcion
-          %th Estado
-          %th{:colspan => "3"}
-      %tbody
-        - collection.each do |proyecto|
+  - if report_mode
+    .col
+      %table.table.table-striped
+        %thead
           %tr
-            %td= proyecto.facultad.nil? ? 'N/A' : proyecto.facultad.nombre
-            %td= proyecto.nombre
-            %td= proyecto.descripcion
-            %td= render 'shared/status_beautify', status: proyecto.status
-            %td= link_to 'Mostrar', proyecto
-            %td= link_to 'Editar', edit_proyecto_path(proyecto)
-            %td= link_to 'Borrar', proyecto, method: :delete, data: { confirm: 'Estas seguro?' }
+            %th Facultad
+            %th Nombre
+            %th Descripcion
+            %th Estado
+            %th{:colspan => "3"}
+        %tbody
+          - collection.each do |proyecto|
+            %tr
+              %td= proyecto.nombre
+              %td= proyecto.facultad.nil? ? 'N/A' : proyecto.facultad.nombre
+              %td= proyecto.descripcion
+              %td= render 'shared/status_beautify', status: proyecto.status
+              %td= link_to 'Mostrar', proyecto
+              %td= link_to 'Editar', edit_proyecto_path(proyecto)
+              %td= link_to 'Borrar', proyecto, method: :delete, data: { confirm: 'Estas seguro?' }
+  - else
+    - collection.each do |proyecto|
+      .col.col-xs-12.col-md-4.col-lg-3
+        .col.box-item
+          = link_to proyecto.nombre, proyecto, class: 'title'
+          .data= proyecto.facultad.nil? ? 'N/A' : proyecto.facultad.nombre
+          .data= render 'shared/area_collection_beautify', collection: proyecto.areas
+          .data= render 'shared/status_beautify', status: proyecto.status
+          .data-id= proyecto.id
+          .options
+            .aux
+              .icon
+                %i.fa.fa-ellipsis-v
+              .expand
+                = link_to 'Mostrar', proyecto
+                = link_to 'Editar', edit_proyecto_path(proyecto)
+                = link_to 'Borrar', proyecto, class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
 
 - if !hide_pagination
   .row

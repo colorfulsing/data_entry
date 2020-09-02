@@ -3,10 +3,6 @@ class InstitucionesController < ApplicationController
   before_action :set_institucion, only: [:show, :edit, :update, :destroy]
   before_action :load_config
 
-  def search_entity_class
-    Institucion.name
-  end
-
   # GET /instituciones
   # GET /instituciones.json
   def index
@@ -85,6 +81,6 @@ class InstitucionesController < ApplicationController
     end
 
     def load_config
-      @search_type = [search_entity_class]
+      @search_type = [Institucion.search_entity_class]
     end
 end

@@ -4,7 +4,7 @@
 !!! 5
 %html
   %head
-    %title= "#{meta_title.empty? ? '' : ' | '}Sistematizaci&oacute;n"
+    %title= "#{meta_title.empty? ? '' : (h(meta_title) + ' | ')}Sistematizaci&oacute;n".html_safe
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
 %body{class: yield(:page_class)}
@@ -33,4 +33,4 @@
   = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   = yield :javascript
 
-  <!-- Creado y donado a RedfiA por Ing. Eduardo Jos&etilde; Rosales Alconero -->
+  <!-- Creado y donado a ICC por Ing. Eduardo Jos&etilde; Rosales Alconero -->

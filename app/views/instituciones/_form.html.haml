@@ -4,7 +4,7 @@
     #error_explanation.alert.alert-danger{role: 'alert'}
       %h2
         Existen
-        institucion.errors.count
+        = institucion.errors.count
         = "error".pluralize(institucion.errors.count, :es)
 
       %ul
@@ -12,15 +12,15 @@
           %li= message
 
   .row
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :nombre
       = form.text_field :nombre, id: :institucion_nombre, class: 'form-control'
 
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :siglas
       = form.text_field :siglas, id: :institucion_siglas, class: 'form-control'
 
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :telefono
       = form.text_field :telefono, id: :institucion_telefono, class: 'form-control'
 
@@ -28,18 +28,19 @@
       = form.label :direccion
       = form.text_field :direccion, id: :institucion_direccion, class: 'form-control'
 
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :correo_electronico
       = form.text_field :correo_electronico, id: :institucion_correo_electronico, class: 'form-control'
 
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :sitio_web
       = form.text_field :sitio_web, id: :institucion_sitio_web, class: 'form-control'
 
-    .col.col-4.form-group
+    .col.col-6.form-group
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :institucion_id_status, class: 'form-control'}
 
 
-  .actions
-    = form.submit "Guardar", class: 'btn btn-primary pull-right'
+  .row
+    .col.actions
+      = form.submit "Guardar", class: 'btn btn-primary pull-right'

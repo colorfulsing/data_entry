@@ -20,9 +20,16 @@ class Institucion < ApplicationRecord
   #alias_attribute :institutos, :facultades
 
   class << self
-    def search query
+    def search_entity_class parent = nil
+      value = self.name
+      value = "#{value}#{self::SEARCH_JOIN_TOKEN}#{parent}" if !parent.blank?
+      value
+    end
+
+    def search query, opts = {}
       where("nombre RLIKE ?", [query])
         .includes(:status)
+        .order(:nombre)
     end
   end
 end

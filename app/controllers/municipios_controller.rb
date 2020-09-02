@@ -1,11 +1,8 @@
 class MunicipiosController < ApplicationController
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
+  before_action :load_departamento, only: [:edit, :update, :new, :create]
   before_action :set_municipio, only: [:show, :edit, :update, :destroy]
   before_action :load_config
-
-  def search_entity_class
-    Municipio.name
-  end
 
   # GET /municipios
   # GET /municipios.json
@@ -78,12 +75,16 @@ class MunicipiosController < ApplicationController
       @statuses = Status.all
     end
 
+    def load_departamento
+      @departamentos = Departamento.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def municipio_params
       params.require(:municipio).permit(:id_departamento, :nombre, :id_status)
     end
 
     def load_config
-      @search_type = [search_entity_class]
+      @search_type = [Municipio.search_entity_class]
     end
 end

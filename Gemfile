@@ -64,3 +64,7 @@ gem 'devise'
 gem 'kaminari'
 
 gem 'inflections', require: 'inflections/es'
+
+gem 'bootstrap-datepicker-rails'
+
+gem 'rails-i18n', '~> 5.1'

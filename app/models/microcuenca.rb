@@ -6,9 +6,19 @@ class Microcuenca < ApplicationRecord
   has_many :investigaciones, class_name: 'Investigacion', foreign_key: 'id_microcuenca', inverse_of: :microcuenca
 
   class << self
-    def search query
-      where("nombre RLIKE ?", [query])
+    def search_entity_class parent = nil
+      value = self.name
+      value = "#{value}#{self::SEARCH_JOIN_TOKEN}#{parent}" if !parent.blank?
+      value
+    end
+
+    def search query, opts = {}
+      parent = opts.delete(:parent)
+      results = self
+      results = where(subcuenca: parent) if !parent.blank?
+      results.where("nombre RLIKE ?", [query])
         .includes(:status, :subcuenca)
+        .order(:nombre)
     end
   end
 end

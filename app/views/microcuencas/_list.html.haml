@@ -1,26 +1,44 @@
 - collection ||= []
 - param_name ||= :page
 - hide_pagination ||= false
+- report_mode ||= @report_mode
 
 .row
-  .col
-    %table.table.table-striped
-      %thead
-        %tr
-          %th Subcuenca
-          %th Nombre
-          %th Estado
-          %th{:colspan => "3"}
-      %tbody
-        - collection.each do |microcuenca|
+  - if report_mode
+    .col
+      %table.table.table-striped
+        %thead
           %tr
-            %td= microcuenca.subcuenca.nombre
-            %td= microcuenca.nombre
-            %td= render 'shared/status_beautify', status: microcuenca.status
-            %td= link_to 'Mostrar', microcuenca
-            %td= link_to 'Editar', edit_microcuenca_path(microcuenca)
-            %td= link_to 'Borrar', microcuenca, method: :delete, data: { confirm: 'Estas seguro?' }
-
+            %th Subcuenca
+            %th Nombre
+            %th Estado
+            %th{:colspan => "3"}
+        %tbody
+          - collection.each do |microcuenca|
+            %tr
+              %td= microcuenca.nombre
+              %td= microcuenca.subcuenca.nombre
+              %td= render 'shared/status_beautify', status: microcuenca.status
+              %td= link_to 'Mostrar', microcuenca
+              %td= link_to 'Editar', edit_microcuenca_path(microcuenca)
+              %td= link_to 'Borrar', microcuenca, method: :delete, data: { confirm: 'Estas seguro?' }
+  - else
+    - collection.each do |microcuenca|
+      .col.col-xs-12.col-md-4.col-lg-3
+        .col.box-item
+          = link_to microcuenca.nombre, microcuenca, class: 'title'
+          .data= microcuenca.subcuenca.cuenca.nombre
+          .data= microcuenca.subcuenca.nombre
+          .data= render 'shared/status_beautify', status: microcuenca.status
+          .data-id= microcuenca.id
+          .options
+            .aux
+              .icon
+                %i.fa.fa-ellipsis-v
+              .expand
+                = link_to 'Mostrar', microcuenca
+                = link_to 'Editar', edit_microcuenca_path(microcuenca)
+                = link_to 'Borrar', microcuenca, class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
 - if !hide_pagination
   .row
     .col

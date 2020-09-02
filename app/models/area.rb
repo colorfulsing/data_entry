@@ -16,9 +16,16 @@ class Area < ApplicationRecord
     inverse_of: :areas
 
   class << self
-    def search query
+    def search_entity_class parent = nil
+      value = self.name
+      value = "#{value}#{self::SEARCH_JOIN_TOKEN}#{parent}" if !parent.blank?
+      value
+    end
+
+    def search query, opts = {}
       where("nombre RLIKE ?", [query])
         .includes(:proyectos, :investigaciones, :status)
+        .order(:nombre)
     end
   end
 end

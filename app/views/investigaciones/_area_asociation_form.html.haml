@@ -1,0 +1,11 @@
+- investigacion ||= @investigacion
+- areas ||= @areas
+- form_path = investigacion_asociate_area_path id: investigacion.id
+= form_with(url: form_path, local: true) do |form|
+  .row
+    .col.col-8.form-group
+      = form.label :id_area, "Area"
+      = form.select :id_area, areas.collect{|i| [i.nombre, i.id]}, {}, {id: :investigacion_area_id_area, name: 'investigacion_area[id_area]', class: 'form-control'}
+    .col.col-4.actions
+      %br/
+      = form.submit "Agregar o quitar area", class: 'btn btn-primary pull-right'

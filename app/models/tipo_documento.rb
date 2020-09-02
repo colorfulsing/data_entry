@@ -5,9 +5,16 @@ class TipoDocumento < ApplicationRecord
   has_many :investigaciones, class_name: 'Investigacion', foreign_key: 'id_documento', inverse_of: :tipo_documento
 
   class << self
-    def search query
+    def search_entity_class parent = nil
+      value = self.name
+      value = "#{value}#{self::SEARCH_JOIN_TOKEN}#{parent}" if !parent.blank?
+      value
+    end
+
+    def search query, opts = {}
       where("nombre RLIKE ?", [query])
         .includes(:status)
+        .order(:nombre)
     end
   end
 end

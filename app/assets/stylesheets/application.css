@@ -11,6 +11,7 @@
  * It is generally better to create a new file per style scope.
  *
  *= require ./bootstrap/bootstrap.min.css
+ *= require bootstrap-datepicker
  *= require ./fontawesome/font-awesome
  *= require_tree ./theme/default/
  *= require_self

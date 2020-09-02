@@ -1,20 +1,25 @@
 .container
   .row
     .col.col-9
-      %h1= @cuenca.nombre
+      %h1 Mostrar Cuenca
     .col.col-3
       = link_to 'Editar', edit_cuenca_path(@cuenca), class: 'btn btn-outline-primary pull-right'
       = link_to 'Volver', cuencas_path, class: 'btn btn-outline-link pull-right'
   .row
     .col.col-4.font-weight-bold
-      Id vertiente:
+      ID:
     .col.col-8
-      = @cuenca.id_vertiente
+      = @cuenca.id
   .row
     .col.col-4.font-weight-bold
       Nombre:
     .col.col-8
       = @cuenca.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Vertiente:
+    .col.col-8
+      = @cuenca.vertiente.try(:nombre)
   .row
     .col.col-4.font-weight-bold
       Estado
