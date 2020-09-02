@@ -5,7 +5,7 @@
 .container
   .row
     .col.logo
-      = image_tag 'images/logo.png'
+      = image_tag 'logo.png'
   .form-sign-in
     = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
       .row

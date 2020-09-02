@@ -1,0 +1,105 @@
+version: "3.3"
+
+services:
+  rails:
+    build:
+      context: "${PWD}/docker/build/rails"
+      dockerfile: dockerfile
+    image: redfia_data_entry_website
+    secrets:
+      - db_user
+      - db_pass
+      - app_secret_key
+    environment:
+      RAILS_ENV: "$RAILS_ENV"
+      DB_HOST: db
+      DB_NAME: redfia_data_entry
+      DB_USER_FILE: /run/secrets/db_user
+      DB_PASS_FILE: /run/secrets/db_pass
+      APP_SECRET_KEY_FILE: /run/secrets/app_secret_key
+    depends_on:
+      - db
+    volumes:
+      - type: volume
+        source: rails_volume
+        target: /var/www/html
+        volume:
+          nocopy: true
+    networks:
+      - rails_network
+    links:
+      - db
+    deploy:
+      #replicas: 2
+      #update_config:
+      #  parallelism: 2
+      restart_policy:
+        condition: on-failure
+  db:
+    image: mysql:5.7
+    secrets:
+      - db_user
+      - db_pass
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: redfia_data_entry
+      MYSQL_USER_FILE: /run/secrets/db_user
+      MYSQL_PASSWORD_FILE: /run/secrets/db_pass
+    volumes:
+      - db_volume:/var/lib/mysql
+      - type: volume
+        source: db_seed_volume
+        target: /docker-entrypoint-initdb.d
+        volume:
+          nocopy: true
+    networks:
+      - rails_network
+    ports:
+      - 3306:3306
+    deploy:
+      restart_policy:
+        condition: unless-stopped
+      placement:
+        constraints: [node.role == manager]
+  web:
+    image: nginx
+    depends_on:
+      - rails
+    volumes:
+      - "${PWD}/docker/web/site_config.conf:/etc/nginx/conf.d/default.conf"
+      - type: volume
+        source: rails_volume
+        target: /var/www/html
+        volume:
+          nocopy: true
+    networks:
+      - rails_network
+    ports:
+      - 8080:80
+    links:
+      - rails
+
+volumes:
+  rails_volume:
+    driver_opts:
+      type: none
+      device: "${PWD}"
+      o: bind
+  db_volume:
+    external: true
+  db_seed_volume:
+    driver_opts:
+      type: none
+      device: "${PWD}/docker/db/seeds"
+      o: bind
+
+networks:
+  rails_network:
+
+secrets:
+  db_user:
+    file: db_user.txt
+  db_pass:
+    file: db_pass.txt
+  app_secret_key:
+    file: app_secret_key.txt

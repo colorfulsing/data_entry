@@ -18,4 +18,10 @@
 
 .byebug_history
 /config/database.yml
+/config/database.dev.yml
 /public/assets
+
+/docker/db/seeds/*
+/db_user.txt
+/db_pass.txt
+/app_secret_key.txt
