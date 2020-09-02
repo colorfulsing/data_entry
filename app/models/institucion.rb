@@ -19,6 +19,7 @@ class Institucion < ApplicationRecord
 
   validates :nombre, presence: true
   validates :status, presence: true
+  validates :direccion, presence: true
 
   #alias_attribute :institutos, :facultades
 

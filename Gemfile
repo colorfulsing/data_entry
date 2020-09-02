@@ -67,6 +67,10 @@ gem 'kaminari'
 
 gem 'inflections', require: 'inflections/es'
 
+
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'bootstrap', '~> 4.1.0'
 gem 'bootstrap-datepicker-rails'
 
 gem 'rails-i18n', '~> 5.1'

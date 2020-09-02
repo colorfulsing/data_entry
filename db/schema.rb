@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409115628) do
+ActiveRecord::Schema.define(version: 20180419093932) do
 
   create_table "area", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre", limit: 100, null: false
@@ -97,10 +97,10 @@ ActiveRecord::Schema.define(version: 20180409115628) do
     t.integer "id_documento", null: false
     t.string "autor", limit: 200, null: false
     t.string "titulo", limit: 300, null: false
-    t.integer "no_paginas", null: false
+    t.integer "no_paginas"
     t.date "fecha_realizacion"
     t.date "fecha_publicacion"
-    t.text "resumen", null: false
+    t.string "resumen", limit: 2000
     t.string "palabras_clave", limit: 300, null: false
     t.text "recurso_web"
     t.integer "id_status"

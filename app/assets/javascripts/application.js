@@ -12,10 +12,12 @@
 //
 //= require rails-ujs
 // require turbolinks
-//= require ./jquery/jquery-3.3.1.min.js
-//= require ./jquery/jquery-ui.min.js
-//= require ./popper/popper.min.js
-//= require ./bootstrap/bootstrap.min.js
+//= require jquery3
+//= require jquery_ujs
+//= require jquery-ui
+//= require popper
+//= require bootstrap-sprockets
+
 // require bootstrap-datepicker
 //= require bootstrap-datepicker/core
 //= require bootstrap-datepicker/locales/bootstrap-datepicker.es.js
