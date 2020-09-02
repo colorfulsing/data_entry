@@ -39,9 +39,9 @@
               -#%td= investigacion.palabras_clave
               %td= investigacion.recurso_web
               %td= render 'shared/status_beautify', status: investigacion.status
-              %td= link_to 'Mostrar', investigacion_path
+              %td= link_to 'Mostrar', investigacion_path(investigacion)
               %td= link_to 'Editar', edit_investigacion_path(investigacion)
-              %td= link_to 'Borrar', investigacion_path, method: :delete, data: { confirm: 'Estas seguro?' }
+              %td= link_to 'Borrar', investigacion_path(investigacion), method: :delete, data: { confirm: 'Estas seguro?' }
   - else
     - collection.each do |investigacion|
       .col.col-xs-12.col-md-4.col-lg-3
@@ -58,9 +58,9 @@
               .icon
                 %i.fa.fa-ellipsis-v
               .expand
-                = link_to 'Mostrar', investigacion_path
+                = link_to 'Mostrar', investigacion_path(investigacion)
                 = link_to 'Editar', edit_investigacion_path(investigacion)
-                = link_to 'Borrar', investigacion_path, class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
+                = link_to 'Borrar', investigacion_path(investigacion), class: 'text-danger', method: :delete, data: { confirm: 'Estas seguro?' }
 
 - if !hide_pagination
   .row

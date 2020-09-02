@@ -13,7 +13,7 @@ bundle install --jobs=4 $(if [ "$IS_PROD" == "1" ]; then echo "--without develop
 rails db:migrate || exit 1
 
 # Execute test when
-if [ "$IS_PROD" == "1" ] && [ "$EXEC_TEST" == '1' ]; then
+if [ "$IS_PROD" == "0" ] && [ "$EXEC_TEST" == '1' ]; then
   rails test || exit 1
 fi
 if [ "$IS_PROD" == "1" ]; then
