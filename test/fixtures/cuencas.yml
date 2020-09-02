@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_vertiente: 1
+  nombre: MyString
+  id_status: 1
+
+two:
+  id_vertiente: 1
+  nombre: MyString
+  id_status: 1

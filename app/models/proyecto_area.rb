@@ -1,0 +1,2 @@
+class ProyectoArea < ApplicationRecord
+end

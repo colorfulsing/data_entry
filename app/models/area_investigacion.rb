@@ -1,0 +1,2 @@
+class AreaInvestigacion < ApplicationRecord
+end

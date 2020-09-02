@@ -1,0 +1,32 @@
+<%= form_with(model: microcuenca, local: true) do |form| %>
+  <% if microcuenca.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(microcuenca.errors.count, "error") %> prohibited this microcuenca from being saved:</h2>
+
+      <ul>
+      <% microcuenca.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :id_subcuenca %>
+    <%= form.number_field :id_subcuenca, id: :microcuenca_id_subcuenca %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nombre %>
+    <%= form.text_field :nombre, id: :microcuenca_nombre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :id_status %>
+    <%= form.number_field :id_status, id: :microcuenca_id_status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

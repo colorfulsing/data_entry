@@ -1,0 +1,2 @@
+class Cuenca < ApplicationRecord
+end

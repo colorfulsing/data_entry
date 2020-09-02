@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_subcuenca: 1
+  nombre: MyString
+  id_status: 1
+
+two:
+  id_subcuenca: 1
+  nombre: MyString
+  id_status: 1

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Proyecto Areas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id proyecto</th>
+      <th>Id area</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @proyecto_areas.each do |proyecto_area| %>
+      <tr>
+        <td><%= proyecto_area.id_proyecto %></td>
+        <td><%= proyecto_area.id_area %></td>
+        <td><%= link_to 'Show', proyecto_area %></td>
+        <td><%= link_to 'Edit', edit_proyecto_area_path(proyecto_area) %></td>
+        <td><%= link_to 'Destroy', proyecto_area, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Proyecto Area', new_proyecto_area_path %>

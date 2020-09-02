@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id_instituto: 1
+  id_microcuenca: 1
+  id_municipio: 1
+  id_documento: 1
+  autor: MyString
+  titulo: MyString
+  no_paginas: 1
+  fecha_realizacion: MyString
+  fecha_publicacion: MyString
+  resumen: MyText
+  palabras_clave: MyString
+  recurso_web: MyText
+  id_status: 1
+
+two:
+  id_instituto: 1
+  id_microcuenca: 1
+  id_municipio: 1
+  id_documento: 1
+  autor: MyString
+  titulo: MyString
+  no_paginas: 1
+  fecha_realizacion: MyString
+  fecha_publicacion: MyString
+  resumen: MyText
+  palabras_clave: MyString
+  recurso_web: MyText
+  id_status: 1

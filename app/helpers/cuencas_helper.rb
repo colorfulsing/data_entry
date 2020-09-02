@@ -1,0 +1,2 @@
+module CuencasHelper
+end

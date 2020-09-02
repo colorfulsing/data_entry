@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id cuenca:</strong>
+  <%= @subcuenca.id_cuenca %>
+</p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @subcuenca.nombre %>
+</p>
+
+<p>
+  <strong>Id status:</strong>
+  <%= @subcuenca.id_status %>
+</p>
+
+<%= link_to 'Edit', edit_subcuenca_path(@subcuenca) %> |
+<%= link_to 'Back', subcuencas_path %>

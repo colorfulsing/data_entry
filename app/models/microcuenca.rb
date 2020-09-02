@@ -1,0 +1,2 @@
+class Microcuenca < ApplicationRecord
+end

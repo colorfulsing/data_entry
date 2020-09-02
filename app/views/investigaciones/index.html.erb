@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Investigaciones</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id instituto</th>
+      <th>Id microcuenca</th>
+      <th>Id municipio</th>
+      <th>Id documento</th>
+      <th>Autor</th>
+      <th>Titulo</th>
+      <th>No paginas</th>
+      <th>Fecha realizacion</th>
+      <th>Fecha publicacion</th>
+      <th>Resumen</th>
+      <th>Palabras clave</th>
+      <th>Recurso web</th>
+      <th>Id status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @investigaciones.each do |investigacione| %>
+      <tr>
+        <td><%= investigacione.id_instituto %></td>
+        <td><%= investigacione.id_microcuenca %></td>
+        <td><%= investigacione.id_municipio %></td>
+        <td><%= investigacione.id_documento %></td>
+        <td><%= investigacione.autor %></td>
+        <td><%= investigacione.titulo %></td>
+        <td><%= investigacione.no_paginas %></td>
+        <td><%= investigacione.fecha_realizacion %></td>
+        <td><%= investigacione.fecha_publicacion %></td>
+        <td><%= investigacione.resumen %></td>
+        <td><%= investigacione.palabras_clave %></td>
+        <td><%= investigacione.recurso_web %></td>
+        <td><%= investigacione.id_status %></td>
+        <td><%= link_to 'Show', investigacione %></td>
+        <td><%= link_to 'Edit', edit_investigacione_path(investigacione) %></td>
+        <td><%= link_to 'Destroy', investigacione, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Investigacione', new_investigacione_path %>

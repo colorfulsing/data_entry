@@ -1,0 +1,2 @@
+class Vertiente < ApplicationRecord
+end
