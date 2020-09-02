@@ -1,10 +1,10 @@
 class InvestigacionesController < ApplicationController
-  before_action :set_investigacione, only: [:show, :edit, :update, :destroy]
+  before_action :set_investigacion, only: [:show, :edit, :update, :destroy]
 
   # GET /investigaciones
   # GET /investigaciones.json
   def index
-    @investigaciones = Investigacione.all
+    @investigaciones = Investigacion.all
   end
 
   # GET /investigaciones/1
@@ -14,7 +14,7 @@ class InvestigacionesController < ApplicationController
 
   # GET /investigaciones/new
   def new
-    @investigacione = Investigacione.new
+    @investigacion = Investigacion.new
   end
 
   # GET /investigaciones/1/edit
@@ -24,15 +24,15 @@ class InvestigacionesController < ApplicationController
   # POST /investigaciones
   # POST /investigaciones.json
   def create
-    @investigacione = Investigacione.new(investigacione_params)
+    @investigacion = Investigacion.new(investigacion_params)
 
     respond_to do |format|
-      if @investigacione.save
-        format.html { redirect_to @investigacione, notice: 'Investigacione was successfully created.' }
-        format.json { render :show, status: :created, location: @investigacione }
+      if @investigacion.save
+        format.html { redirect_to @investigacion, notice: 'Investigacion was successfully created.' }
+        format.json { render :show, status: :created, location: @investigacion }
       else
         format.html { render :new }
-        format.json { render json: @investigacione.errors, status: :unprocessable_entity }
+        format.json { render json: @investigacion.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,12 +41,12 @@ class InvestigacionesController < ApplicationController
   # PATCH/PUT /investigaciones/1.json
   def update
     respond_to do |format|
-      if @investigacione.update(investigacione_params)
-        format.html { redirect_to @investigacione, notice: 'Investigacione was successfully updated.' }
-        format.json { render :show, status: :ok, location: @investigacione }
+      if @investigacion.update(investigacion_params)
+        format.html { redirect_to @investigacion, notice: 'Investigacion was successfully updated.' }
+        format.json { render :show, status: :ok, location: @investigacion }
       else
         format.html { render :edit }
-        format.json { render json: @investigacione.errors, status: :unprocessable_entity }
+        format.json { render json: @investigacion.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,21 +54,21 @@ class InvestigacionesController < ApplicationController
   # DELETE /investigaciones/1
   # DELETE /investigaciones/1.json
   def destroy
-    @investigacione.destroy
+    @investigacion.destroy
     respond_to do |format|
-      format.html { redirect_to investigaciones_url, notice: 'Investigacione was successfully destroyed.' }
+      format.html { redirect_to investigaciones_url, notice: 'Investigacion was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_investigacione
-      @investigacione = Investigacione.find(params[:id])
+    def set_investigacion
+      @investigacion = Investigacion.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def investigacione_params
-      params.require(:investigacione).permit(:id_instituto, :id_microcuenca, :id_municipio, :id_documento, :autor, :titulo, :no_paginas, :fecha_realizacion, :fecha_publicacion, :resumen, :palabras_clave, :recurso_web, :id_status)
+    def investigacion_params
+      params.require(:investigacion).permit(:id_instituto, :id_microcuenca, :id_municipio, :id_documento, :autor, :titulo, :no_paginas, :fecha_realizacion, :fecha_publicacion, :resumen, :palabras_clave, :recurso_web, :id_status)
     end
 end

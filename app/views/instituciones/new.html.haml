@@ -1,0 +1,12 @@
+.container
+  .row
+    .col
+      %h1 Nueva Institucion
+
+  .row
+    .col
+      = link_to 'Volver', instituciones_path, class: 'btn btn-ouline-link pull-right'
+
+  .row
+    .col
+      = render 'form', institucion: @institucion

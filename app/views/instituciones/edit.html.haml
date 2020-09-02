@@ -1,0 +1,13 @@
+.container
+  .row
+    .col
+      %h1 Editar Institucion
+
+  .row
+    .col
+      = link_to 'Mostrar', institucion_path(@institucion), class: 'btn btn-outline-info pull-right'
+      = link_to 'Volver', instituciones_path, class: 'btn btn-outline-link pull-right'
+
+  .row
+    .col
+      = render 'form', institucion: @institucion

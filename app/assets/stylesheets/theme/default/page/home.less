@@ -1,0 +1,26 @@
+.home-page {
+  .section-content {
+    ul.options { display: block; margin: 0; padding: 0;
+      > li { display: block; margin: 0; padding: 0; border: 1px solid #dcdcdc;
+        + li { border-style: none solid solid solid; }
+
+        > a { display: block; padding: 5px 10px; }
+
+        > ul { display: block; background-color: #f7f7f7; margin: 0; padding: 0;
+          > li { display: block; margin: 0; padding: 0; border: 1px solid #dcdcdc; border-style: solid none;
+            + li { border-style: none none solid none; }
+            &.search-button { padding-left: 20px; }
+
+            > a { display: block; padding: 5px 10px 5px 20px; }
+          }
+        }
+      }
+
+      .search-button { padding: 5px 10px; position: relative;
+        button { width: 30px; background: transparent; padding: 6px 0; margin: 0; border-style: none; text-align: center; color: #444; cursor: pointer; position: absolute; z-index: 2; top: 5px; right: 10px; }
+        input[type=text] { padding-right: 30px; }
+      }
+      input[type=text] { width: 100%; }
+    }
+  }
+}

@@ -1,0 +1,62 @@
+<%= form_with(model: facultad, local: true) do |form| %>
+  <% if facultad.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(facultad.errors.count, "error") %> prohibited this facultad from being saved:</h2>
+
+      <ul>
+      <% facultad.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :id_instituciones %>
+    <%= form.number_field :id_instituciones, id: :facultad_id_instituciones %>
+  </div>
+
+  <div class="field">
+    <%= form.label :nombre %>
+    <%= form.text_field :nombre, id: :facultad_nombre %>
+  </div>
+
+  <div class="field">
+    <%= form.label :siglas %>
+    <%= form.text_field :siglas, id: :facultad_siglas %>
+  </div>
+
+  <div class="field">
+    <%= form.label :telefono %>
+    <%= form.text_field :telefono, id: :facultad_telefono %>
+  </div>
+
+  <div class="field">
+    <%= form.label :extension %>
+    <%= form.text_field :extension, id: :facultad_extension %>
+  </div>
+
+  <div class="field">
+    <%= form.label :direccion %>
+    <%= form.text_field :direccion, id: :facultad_direccion %>
+  </div>
+
+  <div class="field">
+    <%= form.label :correo_electronico %>
+    <%= form.text_field :correo_electronico, id: :facultad_correo_electronico %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sitio_web %>
+    <%= form.text_field :sitio_web, id: :facultad_sitio_web %>
+  </div>
+
+  <div class="field">
+    <%= form.label :id_status %>
+    <%= form.number_field :id_status, id: :facultad_id_status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

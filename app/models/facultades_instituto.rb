@@ -1,2 +1,0 @@
-class FacultadesInstituto < ApplicationRecord
-end

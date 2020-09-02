@@ -1,18 +1,45 @@
 Rails.application.routes.draw do
+  get '/', to: 'default#home', as: :home
+
   resources :vertientes
   resources :tipo_documentos
   resources :subcuencas
   resources :statuses
-  resources :proyecto_programas
+  resources :proyectos
   resources :proyecto_areas
   resources :municipios
   resources :microcuencas
+
+  # Add spanish route names
   resources :investigaciones
+  get "/investigaciones/new(.:format)", to: 'investigaciones#new', as: :new_investigacion
+  get "/investigaciones/:id/edit(.:format)", to: 'investigaciones#edit', as: :edit_investigacion
+  get "/investigaciones/:id(.:format)", to: 'investigaciones#show', as: :investigacion
+  patch "/investigaciones/:id(.:format)", to: 'investigaciones#update'
+  put "/investigaciones/:id(.:format)", to: 'investigaciones#update'
+  delete "/investigaciones/:id(.:format)", to: 'investigaciones#destroy'
+
+  # Add spanish route names
   resources :instituciones
-  resources :facultades_institutos
+  get "/instituciones/new(.:format)", to: 'instituciones#new', as: :new_institucion
+  get "/instituciones/:id/edit(.:format)", to: 'instituciones#edit', as: :edit_institucion
+  get "/instituciones/:id(.:format)", to: 'instituciones#show', as: :institucion
+  patch "/instituciones/:id(.:format)", to: 'instituciones#update'
+  put "/instituciones/:id(.:format)", to: 'instituciones#update'
+  delete "/instituciones/:id(.:format)", to: 'instituciones#destroy'
+
+  # Add spanish route names
+  resources :facultades
+  get "/facultades/new(.:format)", to: 'facultades#new', as: :new_facultad
+  get "/facultades/:id/edit(.:format)", to: 'facultades#edit', as: :edit_facultad
+  get "/facultades/:id(.:format)", to: 'facultades#show', as: :facultad
+  patch "/facultades/:id(.:format)", to: 'facultades#update'
+  put "/facultades/:id(.:format)", to: 'facultades#update'
+  delete "/facultades/:id(.:format)", to: 'facultades#destroy'
+
   resources :departamentos
   resources :cuencas
-  resources :area_investigacions
+  resources :area_investigaciones
   resources :areas
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

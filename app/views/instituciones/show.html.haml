@@ -1,0 +1,128 @@
+.container
+  - if !notice.to_s.strip.empty?
+    .row
+      .col
+        #notice.alert.alert-info{role: 'alert'}
+          = notice
+
+  .row
+    .col.col-9
+      %h1= @institucion.nombre
+    .col.col-3
+      = link_to 'Editar', edit_institucion_path(@institucion), class: 'btn btn-outline-primary pull-right'
+      = link_to 'Volver', instituciones_path, class: 'btn btn-outline-link pull-right'
+
+  .row
+    .col.col-4.font-weight-bold
+      Siglas
+    .col.col-8
+      = @institucion.siglas
+
+  .row
+    .col.col-4.font-weight-bold
+      Telefono
+    .col.col-8
+      = @institucion.telefono
+
+  .row
+    .col.col-4.font-weight-bold
+      Direccion
+    .col.col-8
+      = @institucion.direccion
+
+  .row
+    .col.col-4.font-weight-bold
+      Correo electronico
+    .col.col-8
+      - if @institucion.correo_electronico_valid?
+        %a{href: "mailto:#{@institucion.correo_electronico}"}
+          = @institucion.correo_electronico
+      - else
+        = @institucion.correo_electronico
+
+  .row
+    .col.col-4.font-weight-bold
+      Sitio web
+    .col.col-8
+      - if @institucion.sitio_web_valid?
+        %a{href: @institucion.sitio_web}
+          = @institucion.sitio_web
+      - else
+        = @institucion.sitio_web
+
+  .row
+    .col.col-4.font-weight-bold
+      Estado
+    .col.col-8
+      - if @institucion.status.visible?
+        .text-success
+          = @institucion.status.nombre
+      - elsif @institucion.status.deleted?
+        .text-danger.font-italic
+          = @institucion.status.nombre
+      - else
+        .text-secondary
+          = @institucion.status.nombre
+
+  %br/
+  %br/
+
+.container-fluid
+  .row
+    .col.col-8
+      %h2 Facultades e Institutos
+    .col.col-4
+      = link_to 'Nueva Facultad o Instituto', new_facultad_path, class:"btn btn-primary pull-right"
+
+  .row
+    .col
+      %table.table.table-striped
+        %thead
+          %tr
+            %th Id instituciones
+            %th Nombre
+            %th Siglas
+            %th Telefono
+            %th Extension
+            %th Direccion
+            %th Correo electronico
+            %th Sitio web
+            %th Id status
+            %th{colspan: "3"}
+
+        %tbody
+          - @facultades.each do |facultad|
+            %tr
+              %td= facultad.id_instituciones
+              %td= facultad.nombre
+              %td= facultad.siglas
+              %td= facultad.telefono
+              %td= facultad.extension
+              %td= facultad.direccion
+              %td
+                - if facultad.correo_electronico_valid?
+                  %a{href: "mailto:#{facultad.correo_electronico}"}
+                    = facultad.correo_electronico
+                - else
+                  = facultad.correo_electronico
+              %td
+                - if facultad.sitio_web_valid?
+                  %a{href: facultad.sitio_web}
+                    = facultad.sitio_web
+                - else
+                  = facultad.sitio_web
+              %td
+                - if facultad.status.visible?
+                  .text-success
+                    = facultad.status.nombre
+                - elsif facultad.status.deleted?
+                  .text-danger.font-italic
+                    = facultad.status.nombre
+                - else
+                  .text-secondary
+                    = facultad.status.nombre
+              %td= facultad.sitio_web
+              %td= facultad.id_status
+              %td= link_to 'Mostrar', facultad_path(facultad)
+              %td= link_to 'Editar', edit_facultad_path(facultad)
+              %td= link_to 'Borrar', facultad_path(facultad), method: :delete, data: { confirm: 'Estas seguro?' }

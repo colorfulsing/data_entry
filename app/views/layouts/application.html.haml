@@ -1,0 +1,15 @@
+- meta_title = (yield :title)
+!!! 5
+%html
+  %head
+    %title= "#{meta_title.empty? ? '' : ' | '}Estado del Arte"
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+%body{class: yield(:page_class)}
+  .section-header
+    = render 'shared/menu'
+  .section-content
+    = yield
+  .section-footer
+    = render 'shared/footer'

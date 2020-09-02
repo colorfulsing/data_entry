@@ -1,1 +1,1 @@
-json.array! @instituciones, partial: 'instituciones/institucione', as: :institucione
+json.array! @instituciones, partial: 'instituciones/institucion', as: :institucion

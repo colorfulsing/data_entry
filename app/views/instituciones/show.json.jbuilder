@@ -1,1 +1,1 @@
-json.partial! "instituciones/institucione", institucione: @institucione
+json.partial! "instituciones/institucion", institucion: @institucion

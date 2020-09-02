@@ -1,2 +1,0 @@
-class ProyectoPrograma < ApplicationRecord
-end

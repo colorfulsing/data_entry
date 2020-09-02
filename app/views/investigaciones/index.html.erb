@@ -23,24 +23,24 @@
   </thead>
 
   <tbody>
-    <% @investigaciones.each do |investigacione| %>
+    <% @investigaciones.each do |investigacion| %>
       <tr>
-        <td><%= investigacione.id_instituto %></td>
-        <td><%= investigacione.id_microcuenca %></td>
-        <td><%= investigacione.id_municipio %></td>
-        <td><%= investigacione.id_documento %></td>
-        <td><%= investigacione.autor %></td>
-        <td><%= investigacione.titulo %></td>
-        <td><%= investigacione.no_paginas %></td>
-        <td><%= investigacione.fecha_realizacion %></td>
-        <td><%= investigacione.fecha_publicacion %></td>
-        <td><%= investigacione.resumen %></td>
-        <td><%= investigacione.palabras_clave %></td>
-        <td><%= investigacione.recurso_web %></td>
-        <td><%= investigacione.id_status %></td>
-        <td><%= link_to 'Show', investigacione %></td>
-        <td><%= link_to 'Edit', edit_investigacione_path(investigacione) %></td>
-        <td><%= link_to 'Destroy', investigacione, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= investigacion.id_instituto %></td>
+        <td><%= investigacion.id_microcuenca %></td>
+        <td><%= investigacion.id_municipio %></td>
+        <td><%= investigacion.id_documento %></td>
+        <td><%= investigacion.autor %></td>
+        <td><%= investigacion.titulo %></td>
+        <td><%= investigacion.no_paginas %></td>
+        <td><%= investigacion.fecha_realizacion %></td>
+        <td><%= investigacion.fecha_publicacion %></td>
+        <td><%= investigacion.resumen %></td>
+        <td><%= investigacion.palabras_clave %></td>
+        <td><%= investigacion.recurso_web %></td>
+        <td><%= investigacion.id_status %></td>
+        <td><%= link_to 'Show', investigacion %></td>
+        <td><%= link_to 'Edit', edit_investigacion_path(investigacion) %></td>
+        <td><%= link_to 'Destroy', investigacion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -48,4 +48,4 @@
 
 <br>
 
-<%= link_to 'New Investigacione', new_investigacione_path %>
+<%= link_to 'New Investigacion', new_investigacion_path %>

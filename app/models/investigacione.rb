@@ -1,2 +1,0 @@
-class Investigacione < ApplicationRecord
-end

@@ -1,20 +1,22 @@
 class InstitucionesController < ApplicationController
-  before_action :set_institucione, only: [:show, :edit, :update, :destroy]
+  before_action :load_status, only: [:show, :edit, :update, :new, :create]
+  before_action :set_institucion, only: [:show, :edit, :update, :destroy]
 
   # GET /instituciones
   # GET /instituciones.json
   def index
-    @instituciones = Institucione.all
+    @instituciones = Institucion.all.includes([:status])
   end
 
   # GET /instituciones/1
   # GET /instituciones/1.json
   def show
+    @facultades = @institucion.facultades.includes([:status])
   end
 
   # GET /instituciones/new
   def new
-    @institucione = Institucione.new
+    @institucion = Institucion.new
   end
 
   # GET /instituciones/1/edit
@@ -24,15 +26,15 @@ class InstitucionesController < ApplicationController
   # POST /instituciones
   # POST /instituciones.json
   def create
-    @institucione = Institucione.new(institucione_params)
+    @institucion = Institucion.new(institucion_params)
 
     respond_to do |format|
-      if @institucione.save
-        format.html { redirect_to @institucione, notice: 'Institucione was successfully created.' }
-        format.json { render :show, status: :created, location: @institucione }
+      if @institucion.save
+        format.html { redirect_to @institucion, notice: 'La Institucion se creo exitosamente.' }
+        format.json { render :show, status: :created, location: @institucion }
       else
         format.html { render :new }
-        format.json { render json: @institucione.errors, status: :unprocessable_entity }
+        format.json { render json: @institucion.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,12 +43,12 @@ class InstitucionesController < ApplicationController
   # PATCH/PUT /instituciones/1.json
   def update
     respond_to do |format|
-      if @institucione.update(institucione_params)
-        format.html { redirect_to @institucione, notice: 'Institucione was successfully updated.' }
-        format.json { render :show, status: :ok, location: @institucione }
+      if @institucion.update(institucion_params)
+        format.html { redirect_to @institucion, notice: 'La Institucion se actualizo correctamente.' }
+        format.json { render :show, status: :ok, location: @institucion }
       else
         format.html { render :edit }
-        format.json { render json: @institucione.errors, status: :unprocessable_entity }
+        format.json { render json: @institucion.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,21 +56,26 @@ class InstitucionesController < ApplicationController
   # DELETE /instituciones/1
   # DELETE /instituciones/1.json
   def destroy
-    @institucione.destroy
+    @institucion.status = Status.find(Status::VALUES[:deleted])
+    @institucion.save validate: false
     respond_to do |format|
-      format.html { redirect_to instituciones_url, notice: 'Institucione was successfully destroyed.' }
+      format.html { redirect_to instituciones_url, notice: 'La Institucion se marco como borrada.' }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_institucione
-      @institucione = Institucione.find(params[:id])
+    def set_institucion
+      @institucion = Institucion.find(params[:id])
+    end
+
+    def load_status
+      @statuses = Status.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def institucione_params
-      params.require(:institucione).permit(:nombre, :siglas, :telefono, :direccion, :correo_electronico, :sitio_web, :id_status)
+    def institucion_params
+      params.require(:institucion).permit(:nombre, :siglas, :telefono, :direccion, :correo_electronico, :sitio_web, :id_status)
     end
 end

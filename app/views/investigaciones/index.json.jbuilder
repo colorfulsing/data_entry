@@ -1,1 +1,1 @@
-json.array! @investigaciones, partial: 'investigaciones/investigacione', as: :investigacione
+json.array! @investigaciones, partial: 'investigaciones/investigacion', as: :investigacion

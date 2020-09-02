@@ -1,0 +1,24 @@
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.navbar-theme
+  %a.navbar-brand{href: home_path}
+    Estados del Arte
+  %button.navbar-toggler{type: "button", data: {toggle: "collapse", target: "#navbarSupportedContent"}, aria: {controls: "navbarSupportedContent", expanded: "false", label: "Toggle Navigation"}}
+    %span.navbar-toggler-icon
+
+  .collapse.navbar-collapse{id: "navbarSupportedContent"}
+    %ul.navbar-nav.mr-auto
+      %li.nav-item
+        %a.nav-link{href: home_path}
+          Inicio
+      %li.nav-item.dropdown
+        %a.nav-link.dropdown-toggle{id: "navbarInstituciones", href: instituciones_path, role: "button", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}}
+          Instituciones
+        .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
+          %a.dropdown-item{href: "javascript:void(0);"}
+            Action 1
+          .dropdown-divider
+          %a.dropdown-item{href: "javascript:void(0);"}
+            Action 2
+    %form.form-inline.my-2.my-lg-0
+      %input.form-control.mr-sm-2{type: "search", placeholder: "Search", aria: {label: "Search"}}
+      %button.btn.btn-outline-info.my-2.my-sm-0{type: "submit"}
+        Buscar

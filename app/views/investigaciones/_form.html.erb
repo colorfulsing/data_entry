@@ -1,10 +1,10 @@
-<%= form_with(model: investigacione, local: true) do |form| %>
-  <% if investigacione.errors.any? %>
+<%= form_with(model: investigacion, local: true) do |form| %>
+  <% if investigacion.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(investigacione.errors.count, "error") %> prohibited this investigacione from being saved:</h2>
+      <h2><%= pluralize(investigacion.errors.count, "error") %> prohibited this investigacion from being saved:</h2>
 
       <ul>
-      <% investigacione.errors.full_messages.each do |message| %>
+      <% investigacion.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -13,67 +13,67 @@
 
   <div class="field">
     <%= form.label :id_instituto %>
-    <%= form.number_field :id_instituto, id: :investigacione_id_instituto %>
+    <%= form.number_field :id_instituto, id: :investigacion_id_instituto %>
   </div>
 
   <div class="field">
     <%= form.label :id_microcuenca %>
-    <%= form.number_field :id_microcuenca, id: :investigacione_id_microcuenca %>
+    <%= form.number_field :id_microcuenca, id: :investigacion_id_microcuenca %>
   </div>
 
   <div class="field">
     <%= form.label :id_municipio %>
-    <%= form.number_field :id_municipio, id: :investigacione_id_municipio %>
+    <%= form.number_field :id_municipio, id: :investigacion_id_municipio %>
   </div>
 
   <div class="field">
     <%= form.label :id_documento %>
-    <%= form.number_field :id_documento, id: :investigacione_id_documento %>
+    <%= form.number_field :id_documento, id: :investigacion_id_documento %>
   </div>
 
   <div class="field">
     <%= form.label :autor %>
-    <%= form.text_field :autor, id: :investigacione_autor %>
+    <%= form.text_field :autor, id: :investigacion_autor %>
   </div>
 
   <div class="field">
     <%= form.label :titulo %>
-    <%= form.text_field :titulo, id: :investigacione_titulo %>
+    <%= form.text_field :titulo, id: :investigacion_titulo %>
   </div>
 
   <div class="field">
     <%= form.label :no_paginas %>
-    <%= form.number_field :no_paginas, id: :investigacione_no_paginas %>
+    <%= form.number_field :no_paginas, id: :investigacion_no_paginas %>
   </div>
 
   <div class="field">
     <%= form.label :fecha_realizacion %>
-    <%= form.text_field :fecha_realizacion, id: :investigacione_fecha_realizacion %>
+    <%= form.text_field :fecha_realizacion, id: :investigacion_fecha_realizacion %>
   </div>
 
   <div class="field">
     <%= form.label :fecha_publicacion %>
-    <%= form.text_field :fecha_publicacion, id: :investigacione_fecha_publicacion %>
+    <%= form.text_field :fecha_publicacion, id: :investigacion_fecha_publicacion %>
   </div>
 
   <div class="field">
     <%= form.label :resumen %>
-    <%= form.text_area :resumen, id: :investigacione_resumen %>
+    <%= form.text_area :resumen, id: :investigacion_resumen %>
   </div>
 
   <div class="field">
     <%= form.label :palabras_clave %>
-    <%= form.text_field :palabras_clave, id: :investigacione_palabras_clave %>
+    <%= form.text_field :palabras_clave, id: :investigacion_palabras_clave %>
   </div>
 
   <div class="field">
     <%= form.label :recurso_web %>
-    <%= form.text_area :recurso_web, id: :investigacione_recurso_web %>
+    <%= form.text_area :recurso_web, id: :investigacion_recurso_web %>
   </div>
 
   <div class="field">
     <%= form.label :id_status %>
-    <%= form.number_field :id_status, id: :investigacione_id_status %>
+    <%= form.number_field :id_status, id: :investigacion_id_status %>
   </div>
 
   <div class="actions">
