@@ -3,12 +3,17 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
+    "caniuse-lite": "1.0.30000697",
     "babel-preset-react": "^6.24.1",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "react-on-rails": "*",
+    "babel-runtime": ">=6",
+    "js-yaml": ">=3.0.0"
   },
   "devDependencies": {
-    "webpack-dev-server": "2.11.2"
+    "webpack-dev-server": "2.11.2",
+    "webpack": "3.x"
   }
 }
