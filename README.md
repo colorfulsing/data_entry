@@ -52,15 +52,15 @@ it on the terminal (assuming you are located on the project's root directory):
 
 * To rebuild the project's containers:
 
-  ./deploy.sh rebuild
+    ./deploy.sh rebuild
 
 * To start/restart the project's containers:
 
-  ./deploy.sh start
+    ./deploy.sh start
 
 * To destory the project's containers:
 
-  ./deploy.sh destroy
+    ./deploy.sh destroy
 
 That's it! it will do the rest for you, including attaching the started
 containers logs to the current terminal so you can monitor all it's
@@ -70,7 +70,7 @@ gracefully stop the containers for you.
 For more information and commands, execute the deployment script with *"--help"*
 option:
 
-  ./deploy.sh --help
+    ./deploy.sh --help
 
 ### Deploying manullay with docker-compose
 
