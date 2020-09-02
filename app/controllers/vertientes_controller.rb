@@ -1,4 +1,5 @@
 class VertientesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_vertiente, only: [:show, :edit, :update, :destroy]
   before_action :load_config
@@ -6,7 +7,7 @@ class VertientesController < ApplicationController
   # GET /vertientes
   # GET /vertientes.json
   def index
-    @vertientes = Vertiente.all.includes([:status]).order(:nombre).page params[:page]
+    @vertientes = Vertiente.search.page params[:page]
   end
 
   # GET /vertientes/1

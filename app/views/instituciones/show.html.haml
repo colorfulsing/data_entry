@@ -8,6 +8,16 @@
 
   .row
     .col.col-4.font-weight-bold
+      ID:
+    .col.col-8
+      = @institucion.id
+  .row
+    .col.col-4.font-weight-bold
+      Nombre:
+    .col.col-8
+      = @institucion.nombre
+  .row
+    .col.col-4.font-weight-bold
       Siglas
     .col.col-8
       = @institucion.siglas
@@ -52,4 +62,4 @@
     .col.col-4
       = link_to 'Nueva Facultad o Instituto', new_facultad_path, class:"btn btn-primary pull-right"
 
-  = render 'facultades/list', collection: @facultades, hide_pagination: true
+  = render 'facultades/list', collection: @institucion.facultades, hide_pagination: true

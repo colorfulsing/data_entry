@@ -1,4 +1,5 @@
 class FacultadesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :load_institucion, only: [:edit, :update, :new, :create]
   before_action :set_facultad, only: [:show, :edit, :update, :destroy]
@@ -7,7 +8,7 @@ class FacultadesController < ApplicationController
   # GET /facultades
   # GET /facultades.json
   def index
-    @facultades = Facultad.all.includes([:status]).order(:nombre).page params[:page]
+    @facultades = Facultad.search.page params[:page]
   end
 
   # GET /facultades/1
@@ -62,6 +63,16 @@ class FacultadesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to facultades_url, notice: 'Facultades instituto se marco como borrada..' }
       format.json { head :no_content }
+    end
+  end
+
+  def autocomplete
+    query = params[:term]
+    search_expression = convert_to_search_expression query
+    limit = APP_CONFIG['autocomplete_limit']
+    @collection = []
+    unless search_expression.blank?
+      @collection = Facultad.search(query).limit(limit)
     end
   end
 

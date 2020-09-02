@@ -17,12 +17,20 @@
     .col.col-6.form-group
       = form.label :id_instituto, "Facultad / Instituto"
       = form.select :id_instituto, @facultades.collect{|i| [i.nombre, i.id]}, {}, {id: :investigacion_id_instituto, class: 'form-control'}
-    .col.col-6.form-group
-      = form.label :id_microcuenca
-      = form.number_field :id_microcuenca, id: :investigacion_id_microcuenca, class: 'form-control'
-    .col.col-6.form-group
-      = form.label :id_municipio
-      = form.number_field :id_municipio, id: :investigacion_id_municipio, class: 'form-control'
+    = render 'shared/autocomplete_widget',
+      form: form,
+      widget_class: 'col col-6 microcuenca-field',
+      entity: investigacion.try(:microcuenca),
+      field: :id_microcuenca,
+      param_id: :investigacion_id_microcuenca,
+      label_text: 'Microcuenca'
+    = render 'shared/autocomplete_widget',
+      form: form,
+      widget_class: 'col col-6 municipio-field',
+      entity: investigacion.try(:municipio),
+      field: :id_municipio,
+      param_id: :investigacion_id_municipio,
+      label_text: 'Municipio'
     .col.col-6.form-group
       = form.label :id_documento, "Tipo de documento"
       = form.select :id_documento, @tipo_documentos.collect{|i| [i.nombre, i.id]}, {}, {id: :investigacion_id_documento, class: 'form-control'}
@@ -35,10 +43,10 @@
   .row
     .col.col-6.form-group
       = form.label :fecha_realizacion
-      = form.text_field :fecha_realizacion, id: :investigacion_fecha_realizacion, class: 'form-control'
+      = form.text_field :fecha_realizacion, id: :investigacion_fecha_realizacion, class: 'form-control', data: {provide: :datepicker, 'date-format': APP_CONFIG['date_format']}
     .col.col-6.form-group
       = form.label :fecha_publicacion
-      = form.text_field :fecha_publicacion, id: :investigacion_fecha_publicacion, class: 'form-control'
+      = form.text_field :fecha_publicacion, id: :investigacion_fecha_publicacion, class: 'form-control', data: {provide: :datepicker, 'date-format': APP_CONFIG['date_format']}
   .row
     .col.col-12.form-group
       = form.label :resumen
@@ -55,3 +63,22 @@
   .row
     .col.actions
       = form.submit "Guardar", class: 'btn btn-primary pull-right'
+
+- content_for :javascript do
+  :erb
+    <script type="text/javascript">
+      (function() {
+        // Microcuenca autocomplete
+        configAutocomplete({
+          queryInputSelector: 'form .microcuenca-field .query-input',
+          valueInputSelector: 'form .microcuenca-field .value-input',
+          source: '<%= j microcuencas_autocomplete_path(format: :json) %>'
+        });
+        // Municipio autocomplete
+        configAutocomplete({
+          queryInputSelector: 'form .municipio-field .query-input',
+          valueInputSelector: 'form .municipio-field .value-input',
+          source: '<%= j municipios_autocomplete_path(format: :json) %>'
+        });
+      })();
+    </script>

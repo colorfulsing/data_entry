@@ -12,6 +12,7 @@
  *
  *= require ./bootstrap/bootstrap.min.css
  *= require bootstrap-datepicker
+ *= require_tree ./jquery.ui/
  *= require ./fontawesome/font-awesome
  *= require_tree ./theme/default/
  *= require_self

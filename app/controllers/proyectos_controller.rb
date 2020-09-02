@@ -1,4 +1,5 @@
 class ProyectosController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :load_facultad, only: [:edit, :update, :new, :create]
   before_action :set_proyecto, only: [:show, :edit, :update, :destroy, :asociate_area]
@@ -8,7 +9,7 @@ class ProyectosController < ApplicationController
   # GET /proyectos
   # GET /proyectos.json
   def index
-    @proyectos = Proyecto.all.includes([:status]).order(:nombre).page params[:page]
+    @proyectos = Proyecto.search.page params[:page]
   end
 
   # GET /proyectos/1

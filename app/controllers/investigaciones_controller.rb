@@ -1,4 +1,5 @@
 class InvestigacionesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :load_facultad, only: [:edit, :update, :new, :create]
   before_action :load_tipo_documento, only: [:edit, :update, :new, :create]
@@ -9,7 +10,7 @@ class InvestigacionesController < ApplicationController
   # GET /investigaciones
   # GET /investigaciones.json
   def index
-    @investigaciones = Investigacion.all.includes([:status]).order(:nombre).page params[:page]
+    @investigaciones = Investigacion.search.page params[:page]
   end
 
   # GET /investigaciones/1

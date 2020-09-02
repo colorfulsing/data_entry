@@ -28,6 +28,6 @@
     .col.col-8
       %h2 Municipios
     .col.col-4
-      = link_to 'Nueva Municipio', new_municipio_path, class:"btn btn-primary pull-right"
+      = link_to 'Nuevo Municipio', new_municipio_path, class:"btn btn-primary pull-right"
 
   = render 'municipios/list', collection: @departamento.municipios, hide_pagination: true

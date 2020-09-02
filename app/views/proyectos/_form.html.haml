@@ -14,9 +14,13 @@
     .col.col-6.form-group
       = form.label :nombre
       = form.text_field :nombre, id: :proyecto_nombre, class: 'form-control'
-    .col.col-6.form-group
-      = form.label :id_instituto, "Facultad / Instituto"
-      = form.select :id_instituto, @facultades.collect{|i| [i.nombre, i.id]}, {}, {id: :proyecto_id_instituto, class: 'form-control'}
+    = render 'shared/autocomplete_widget',
+      form: form,
+      widget_class: 'col col-6 facultad-field',
+      entity: proyecto.facultad,
+      field: :id_instituto,
+      param_id: :proyecto_id_instituto,
+      label_text: 'Facultad / Instituto'
     .col.col-12.form-group
       = form.label :descripcion
       = form.text_area :descripcion, id: :proyecto_descripcion, class: 'form-control'
@@ -26,3 +30,16 @@
   .row
     .col.actions
       = form.submit "Guardar", class: 'btn btn-primary pull-right'
+
+- content_for :javascript do
+  :erb
+    <script type="text/javascript">
+      (function() {
+        // Facultad autocomplete
+        configAutocomplete({
+          queryInputSelector: 'form .facultad-field .query-input',
+          valueInputSelector: 'form .facultad-field .value-input',
+          source: '<%= j facultades_autocomplete_path(format: :json) %>'
+        });
+      })();
+    </script>

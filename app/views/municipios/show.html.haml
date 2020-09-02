@@ -7,14 +7,19 @@
       = link_to 'Volver', municipios_path, class: 'btn btn-outline-link pull-right'
   .row
     .col.col-4.font-weight-bold
-      Id departamento:
+      ID:
     .col.col-8
-      = @municipio.id_departamento
+      = @municipio.id
   .row
     .col.col-4.font-weight-bold
       Nombre:
     .col.col-8
       = @municipio.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Departamento:
+    .col.col-8
+      = @municipio.departamento.try(:nombre)
   .row
     .col.col-4.font-weight-bold
       Estado

@@ -1,4 +1,5 @@
 class InstitucionesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_institucion, only: [:show, :edit, :update, :destroy]
   before_action :load_config
@@ -6,7 +7,7 @@ class InstitucionesController < ApplicationController
   # GET /instituciones
   # GET /instituciones.json
   def index
-    @instituciones = Institucion.all.includes([:status]).order(:nombre).page params[:page]
+    @instituciones = Institucion.search.page params[:page]
   end
 
   # GET /instituciones/1

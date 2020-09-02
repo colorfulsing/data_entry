@@ -1,4 +1,5 @@
 class AreasController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_area, only: [:show, :edit, :update, :destroy]
   before_action :load_config
@@ -6,7 +7,7 @@ class AreasController < ApplicationController
   # GET /areas
   # GET /areas.json
   def index
-    @areas = Area.all.includes([:status]).order(:nombre).page params[:page]
+    @areas = Area.search.page params[:page]
   end
 
   # GET /areas/1

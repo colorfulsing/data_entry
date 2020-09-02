@@ -1,4 +1,5 @@
 class CuencasController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :load_vertiente, only: [:edit, :update, :new, :create]
   before_action :set_cuenca, only: [:show, :edit, :update, :destroy]
@@ -7,7 +8,7 @@ class CuencasController < ApplicationController
   # GET /cuencas
   # GET /cuencas.json
   def index
-    @cuencas = Cuenca.all.includes([:status]).order(:nombre).page params[:page]
+    @cuencas = Cuenca.search.page params[:page]
   end
 
   # GET /cuencas/1
@@ -62,6 +63,16 @@ class CuencasController < ApplicationController
     respond_to do |format|
       format.html { redirect_to cuencas_url, notice: 'La Cuenca se marco como borrada.' }
       format.json { head :no_content }
+    end
+  end
+
+  def autocomplete
+    query = params[:term]
+    search_expression = convert_to_search_expression query
+    limit = APP_CONFIG['autocomplete_limit']
+    @collection = []
+    unless search_expression.blank?
+      @collection = Cuenca.search(query).limit(limit)
     end
   end
 

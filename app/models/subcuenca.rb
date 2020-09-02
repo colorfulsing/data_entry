@@ -12,12 +12,12 @@ class Subcuenca < ApplicationRecord
       value
     end
 
-    def search query, opts = {}
+    def search query = nil, opts = {}
       parent = opts.delete(:parent)
-      results = self
-      results = where(cuenca: parent) if !parent.blank?
-      results.where("nombre RLIKE ?", [query])
-        .includes(:status, :cuenca)
+      results = self.all
+      results = results.where(cuenca: parent) if !parent.blank?
+      results = results.where("nombre RLIKE ?", [query]) if !query.blank?
+      results.includes(:status, :cuenca)
         .order(:nombre)
     end
   end

@@ -20,12 +20,12 @@ class Facultad < ApplicationRecord
       value
     end
 
-    def search query, opts = {}
+    def search query = nil, opts = {}
       parent = opts.delete(:parent)
-      results = self
-      results = where(institucion: parent) if !parent.blank?
-      results.where("nombre RLIKE ?", [query])
-        .includes(:institucion, :status)
+      results = self.all
+      results = results.where(institucion: parent) if !parent.blank?
+      results = results.where("nombre RLIKE ?", [query]) if !query.blank?
+      results.includes(:institucion, :status)
         .order(:nombre)
     end
   end

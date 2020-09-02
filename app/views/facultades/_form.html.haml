@@ -12,14 +12,14 @@
 
   .row
     .col.col-6.form-group
-      = form.label :id_institucion, "Institucion"
-      = form.select :id_institucion, @instituciones.collect{|i| [i.nombre, i.id]}, {}, {id: :facultad_id_institucion, class: 'form-control'}
-    .col.col-6.form-group
       = form.label :nombre
       = form.text_field :nombre, id: :facultad_nombre, class: 'form-control'
     .col.col-6.form-group
       = form.label :siglas
       = form.text_field :siglas, id: :facultad_siglas, class: 'form-control'
+    .col.col-6.form-group
+      = form.label :id_institucion, "Institucion"
+      = form.select :id_institucion, @instituciones.collect{|i| [i.nombre, i.id]}, {}, {id: :facultad_id_institucion, class: 'form-control'}
     .col.col-6.form-group
       = form.label :telefono
       = form.text_field :telefono, id: :facultad_telefono, class: 'form-control'

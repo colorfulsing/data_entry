@@ -7,11 +7,16 @@
       = link_to 'Volver', statuses_path, class: 'btn btn-outline-link pull-right'
   .row
     .col.col-4.font-weight-bold
+      ID:
+    .col.col-8
+      = @status.id
+  .row
+    .col.col-4.font-weight-bold
       Nombre:
     .col.col-8
       = @status.nombre
   .row
     .col.col-4.font-weight-bold
-      Visible:
+      Es visible?:
     .col.col-8
       = render 'shared/flag_beautify', flag: @status.visible

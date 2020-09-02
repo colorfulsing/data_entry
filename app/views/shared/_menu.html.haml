@@ -56,13 +56,14 @@
           %a.nav-link.dropdown-toggle{id: "navbar_configuraciones", href: "#", role: "button", data: {toggle: "dropdown"}, aria: {haspopup: "true", expanded: "false"}}
             Configuracion
           .dropdown-menu{aria: {labelledby:"navbarDropdown"}}
-            %a.dropdown-item{href: new_status_path}
-              Nuevo estado
-            .dropdown-divider
-            %a.dropdown-item{href: statuses_path}
-              Ver todos los estados
-            .dropdown-divider
-            .dropdown-divider
+            - if current_user.admin?
+              %a.dropdown-item{href: new_status_path}
+                Nuevo estado
+              .dropdown-divider
+              %a.dropdown-item{href: statuses_path}
+                Ver todos los estados
+              .dropdown-divider
+              .dropdown-divider
             %a.dropdown-item{href: new_tipo_documento_path}
               Nuevo tipo de documento
             .dropdown-divider

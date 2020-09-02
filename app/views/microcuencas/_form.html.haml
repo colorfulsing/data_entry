@@ -14,12 +14,29 @@
     .col.col-6.form-group
       = form.label :nombre
       = form.text_field :nombre, id: :microcuenca_nombre, class: 'form-control'
-    .col.col-6.form-group
-      = form.label :id_subcuenca
-      = form.number_field :id_subcuenca, id: :microcuenca_id_subcuenca, class: 'form-control'
+    = render 'shared/autocomplete_widget',
+      form: form,
+      widget_class: 'col col-6 subcuenca-field',
+      entity: microcuenca.try(:subcuenca),
+      field: :id_subcuenca,
+      param_id: :microcuenca_id_subcuenca,
+      label_text: 'Subcuenca'
     .col.col-6.form-group
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :microcuenca_id_status, class: 'form-control'}
   .row
     .col.actions
       = form.submit "Guardar", class: 'btn btn-primary pull-right'
+
+- content_for :javascript do
+  :erb
+    <script type="text/javascript">
+      (function() {
+        // Subcuenca autocomplete
+        configAutocomplete({
+          queryInputSelector: 'form .subcuenca-field .query-input',
+          valueInputSelector: 'form .subcuenca-field .value-input',
+          source: '<%= j subcuencas_autocomplete_path(format: :json) %>'
+        });
+      })();
+    </script>

@@ -50,7 +50,7 @@
           .data= investigacion.facultad.try(:nombre)
           .data= investigacion.tipo_documento.nombre
           .data= investigacion.autor
-          .data= investigacion.fecha_publicacion
+          .data= "Publicado: #{investigacion.fecha_publicacion}"
           .data= render 'shared/status_beautify', status: investigacion.status
           .data-id= investigacion.id
           .options

@@ -7,28 +7,29 @@
       = link_to 'Volver', investigaciones_path, class: 'btn btn-outline-link pull-right'
   .row
     .col.col-4.font-weight-bold
+      ID:
+    .col.col-8
+      = @investigacion.id
+  .row
+    .col.col-4.font-weight-bold
+      Titulo:
+    .col.col-8
+      = @investigacion.titulo
+  .row
+    .col.col-4.font-weight-bold
       Facultado / Instituto:
     .col.col-8
       = @investigacion.facultad.try(:nombre)
   .row
     .col.col-4.font-weight-bold
-      Vertiente:
+      Vertiente / Cuenca / Subcuenca / Microcuenca:
     .col.col-8
       = @investigacion.microcuenca.try(:subcuenca).try(:cuenca).try(:vertiente).try(:nombre)
-  .row
-    .col.col-4.font-weight-bold
-      Cuenca:
-    .col.col-8
+      = "/"
       = @investigacion.microcuenca.try(:subcuenca).try(:cuenca).try(:nombre)
-  .row
-    .col.col-4.font-weight-bold
-      Subcuenca:
-    .col.col-8
+      = "/"
       = @investigacion.microcuenca.try(:subcuenca).try(:nombre)
-  .row
-    .col.col-4.font-weight-bold
-      Microcuenca:
-    .col.col-8
+      = "/"
       = @investigacion.microcuenca.nombre
   .row
     .col.col-4.font-weight-bold
@@ -50,11 +51,6 @@
       Autor:
     .col.col-8
       = @investigacion.autor
-  .row
-    .col.col-4.font-weight-bold
-      Titulo:
-    .col.col-8
-      = @investigacion.titulo
   .row
     .col.col-4.font-weight-bold
       No paginas:

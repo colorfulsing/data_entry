@@ -17,7 +17,7 @@
   = render 'default/show_results', entity_class: Microcuenca, list_view: 'microcuencas/list'
   = render 'default/show_results', entity_class: Municipio, list_view: 'municipios/list'
   = render 'default/show_results', entity_class: Proyecto, list_view: 'proyectos/list'
-  = render 'default/show_results', entity_class: Status, list_view: 'statuses/list'
+  = render 'default/show_results', entity_class: Status, list_view: 'statuses/list' if current_user.admin?
   = render 'default/show_results', entity_class: Subcuenca, list_view: 'subcuencas/list'
   = render 'default/show_results', entity_class: TipoDocumento, list_view: 'tipo_documentos/list'
   = render 'default/show_results', entity_class: Vertiente, list_view: 'vertientes/list'

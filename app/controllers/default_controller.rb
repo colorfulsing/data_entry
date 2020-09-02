@@ -7,7 +7,7 @@ class DefaultController < ApplicationController
   def search
     # Create search expression
     @search_query = params[:q]
-    search_expression = @search_query.gsub(/\s+/,' ').strip.split(' ').map{|s|Regexp.escape(s)}.join('|')
+    search_expression = convert_to_search_expression @search_query
 
     # Create search data
     search_data = {}

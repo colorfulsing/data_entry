@@ -7,6 +7,11 @@
       = link_to 'Volver', tipo_documentos_path, class: 'btn btn-outline-link pull-right'
   .row
     .col.col-4.font-weight-bold
+      ID:
+    .col.col-8
+      = @tipo_documento.id
+  .row
+    .col.col-4.font-weight-bold
       Nombre:
     .col.col-8
       = @tipo_documento.nombre

@@ -14,12 +14,30 @@
     .col.col-6.form-group
       = form.label :nombre
       = form.text_field :nombre, id: :subcuenca_nombre, class: 'form-control'
-    .col.col-6.form-group
-      = form.label :id_cuenca
-      = form.number_field :id_cuenca, id: :subcuenca_id_cuenca, class: 'form-control'
+
+    = render 'shared/autocomplete_widget',
+      form: form,
+      widget_class: 'col col-6 cuenca-field',
+      entity: subcuenca.try(:cuenca),
+      field: :id_cuenca,
+      param_id: :subcuenca_id_cuenca,
+      label_text: 'Cuenca'
     .col.col-6.form-group
       = form.label :id_status, "Estado"
       = form.select :id_status, @statuses.collect{|status| [status.nombre, status.id]}, {}, {id: :subcuenca_id_status, class: 'form-control'}
   .row
     .col.actions
       = form.submit "Guardar", class: 'btn btn-primary pull-right'
+
+- content_for :javascript do
+  :erb
+    <script type="text/javascript">
+      (function() {
+        // Cuenca autocomplete
+        configAutocomplete({
+          queryInputSelector: 'form .cuenca-field .query-input',
+          valueInputSelector: 'form .cuenca-field .value-input',
+          source: '<%= j cuencas_autocomplete_path(format: :json) %>'
+        });
+      })();
+    </script>

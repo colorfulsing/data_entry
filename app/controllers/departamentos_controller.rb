@@ -1,4 +1,5 @@
 class DepartamentosController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_departamento, only: [:show, :edit, :update, :destroy]
   before_action :load_config
@@ -6,7 +7,7 @@ class DepartamentosController < ApplicationController
   # GET /departamentos
   # GET /departamentos.json
   def index
-    @departamentos = Departamento.all.includes([:status]).order(:nombre).page params[:page]
+    @departamentos = Departamento.search.page params[:page]
   end
 
   # GET /departamentos/1

@@ -1,0 +1,12 @@
+defaults: &defaults
+  autocomplete_limit: 6
+  date_format: 'yyyy-mm-dd'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

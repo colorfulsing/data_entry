@@ -7,6 +7,11 @@
       = link_to 'Volver', proyectos_path, class: 'btn btn-outline-link pull-right'
   .row
     .col.col-4.font-weight-bold
+      ID:
+    .col.col-8
+      = @proyecto.id
+  .row
+    .col.col-4.font-weight-bold
       Nombre:
     .col.col-8
       = @proyecto.nombre
@@ -15,6 +20,11 @@
       Facultad / instituto:
     .col.col-8
       = @proyecto.facultad.try(:nombre)
+  .row
+    .col.col-4.font-weight-bold
+      Institucion:
+    .col.col-8
+      = @proyecto.facultad.try(:institucion).try(:nombre)
   .row
     .col.col-4.font-weight-bold
       Descripcion:

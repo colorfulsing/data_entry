@@ -1,0 +1,16 @@
+- form ||= nil
+- widget_class ||= nil
+- entity ||= nil
+- field ||= nil
+- param_id ||= nil
+- label_text ||= nil
+.form-group{class: "#{widget_class} #{entity.blank? ? '' : 'read-only'}"}
+  = form.label field, label_text
+  = form.hidden_field field, class: 'value-input', id: param_id, value: entity.try(:id).to_s
+  .read-hidden
+    %input.form-control.query-input{type: "text", value: entity.try(:nombre).to_s, placeholder: ''}
+  .edit-hidden
+    .item-name
+      %span.text= entity.try(:nombre).to_s
+      %a.edit-icon.trigger-edit{href: 'javascript:void(0);'}
+        %i.fa.fa-pencil

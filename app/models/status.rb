@@ -15,9 +15,10 @@ class Status < ApplicationRecord
       value
     end
 
-    def search query, opts = {}
-      where("nombre RLIKE ?", [query])
-        .order(:nombre)
+    def search query = nil, opts = {}
+      results = self.all
+      results = results.where("nombre RLIKE ?", [query]) if !query.blank?
+      results.order(:nombre)
     end
 
     def entity_label

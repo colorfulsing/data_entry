@@ -7,14 +7,21 @@
       = link_to 'Volver', subcuencas_path, class: 'btn btn-outline-link pull-right'
   .row
     .col.col-4.font-weight-bold
-      Id cuenca:
+      ID:
     .col.col-8
-      = @subcuenca.id_cuenca
+      = @subcuenca.id
   .row
     .col.col-4.font-weight-bold
       Nombre:
     .col.col-8
       = @subcuenca.nombre
+  .row
+    .col.col-4.font-weight-bold
+      Vertiente / Cuenca:
+    .col.col-8
+      = @subcuenca.try(:cuenca).try(:vertiente).try(:nombre)
+      = "/"
+      = @subcuenca.try(:cuenca).try(:nombre)
   .row
     .col.col-4.font-weight-bold
       Estado

@@ -1,4 +1,5 @@
 class MicrocuencasController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_microcuenca, only: [:show, :edit, :update, :destroy]
   before_action :load_config
@@ -6,7 +7,7 @@ class MicrocuencasController < ApplicationController
   # GET /microcuencas
   # GET /microcuencas.json
   def index
-    @microcuencas = Microcuenca.all.includes([:status]).order(:nombre).page params[:page]
+    @microcuencas = Microcuenca.search.page params[:page]
   end
 
   # GET /microcuencas/1
@@ -61,6 +62,16 @@ class MicrocuencasController < ApplicationController
     respond_to do |format|
       format.html { redirect_to microcuencas_url, notice: 'La Microcuenca se marco como borrada.' }
       format.json { head :no_content }
+    end
+  end
+
+  def autocomplete
+    query = params[:term]
+    search_expression = convert_to_search_expression query
+    limit = APP_CONFIG['autocomplete_limit']
+    @collection = []
+    unless search_expression.blank?
+      @collection = Microcuenca.search(query).limit(limit)
     end
   end
 

@@ -46,5 +46,12 @@ Rails.application.routes.draw do
   post "/proyectos/:id/asociate_area/(.:format)", to: 'proyectos#asociate_area', as: :proyecto_asociate_area
   post "/investigaciones/:id/asociate_area/(.:format)", to: 'investigaciones#asociate_area', as: :investigacion_asociate_area
 
+  # Add autocomplete route names
+  get "/autocomplete/cuencas", to: 'cuencas#autocomplete', as: :cuencas_autocomplete
+  get "/autocomplete/subcuencas", to: 'subcuencas#autocomplete', as: :subcuencas_autocomplete
+  get "/autocomplete/microcuencas", to: 'microcuencas#autocomplete', as: :microcuencas_autocomplete
+  get "/autocomplete/municipios", to: 'municipios#autocomplete', as: :municipios_autocomplete
+  get "/autocomplete/facultades", to: 'facultades#autocomplete', as: :facultades_autocomplete
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -11,9 +11,10 @@ class Departamento < ApplicationRecord
       value
     end
 
-    def search query, opts = {}
-      where("nombre RLIKE ?", [query])
-        .includes(:status)
+    def search query = nil, opts = {}
+      results = self.all
+      results = results.where("nombre RLIKE ?", [query]) if !query.blank?
+      results.includes(:status)
         .order(:nombre)
     end
   end

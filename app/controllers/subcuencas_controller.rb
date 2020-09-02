@@ -1,4 +1,5 @@
 class SubcuencasController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_subcuenca, only: [:show, :edit, :update, :destroy]
   before_action :load_config
@@ -6,7 +7,7 @@ class SubcuencasController < ApplicationController
   # GET /subcuencas
   # GET /subcuencas.json
   def index
-    @subcuencas = Subcuenca.all.includes([:status]).order(:nombre).page params[:page]
+    @subcuencas = Subcuenca.search.page params[:page]
   end
 
   # GET /subcuencas/1
@@ -61,6 +62,16 @@ class SubcuencasController < ApplicationController
     respond_to do |format|
       format.html { redirect_to subcuencas_url, notice: 'La Subcuenca se marco como borrada.' }
       format.json { head :no_content }
+    end
+  end
+
+  def autocomplete
+    query = params[:term]
+    search_expression = convert_to_search_expression query
+    limit = APP_CONFIG['autocomplete_limit']
+    @collection = []
+    unless search_expression.blank?
+      @collection = Subcuenca.search(query).limit(limit)
     end
   end
 

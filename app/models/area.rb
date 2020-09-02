@@ -22,9 +22,10 @@ class Area < ApplicationRecord
       value
     end
 
-    def search query, opts = {}
-      where("nombre RLIKE ?", [query])
-        .includes(:proyectos, :investigaciones, :status)
+    def search query = nil, opts = {}
+      results = self.all
+      results = results.where("nombre RLIKE ?", [query]) if !query.blank?
+      results.includes(:proyectos, :investigaciones, :status)
         .order(:nombre)
     end
   end

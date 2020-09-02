@@ -1,4 +1,5 @@
 class TipoDocumentosController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_tipo_documento, only: [:show, :edit, :update, :destroy]
   before_action :load_config
@@ -6,7 +7,7 @@ class TipoDocumentosController < ApplicationController
   # GET /tipo_documentos
   # GET /tipo_documentos.json
   def index
-    @tipo_documentos = TipoDocumento.all.includes([:status]).order(:nombre).page params[:page]
+    @tipo_documentos = TipoDocumento.search.page params[:page]
   end
 
   # GET /tipo_documentos/1

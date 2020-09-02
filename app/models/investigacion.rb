@@ -1,6 +1,8 @@
 class Investigacion < ApplicationRecord
   self.table_name = 'investigaciones'
 
+  alias_attribute :nombre, :titulo
+
   belongs_to :status, class_name: 'Status', foreign_key: 'id_status'
   belongs_to :facultad, class_name: 'Facultad', foreign_key: 'id_instituto', inverse_of: :investigaciones
   belongs_to :municipio, class_name: 'Municipio', foreign_key: 'id_municipio', inverse_of: :investigaciones
@@ -19,12 +21,12 @@ class Investigacion < ApplicationRecord
       value
     end
 
-    def search query, opts = {}
+    def search query = nil, opts = {}
       parent = opts.delete(:parent)
-      results = self
-      results = where(facultad: parent) if !parent.blank?
-      results.where("titulo RLIKE ?", [query])
-        .includes(
+      results = self.all
+      results = results.where(facultad: parent) if !parent.blank?
+      results = results.where("titulo RLIKE ?", [query]) if !query.blank?
+      results.includes(
           :status,
           :facultad,
           {municipio: [:departamento]},

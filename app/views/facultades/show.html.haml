@@ -7,9 +7,9 @@
       = link_to 'Volver', facultades_path, class: 'btn btn-outline-link pull-right'
   .row
     .col.col-4.font-weight-bold
-      Id instituciones:
+      ID:
     .col.col-8
-      = @facultad.id_instituciones
+      = @facultad.id
   .row
     .col.col-4.font-weight-bold
       Nombre:
@@ -20,6 +20,11 @@
       Siglas:
     .col.col-8
       = @facultad.siglas
+  .row
+    .col.col-4.font-weight-bold
+      Institucion:
+    .col.col-8
+      = @facultad.institucion.nombre
   .row
     .col.col-4.font-weight-bold
       Telefono:
@@ -50,3 +55,27 @@
       Estado
     .col.col-8
       = render 'shared/status_beautify', status: @facultad.status
+
+
+  %br/
+  %br/
+.container-fluid
+  .row
+    .col.col-8
+      %h2 Proyectos
+    .col.col-4
+      = link_to 'Nuevo Proyecto', new_proyecto_path, class:"btn btn-primary pull-right"
+
+  = render 'proyectos/list', collection: @facultad.proyectos, hide_pagination: true
+
+
+  %br/
+  %br/
+.container-fluid
+  .row
+    .col.col-8
+      %h2 Investigaciones
+    .col.col-4
+      = link_to 'Nueva Investigacion', new_investigacion_path, class:"btn btn-primary pull-right"
+
+  = render 'investigaciones/list', collection: @facultad.investigaciones, hide_pagination: true

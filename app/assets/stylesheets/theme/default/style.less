@@ -11,6 +11,18 @@ body { color: @textColor; }
   }
 }
 
+.autocomplete-item { background-color: #fff; padding: 0;
+  &:hover { text-decoration: none; font-weight: normal; }
+  + .autocomplete-item { border-top: 1px solid #cdcdcd; }
+  a { display: block; padding: 8px 10px 10px 10px;
+    &:hover { font-weight: normal;
+      .data { text-decoration: none; }
+    }
+    .title { display: block; font-size: 16px; }
+    .data { display: block; font-size: 12px; }
+  }
+}
+
 .no-header {
   .section-header { display: none; }
 }
@@ -66,6 +78,19 @@ body { color: @textColor; }
       &.current { background-color: #007bff; color: #fff; }
     }
     .first, .prev, .next, .last { line-height: 25px; font-size: 1.5em; }
+  }
+
+  form {
+    .read-only {
+      .edit-hidden { display: block; }
+      .read-hidden { display: none; }
+
+      .item-name { padding-top: 5px; .ellipsis();
+        .text { font-weight: bold; }
+        .edit-icon { display: inline-block; margin-left: 5px; }
+      }
+    }
+    .edit-hidden { display: none; }
   }
 }
 

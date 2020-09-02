@@ -1,12 +1,15 @@
 class StatusesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_status, only: [:show, :edit, :update, :destroy]
   before_action :load_config
+  before_action :admin_only_access
+  before_action :authenticate_user!
 
   # GET /statuses
   # GET /statuses.json
   def index
-    @statuses = Status.all.order(:nombre).page params[:page]
+    @statuses = Status.search.page params[:page]
   end
 
   # GET /statuses/1
