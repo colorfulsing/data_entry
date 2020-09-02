@@ -1,8 +1,16 @@
 require 'test_helper'
 
 class TipoDocumentosControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  include Warden::Test::Helpers
+
   setup do
     @tipo_documento = tipo_documentos(:one)
+    sign_in users(:user)
+  end
+
+  teardown do
+    Warden.test_reset!
   end
 
   test "should get index" do
@@ -39,9 +47,11 @@ class TipoDocumentosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy tipo_documento" do
-    assert_difference('TipoDocumento.count', -1) do
+    assert_no_difference('TipoDocumento.count') do
       delete tipo_documento_url(@tipo_documento)
     end
+    @tipo_documento.reload
+    assert @tipo_documento.status.deleted?
 
     assert_redirected_to tipo_documentos_url
   end

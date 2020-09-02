@@ -1,23 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id_instituciones: 1
+  institucion: one
+  tipo_instituto: one
   nombre: MyString
   siglas: MyString
   telefono: MyString
   extension: MyString
   direccion: MyString
-  correo_electronico: MyString
-  sitio_web: MyString
+  correo_electronico: testfac2@test.test
+  sitio_web: http://factest.com
   id_status: 1
 
 two:
-  id_instituciones: 1
+  institucion: one
+  tipo_instituto: one
   nombre: MyString
   siglas: MyString
   telefono: MyString
   extension: MyString
   direccion: MyString
-  correo_electronico: MyString
-  sitio_web: MyString
+  correo_electronico: testfac2@test.test
+  sitio_web: http://factest2.com
   id_status: 1

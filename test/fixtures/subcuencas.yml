@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id_cuenca: 1
+  cuenca: one
   nombre: MyString
   id_status: 1
 
 two:
-  id_cuenca: 1
+  cuenca: two
   nombre: MyString
   id_status: 1

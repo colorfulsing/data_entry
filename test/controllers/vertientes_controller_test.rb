@@ -1,8 +1,16 @@
 require 'test_helper'
 
 class VertientesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  include Warden::Test::Helpers
+
   setup do
     @vertiente = vertientes(:one)
+    sign_in users(:user)
+  end
+
+  teardown do
+    Warden.test_reset!
   end
 
   test "should get index" do
@@ -39,9 +47,11 @@ class VertientesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy vertiente" do
-    assert_difference('Vertiente.count', -1) do
+    assert_no_difference('Vertiente.count') do
       delete vertiente_url(@vertiente)
     end
+    @vertiente.reload
+    assert @vertiente.status.deleted?
 
     assert_redirected_to vertientes_url
   end

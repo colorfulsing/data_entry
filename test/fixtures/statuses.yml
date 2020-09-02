@@ -1,9 +1,24 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  nombre: MyString
+  nombre: MyStringA
   visible: 1
 
 two:
-  nombre: MyString
+  nombre: MyStringB
   visible: 1
+
+active:
+  id: 1
+  nombre: activo
+  visible: 1
+
+inactive:
+  id: 2
+  nombre: desactivado
+  visible: 2
+
+deleted:
+  id: 3
+  nombre: borrado
+  visible: 2

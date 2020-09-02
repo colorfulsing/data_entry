@@ -1,8 +1,16 @@
 require 'test_helper'
 
 class MicrocuencasControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  include Warden::Test::Helpers
+
   setup do
     @microcuenca = microcuencas(:one)
+    sign_in users(:user)
+  end
+
+  teardown do
+    Warden.test_reset!
   end
 
   test "should get index" do
@@ -17,7 +25,7 @@ class MicrocuencasControllerTest < ActionDispatch::IntegrationTest
 
   test "should create microcuenca" do
     assert_difference('Microcuenca.count') do
-      post microcuencas_url, params: { microcuenca: { id_status: @microcuenca.id_status, id_subcuenca: @microcuenca.id_subcuenca, nombre: @microcuenca.nombre } }
+      post microcuencas_url, params: { microcuenca: { id_status: @microcuenca.status.id, id_subcuenca: @microcuenca.subcuenca.id, nombre: @microcuenca.nombre } }
     end
 
     assert_redirected_to microcuenca_url(Microcuenca.last)
@@ -34,14 +42,16 @@ class MicrocuencasControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update microcuenca" do
-    patch microcuenca_url(@microcuenca), params: { microcuenca: { id_status: @microcuenca.id_status, id_subcuenca: @microcuenca.id_subcuenca, nombre: @microcuenca.nombre } }
+    patch microcuenca_url(@microcuenca), params: { microcuenca: { id_status: @microcuenca.status.id, id_subcuenca: @microcuenca.subcuenca.id, nombre: @microcuenca.nombre } }
     assert_redirected_to microcuenca_url(@microcuenca)
   end
 
   test "should destroy microcuenca" do
-    assert_difference('Microcuenca.count', -1) do
+    assert_no_difference('Microcuenca.count') do
       delete microcuenca_url(@microcuenca)
     end
+    @microcuenca.reload
+    assert @microcuenca.status.deleted?
 
     assert_redirected_to microcuencas_url
   end

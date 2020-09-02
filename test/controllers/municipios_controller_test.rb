@@ -1,8 +1,16 @@
 require 'test_helper'
 
 class MunicipiosControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  include Warden::Test::Helpers
+
   setup do
     @municipio = municipios(:one)
+    sign_in users(:user)
+  end
+
+  teardown do
+    Warden.test_reset!
   end
 
   test "should get index" do
@@ -39,9 +47,11 @@ class MunicipiosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy municipio" do
-    assert_difference('Municipio.count', -1) do
+    assert_no_difference('Municipio.count') do
       delete municipio_url(@municipio)
     end
+    @municipio.reload
+    assert @municipio.status.deleted?
 
     assert_redirected_to municipios_url
   end

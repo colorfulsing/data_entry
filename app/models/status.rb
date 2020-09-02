@@ -60,7 +60,7 @@ class Status < ApplicationRecord
   end
 
   def can_be_deleted?
-    !(VALUES.values.includes?(self.id) || self.is_used?)
+    !(VALUES.values.include?(self.id) || self.is_used?)
   end
 
   def deleted?

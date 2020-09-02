@@ -1,8 +1,16 @@
 require 'test_helper'
 
 class AreasControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  include Warden::Test::Helpers
+
   setup do
     @area = areas(:one)
+    sign_in users(:user)
+  end
+
+  teardown do
+    Warden.test_reset!
   end
 
   test "should get index" do
@@ -17,7 +25,7 @@ class AreasControllerTest < ActionDispatch::IntegrationTest
 
   test "should create area" do
     assert_difference('Area.count') do
-      post areas_url, params: { area: { descripcion: @area.descripcion, id_status: @area.id_status, nombre: @area.nombre } }
+      post areas_url, params: { area: { descripcion: @area.descripcion, id_status: @area.status.id, nombre: @area.nombre } }
     end
 
     assert_redirected_to area_url(Area.last)
@@ -34,14 +42,16 @@ class AreasControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update area" do
-    patch area_url(@area), params: { area: { descripcion: @area.descripcion, id_status: @area.id_status, nombre: @area.nombre } }
+    patch area_url(@area), params: { area: { descripcion: @area.descripcion, id_status: @area.status.id, nombre: @area.nombre } }
     assert_redirected_to area_url(@area)
   end
 
   test "should destroy area" do
-    assert_difference('Area.count', -1) do
+    assert_no_difference('Area.count') do
       delete area_url(@area)
     end
+    @area.reload
+    assert @area.status.deleted?
 
     assert_redirected_to areas_url
   end

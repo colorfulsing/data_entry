@@ -5,8 +5,8 @@ one:
   siglas: MyString
   telefono: MyString
   direccion: MyString
-  correo_electronico: MyString
-  sitio_web: MyString
+  correo_electronico: testInst2@test.test
+  sitio_web: http://insttest.com
   id_status: 1
 
 two:
@@ -14,6 +14,6 @@ two:
   siglas: MyString
   telefono: MyString
   direccion: MyString
-  correo_electronico: MyString
-  sitio_web: MyString
+  correo_electronico: testInst2@test.test
+  sitio_web: http://insttest.com
   id_status: 1

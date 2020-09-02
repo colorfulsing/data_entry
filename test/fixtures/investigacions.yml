@@ -1,10 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id_instituto: 1
-  id_microcuenca: 1
-  id_municipio: 1
-  id_documento: 1
+  facultad: one
+  microcuenca: one
+  municipio: one
+  tipo_documento: one
   autor: MyString
   titulo: MyString
   no_paginas: 1
@@ -16,10 +16,10 @@ one:
   id_status: 1
 
 two:
-  id_instituto: 1
-  id_microcuenca: 1
-  id_municipio: 1
-  id_documento: 1
+  facultad: two
+  microcuenca: two
+  municipio: two
+  tipo_documento: two
   autor: MyString
   titulo: MyString
   no_paginas: 1

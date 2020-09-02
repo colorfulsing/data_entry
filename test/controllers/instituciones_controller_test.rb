@@ -1,8 +1,16 @@
 require 'test_helper'
 
 class InstitucionesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  include Warden::Test::Helpers
+
   setup do
-    @institucione = instituciones(:one)
+    @institucion = institucions(:one)
+    sign_in users(:user)
+  end
+
+  teardown do
+    Warden.test_reset!
   end
 
   test "should get index" do
@@ -11,37 +19,39 @@ class InstitucionesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get new_institucione_url
+    get new_institucion_url
     assert_response :success
   end
 
   test "should create institucione" do
-    assert_difference('Institucione.count') do
-      post instituciones_url, params: { institucione: { correo_electronico: @institucione.correo_electronico, direccion: @institucione.direccion, id_status: @institucione.id_status, nombre: @institucione.nombre, siglas: @institucione.siglas, sitio_web: @institucione.sitio_web, telefono: @institucione.telefono } }
+    assert_difference('Institucion.count') do
+      post instituciones_url, params: { institucion: { correo_electronico: @institucion.correo_electronico, direccion: @institucion.direccion, id_status: @institucion.status.id, nombre: @institucion.nombre, siglas: @institucion.siglas, sitio_web: @institucion.sitio_web, telefono: @institucion.telefono } }
     end
 
-    assert_redirected_to institucione_url(Institucione.last)
+    assert_redirected_to institucion_url(Institucion.last)
   end
 
   test "should show institucione" do
-    get institucione_url(@institucione)
+    get institucion_url(@institucion)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_institucione_url(@institucione)
+    get edit_institucion_url(@institucion)
     assert_response :success
   end
 
   test "should update institucione" do
-    patch institucione_url(@institucione), params: { institucione: { correo_electronico: @institucione.correo_electronico, direccion: @institucione.direccion, id_status: @institucione.id_status, nombre: @institucione.nombre, siglas: @institucione.siglas, sitio_web: @institucione.sitio_web, telefono: @institucione.telefono } }
-    assert_redirected_to institucione_url(@institucione)
+    patch institucion_url(@institucion), params: { institucion: { correo_electronico: @institucion.correo_electronico, direccion: @institucion.direccion, id_status: @institucion.status.id, nombre: @institucion.nombre, siglas: @institucion.siglas, sitio_web: @institucion.sitio_web, telefono: @institucion.telefono } }
+    assert_redirected_to institucion_url(@institucion)
   end
 
   test "should destroy institucione" do
-    assert_difference('Institucione.count', -1) do
-      delete institucione_url(@institucione)
+    assert_no_difference('Institucion.count') do
+      delete institucion_url(@institucion)
     end
+    @institucion.reload
+    assert @institucion.status.deleted?
 
     assert_redirected_to instituciones_url
   end

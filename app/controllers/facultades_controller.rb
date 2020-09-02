@@ -97,7 +97,7 @@ class FacultadesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def facultad_params
-      params.require(:facultad).permit(:id_institucion, :tipo_instituto, :nombre, :siglas, :telefono, :extension, :direccion, :correo_electronico, :sitio_web, :id_status)
+      params.require(:facultad).permit(:id_institucion, :id_tipo_instituto, :nombre, :siglas, :telefono, :extension, :direccion, :correo_electronico, :sitio_web, :id_status)
     end
 
     def load_config

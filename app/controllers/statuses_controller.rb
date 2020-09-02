@@ -68,7 +68,7 @@ class StatusesController < ApplicationController
     end
 
     # Delete status permanently
-    @status.delete!
+    @status.delete
     respond_to do |format|
       format.html { redirect_to statuses_url, notice: 'El Estado se elimino permanentemente.' }
       format.json { head :no_content }

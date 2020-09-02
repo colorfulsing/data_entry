@@ -1,8 +1,16 @@
 require 'test_helper'
 
 class CuencasControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  include Warden::Test::Helpers
+
   setup do
     @cuenca = cuencas(:one)
+    sign_in users(:user)
+  end
+
+  teardown do
+    Warden.test_reset!
   end
 
   test "should get index" do
@@ -17,7 +25,7 @@ class CuencasControllerTest < ActionDispatch::IntegrationTest
 
   test "should create cuenca" do
     assert_difference('Cuenca.count') do
-      post cuencas_url, params: { cuenca: { id_status: @cuenca.id_status, id_vertiente: @cuenca.id_vertiente, nombre: @cuenca.nombre } }
+      post cuencas_url, params: { cuenca: { id_status: @cuenca.status.id, id_vertiente: @cuenca.vertiente.id, nombre: @cuenca.nombre } }
     end
 
     assert_redirected_to cuenca_url(Cuenca.last)
@@ -34,14 +42,16 @@ class CuencasControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update cuenca" do
-    patch cuenca_url(@cuenca), params: { cuenca: { id_status: @cuenca.id_status, id_vertiente: @cuenca.id_vertiente, nombre: @cuenca.nombre } }
+    patch cuenca_url(@cuenca), params: { cuenca: { id_status: @cuenca.status.id, id_vertiente: @cuenca.vertiente.id, nombre: @cuenca.nombre } }
     assert_redirected_to cuenca_url(@cuenca)
   end
 
   test "should destroy cuenca" do
-    assert_difference('Cuenca.count', -1) do
+    assert_no_difference('Cuenca.count') do
       delete cuenca_url(@cuenca)
     end
+    @cuenca.reload
+    assert @cuenca.status.deleted?
 
     assert_redirected_to cuencas_url
   end

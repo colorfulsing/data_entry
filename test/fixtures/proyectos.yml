@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id_instituto: 1
+  facultad: one
   nombre: MyString
   descripcion: MyString
   id_status: 1
 
 two:
-  id_instituto: 1
+  facultad: two
   nombre: MyString
   descripcion: MyString
   id_status: 1

@@ -1,8 +1,16 @@
 require 'test_helper'
 
 class InvestigacionesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  include Warden::Test::Helpers
+
   setup do
-    @investigacione = investigaciones(:one)
+    @investigacion = investigacions(:one)
+    sign_in users(:user)
+  end
+
+  teardown do
+    Warden.test_reset!
   end
 
   test "should get index" do
@@ -11,37 +19,39 @@ class InvestigacionesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get new" do
-    get new_investigacione_url
+    get new_investigacion_url
     assert_response :success
   end
 
-  test "should create investigacione" do
-    assert_difference('Investigacione.count') do
-      post investigaciones_url, params: { investigacione: { autor: @investigacione.autor, fecha_publicacion: @investigacione.fecha_publicacion, fecha_realizacion: @investigacione.fecha_realizacion, id_documento: @investigacione.id_documento, id_instituto: @investigacione.id_instituto, id_microcuenca: @investigacione.id_microcuenca, id_municipio: @investigacione.id_municipio, id_status: @investigacione.id_status, no_paginas: @investigacione.no_paginas, palabras_clave: @investigacione.palabras_clave, recurso_web: @investigacione.recurso_web, resumen: @investigacione.resumen, titulo: @investigacione.titulo } }
+  test "should create investigacion" do
+    assert_difference('Investigacion.count') do
+      post investigaciones_url, params: { investigacion: { autor: @investigacion.autor, fecha_publicacion: @investigacion.fecha_publicacion, fecha_realizacion: @investigacion.fecha_realizacion, id_documento: @investigacion.tipo_documento.id, id_instituto: @investigacion.facultad.id, id_microcuenca: @investigacion.microcuenca.id, id_municipio: @investigacion.municipio.id, id_status: @investigacion.status.id, no_paginas: @investigacion.no_paginas, palabras_clave: @investigacion.palabras_clave, recurso_web: @investigacion.recurso_web, resumen: @investigacion.resumen, titulo: @investigacion.titulo } }
     end
 
-    assert_redirected_to investigacione_url(Investigacione.last)
+    assert_redirected_to investigacion_url(Investigacion.last)
   end
 
-  test "should show investigacione" do
-    get investigacione_url(@investigacione)
+  test "should show investigacion" do
+    get investigacion_url(@investigacion)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_investigacione_url(@investigacione)
+    get edit_investigacion_url(@investigacion)
     assert_response :success
   end
 
-  test "should update investigacione" do
-    patch investigacione_url(@investigacione), params: { investigacione: { autor: @investigacione.autor, fecha_publicacion: @investigacione.fecha_publicacion, fecha_realizacion: @investigacione.fecha_realizacion, id_documento: @investigacione.id_documento, id_instituto: @investigacione.id_instituto, id_microcuenca: @investigacione.id_microcuenca, id_municipio: @investigacione.id_municipio, id_status: @investigacione.id_status, no_paginas: @investigacione.no_paginas, palabras_clave: @investigacione.palabras_clave, recurso_web: @investigacione.recurso_web, resumen: @investigacione.resumen, titulo: @investigacione.titulo } }
-    assert_redirected_to investigacione_url(@investigacione)
+  test "should update investigacion" do
+    patch investigacion_url(@investigacion), params: { investigacion: { autor: @investigacion.autor, fecha_publicacion: @investigacion.fecha_publicacion, fecha_realizacion: @investigacion.fecha_realizacion, id_documento: @investigacion.tipo_documento.id, id_instituto: @investigacion.facultad.id, id_microcuenca: @investigacion.microcuenca.id, id_municipio: @investigacion.municipio.id, id_status: @investigacion.status.id, no_paginas: @investigacion.no_paginas, palabras_clave: @investigacion.palabras_clave, recurso_web: @investigacion.recurso_web, resumen: @investigacion.resumen, titulo: @investigacion.titulo } }
+    assert_redirected_to investigacion_url(@investigacion)
   end
 
-  test "should destroy investigacione" do
-    assert_difference('Investigacione.count', -1) do
-      delete investigacione_url(@investigacione)
+  test "should destroy investigacion" do
+    assert_no_difference('Investigacion.count') do
+      delete investigacion_url(@investigacion)
     end
+    @investigacion.reload
+    assert @investigacion.status.deleted?
 
     assert_redirected_to investigaciones_url
   end

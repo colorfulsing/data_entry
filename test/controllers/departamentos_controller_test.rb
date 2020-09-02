@@ -1,8 +1,16 @@
 require 'test_helper'
 
 class DepartamentosControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  include Warden::Test::Helpers
+
   setup do
     @departamento = departamentos(:one)
+    sign_in users(:admin)
+  end
+
+  teardown do
+    Warden.test_reset!
   end
 
   test "should get index" do
@@ -39,9 +47,11 @@ class DepartamentosControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy departamento" do
-    assert_difference('Departamento.count', -1) do
+    assert_no_difference('Departamento.count') do
       delete departamento_url(@departamento)
     end
+    @departamento.reload
+    assert @departamento.status.deleted?
 
     assert_redirected_to departamentos_url
   end

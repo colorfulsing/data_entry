@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  departamento: one
   nombre: MyString
+  descripcion: MyString
   id_status: 1
 
 two:
-  departamento: two
   nombre: MyString
+  descripcion: MyString
   id_status: 1

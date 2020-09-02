@@ -1,8 +1,16 @@
 require 'test_helper'
 
 class StatusesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+  include Warden::Test::Helpers
+
   setup do
     @status = statuses(:one)
+    sign_in users(:admin)
+  end
+
+  teardown do
+    Warden.test_reset!
   end
 
   test "should get index" do
