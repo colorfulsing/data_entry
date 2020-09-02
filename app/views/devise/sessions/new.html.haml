@@ -1,36 +1,37 @@
+- @disable_header = true
+- @disable_footer = true
 - content_for(:page_class){'sign-in-page'}
 
 .container
   .row
     .col.logo
-      = image_tag 'images/logo.png'
+      = image_tag 'images/logo.png', alt: 'RedfiA'
   .form-sign-in
-    .row
-      .col
-        %h1 Iniciar Sesion
 
-    .row
-      .col
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .row
+        .col
+          %h1 Iniciar Sesion
 
-        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-          - errors = devise_error_messages!
-          - if !errors.blank?
-            #error_explanation.alert.alert-danger{role: 'alert'}
-              %h2
-                Existen errores:
+      - errors = devise_error_messages!
+      - if !errors.blank?
+        #error_explanation.alert.alert-danger{role: 'alert'}
+          %h2
+            Existen errores:
 
-              = errors
-          .row
-            .col.col-12.form-group
-              = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Correo electronico'
-            .col.col-12.form-group
-              = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: raw('Contrase&ntilde;a')
-            - if devise_mapping.rememberable?
-              .col.col-12.form-group
-                = f.check_box :remember_me
-                = f.label :remember_me, 'Recordarme'
-          .row
-            .col
-              = render "devise/shared/links"
-          .actions
-            = f.submit "Ingresar", class: 'btn btn-primary pull-right'
+          = errors
+      .row
+        .col.col-12.form-group
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Correo electronico'
+        .col.col-12.form-group
+          = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: raw('Contrase&ntilde;a')
+        - if devise_mapping.rememberable?
+          .col.col-12.form-group
+            = f.check_box :remember_me
+            = f.label :remember_me, 'Recordarme'
+      .row
+        .col
+          = render "devise/shared/links"
+      .row
+        .col.actions
+          = f.submit "Ingresar", class: 'btn btn-primary pull-right'

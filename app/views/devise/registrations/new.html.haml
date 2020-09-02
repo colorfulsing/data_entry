@@ -7,35 +7,33 @@
     .col.logo
       = image_tag 'images/logo.png'
   .form-sign-in
-    .row
-      .col
-        %h1 Registrarse
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      .row
+        .col
+          %h1 Registrarse
 
-    .row
-      .col
+      - errors = devise_error_messages!
+      - if !errors.blank?
+        #error_explanation.alert.alert-danger{role: 'alert'}
+          %h2
+            Existen errores:
 
-        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-          - errors = devise_error_messages!
-          - if !errors.blank?
-            #error_explanation.alert.alert-danger{role: 'alert'}
-              %h2
-                Existen errores:
+          = errors
 
-              = errors
+      .row
+        .col.col-12.form-group
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Correo electronico'
+        .col.col-12.form-group
+          - if @minimum_password_length
+            %em
+              (Minimo #{@minimum_password_length} caracteres)
+          = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: raw('Contrase&ntilde;a')
+        .col.col-12.form-group
+          = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: raw('Confirmar contrase&ntilde;a')
 
-          .row
-            .col.col-12.form-group
-              = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Correo electronico'
-            .col.col-12.form-group
-              - if @minimum_password_length
-                %em
-                  (Minimo #{@minimum_password_length} caracteres)
-              = f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: raw('Contrase&ntilde;a')
-            .col.col-12.form-group
-              = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: raw('Confirmar contrase&ntilde;a')
-
-          .row
-            .col
-              = render "devise/shared/links"
-          .actions
-            = f.submit "Guardar", class: 'btn btn-primary pull-right'
+      .row
+        .col
+          = render "devise/shared/links"
+      .row
+        .col.actions
+          = f.submit "Guardar", class: 'btn btn-primary pull-right'

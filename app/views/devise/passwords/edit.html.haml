@@ -1,25 +1,34 @@
 - content_for(:page_class){'sign-in-page'}
 
 .container
+
   .form-sign-in
-    .row
-      .col
-        %h1 Change your password
-= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
-  = devise_error_messages!
-  = f.hidden_field :reset_password_token
-    .col.col-4.form-group
-    = f.label :password, "New password"
-    %br/
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-      %br/
-    = f.password_field :password, autofocus: true, autocomplete: "off"
-    .col.col-4.form-group
-    = f.label :password_confirmation, "Confirm new password"
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .actions
-    = f.submit "Change my password"
-= render "devise/shared/links"
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      .row
+        .col
+          %h1 Change your password
+
+      - errors = devise_error_messages!
+      - if !errors.blank?
+        #error_explanation.alert.alert-danger{role: 'alert'}
+          %h2
+            Existen errores:
+
+          = errors
+
+      = f.hidden_field :reset_password_token
+      .row
+        .col.col-12.form-group
+          - if @minimum_password_length
+            %em
+              (Minimo #{@minimum_password_length} caracteres)
+          = f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control', placeholder: raw('Contrase&ntilde;a')
+        .col.col-12.form-group
+          = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: raw('Confirmar contrase&ntilde;a')
+
+      .row
+        .col
+          = render "devise/shared/links"
+      .row
+        .col.actions
+          = f.submit "Change my password"

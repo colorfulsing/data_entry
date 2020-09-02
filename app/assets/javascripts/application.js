@@ -26,8 +26,11 @@
   $('.fixed-alert .alert .close-alert-trigger').click(function (e) {
     var myself = $(e.target);
     var parent = myself.closest('.alert');
-    parent.remove();
+    if (!parent.hasClass('hide-alert'))
+      parent.addClass('hide-alert');
   });
+
+  setTimeout(function() { $('.fixed-alert .alert .close-alert-trigger').click(); },5000);
 })();
 
 // Autocomplete events
