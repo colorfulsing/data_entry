@@ -1,6 +1,11 @@
 class ProyectosController < ApplicationController
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_proyecto, only: [:show, :edit, :update, :destroy]
+  before_action :load_config
+
+  def search_entity_class
+    Proyecto.name
+  end
 
   # GET /proyectos
   # GET /proyectos.json
@@ -76,5 +81,9 @@ class ProyectosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def proyecto_params
       params.require(:proyecto).permit(:id_instituto, :nombre, :descripcion, :id_status)
+    end
+
+    def load_config
+      @search_type = [search_entity_class]
     end
 end

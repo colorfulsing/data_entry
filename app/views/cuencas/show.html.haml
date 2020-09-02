@@ -20,3 +20,14 @@
       Estado
     .col.col-8
       = render 'shared/status_beautify', status: @cuenca.status
+
+  %br/
+  %br/
+.container-fluid
+  .row
+    .col.col-8
+      %h2 Subcuencas
+    .col.col-4
+      = link_to 'Nueva Subcuenca', new_subcuenca_path, class:"btn btn-primary pull-right"
+
+  = render 'subcuencas/list', collection: @cuenca.subcuencas, hide_pagination: true

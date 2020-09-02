@@ -5,25 +5,4 @@
     .col.col-4
       = link_to 'Nuevo Subcuenca', new_subcuenca_path, class:"btn btn-primary pull-right"
 
-  .row
-    .col
-      %table.table.table-striped
-        %thead
-          %tr
-            %th Cuenca
-            %th Nombre
-            %th Estado
-            %th{:colspan => "3"}
-        %tbody
-          - @subcuencas.each do |subcuenca|
-            %tr
-              %td= subcuenca.cuenca.nombre
-              %td= subcuenca.nombre
-              %td= render 'shared/status_beautify', status: subcuenca.status
-              %td= link_to 'Mostrar', subcuenca
-              %td= link_to 'Editar', edit_subcuenca_path(subcuenca)
-              %td= link_to 'Borrar', subcuenca, method: :delete, data: { confirm: 'Estas seguro?' }
-
-  .row
-    .col
-      = paginate @subcuencas
+  = render 'subcuencas/list', collection: @subcuencas

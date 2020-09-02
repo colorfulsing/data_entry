@@ -5,45 +5,4 @@
     .col.col-4
       = link_to 'Nuevo Investigacion', new_investigacion_path, class:"btn btn-primary pull-right"
 
-  .row
-    .col
-      %table.table.table-striped
-        %thead
-          %tr
-            %th Instituto
-            %th Microcuenca
-            %th Municipio
-            %th Documento
-            %th Autor
-            %th Titulo
-            %th No paginas
-            %th Fecha realizacion
-            %th Fecha publicacion
-            %th Resumen
-            %th Palabras clave
-            %th Recurso web
-            %th Estado
-            %th{:colspan => "3"}
-        %tbody
-          - @investigaciones.each do |investigacion|
-            %tr
-              %td= investigacion.instituto.nombre
-              %td= investigacion.microcuenca.nombre
-              %td= investigacion.municipio.nombre
-              %td= investigacion.documento.nombre
-              %td= investigacion.autor
-              %td= investigacion.titulo
-              %td= investigacion.no_paginas
-              %td= investigacion.fecha_realizacion
-              %td= investigacion.fecha_publicacion
-              %td= investigacion.resumen
-              %td= investigacion.palabras_clave
-              %td= investigacion.recurso_web
-              %td= = render 'shared/status_beautify', status: investigacion.status
-              %td= link_to 'Mostrar', investigacion
-              %td= link_to 'Editar', edit_investigacion_path(investigacion)
-              %td= link_to 'Borrar', investigacion, method: :delete, data: { confirm: 'Estas seguro?' }
-
-  .row
-    .col
-      = paginate @investigaciones
+  = render 'areas/investigaciones', collection: @investigaciones

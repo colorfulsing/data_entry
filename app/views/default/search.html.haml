@@ -1,0 +1,23 @@
+- content_for(:page_class){'search-page'}
+
+.container-fluid
+  .row
+    .col.col-12
+      %h1
+        Resultados de la busqueda
+      .text
+        Se busco "#{@search_query}" en los nombres y titulos de #{@search_entities.map{|k|k.entity_label.pluralize.downcase}.to_sentence}
+
+  = render 'default/show_results', entity_class: Area, list_view: 'areas/list'
+  = render 'default/show_results', entity_class: Cuenca, list_view: 'cuencas/list'
+  = render 'default/show_results', entity_class: Departamento, list_view: 'departamentos/list'
+  = render 'default/show_results', entity_class: Facultad, list_view: 'facultades/list'
+  = render 'default/show_results', entity_class: Institucion, list_view: 'instituciones/list'
+  = render 'default/show_results', entity_class: Investigacion, list_view: 'investigaciones/list'
+  = render 'default/show_results', entity_class: Microcuenca, list_view: 'microcuencas/list'
+  = render 'default/show_results', entity_class: Municipio, list_view: 'municipios/list'
+  = render 'default/show_results', entity_class: Proyecto, list_view: 'proyectos/list'
+  = render 'default/show_results', entity_class: Status, list_view: 'statuses/list'
+  = render 'default/show_results', entity_class: Subcuenca, list_view: 'subcuencas/list'
+  = render 'default/show_results', entity_class: TipoDocumento, list_view: 'tipo_documentos/list'
+  = render 'default/show_results', entity_class: Vertiente, list_view: 'vertientes/list'

@@ -1,0 +1,36 @@
+- collection ||= []
+- param_name ||= :page
+- hide_pagination ||= false
+
+.row
+  .col
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Nombre
+          %th Siglas
+          %th Telefono
+          %th Direccion
+          %th Correo electronico
+          %th Sitio web
+          %th Estado
+          %th{colspan:"3"}
+
+      %tbody
+        - collection.each do |institucion|
+          %tr
+            %td= institucion.nombre
+            %td= institucion.siglas
+            %td= render 'shared/phone_beautify', phone: institucion.telefono
+            %td= institucion.direccion
+            %td= render 'shared/email_beautify', item: institucion
+            %td= render 'shared/website_beautify', item: institucion
+            %td= render 'shared/status_beautify', status: institucion.status
+            %td= link_to 'Mostrar', institucion_path(institucion)
+            %td= link_to 'Editar', edit_institucion_path(institucion)
+            %td= link_to 'Borrar', institucion_path(institucion), method: :delete, data: { confirm: 'Estas seguro?' }
+
+- if !hide_pagination
+  .row
+    .col
+      = paginate collection, param_name: param_name

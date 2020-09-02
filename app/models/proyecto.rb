@@ -9,4 +9,11 @@ class Proyecto < ApplicationRecord
       association_foreign_key: "id_area",
       join_table: 'proyecto_area',
       inverse_of: :proyectos
+
+  class << self
+    def search query
+      where("nombre RLIKE ?", [query])
+        .includes(:status, :facultad)
+    end
+  end
 end

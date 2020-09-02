@@ -1,6 +1,11 @@
 class TipoDocumentosController < ApplicationController
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_tipo_documento, only: [:show, :edit, :update, :destroy]
+  before_action :load_config
+
+  def search_entity_class
+    TipoDocumento.name
+  end
 
   # GET /tipo_documentos
   # GET /tipo_documentos.json
@@ -76,5 +81,9 @@ class TipoDocumentosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tipo_documento_params
       params.require(:tipo_documento).permit(:nombre, :descripcion, :id_status)
+    end
+
+    def load_config
+      @search_type = [search_entity_class]
     end
 end

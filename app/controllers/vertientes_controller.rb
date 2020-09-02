@@ -1,6 +1,11 @@
 class VertientesController < ApplicationController
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_vertiente, only: [:show, :edit, :update, :destroy]
+  before_action :load_config
+
+  def search_entity_class
+    Vertiente.name
+  end
 
   # GET /vertientes
   # GET /vertientes.json
@@ -76,5 +81,9 @@ class VertientesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def vertiente_params
       params.require(:vertiente).permit(:nombre, :id_status)
+    end
+
+    def load_config
+      @search_type = [search_entity_class]
     end
 end

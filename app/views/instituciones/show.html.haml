@@ -40,7 +40,7 @@
     .col.col-4.font-weight-bold
       Estado
     .col.col-8
-      = render 'shared/status_beautify', @institucio.status
+      = render 'shared/status_beautify', status: @institucion.status
 
   %br/
   %br/
@@ -52,34 +52,4 @@
     .col.col-4
       = link_to 'Nueva Facultad o Instituto', new_facultad_path, class:"btn btn-primary pull-right"
 
-  .row
-    .col
-      %table.table.table-striped
-        %thead
-          %tr
-            %th Institucion
-            %th Nombre
-            %th Siglas
-            %th Telefono
-            %th Extension
-            %th Direccion
-            %th Correo electronico
-            %th Sitio web
-            %th Estado
-            %th{colspan: "3"}
-
-        %tbody
-          - @facultades.each do |facultad|
-            %tr
-              %td= facultad.institucion.nombre
-              %td= facultad.nombre
-              %td= facultad.siglas
-              %td= facultad.telefono
-              %td= facultad.extension
-              %td= facultad.direccion
-              %td= render 'shared/email_beautify', item: facultad
-              %td= render 'shared/website_beautify', item: facultad
-              %td= render 'shared/status_beautify', item: facultad.status
-              %td= link_to 'Mostrar', facultad_path(facultad)
-              %td= link_to 'Editar', edit_facultad_path(facultad)
-              %td= link_to 'Borrar', facultad_path(facultad), method: :delete, data: { confirm: 'Estas seguro?' }
+  = render 'facultades/list', collection: @facultades, hide_pagination: true

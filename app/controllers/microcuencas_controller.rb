@@ -1,6 +1,11 @@
 class MicrocuencasController < ApplicationController
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_microcuenca, only: [:show, :edit, :update, :destroy]
+  before_action :load_config
+
+  def search_entity_class
+    Microcuenca.name
+  end
 
   # GET /microcuencas
   # GET /microcuencas.json
@@ -76,5 +81,9 @@ class MicrocuencasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def microcuenca_params
       params.require(:microcuenca).permit(:id_subcuenca, :nombre, :id_status)
+    end
+
+    def load_config
+      @search_type = [search_entity_class]
     end
 end

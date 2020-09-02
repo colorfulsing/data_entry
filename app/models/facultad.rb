@@ -11,4 +11,11 @@ class Facultad < ApplicationRecord
   belongs_to :institucion, class_name: 'Institucion', foreign_key: 'id_instituciones', inverse_of: :facultades
   has_many :investigaciones, class_name: 'Investigacion', foreign_key: 'id_instituto', inverse_of: :facultad
   has_many :proyectos, class_name: 'Proyecto', foreign_key: 'id_instituto', inverse_of: :facultad
+
+  class << self
+    def search query
+      where("nombre RLIKE ?", [query])
+        .includes(:institucion, :status)
+    end
+  end
 end

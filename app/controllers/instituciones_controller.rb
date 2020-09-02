@@ -1,6 +1,11 @@
 class InstitucionesController < ApplicationController
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_institucion, only: [:show, :edit, :update, :destroy]
+  before_action :load_config
+
+  def search_entity_class
+    Institucion.name
+  end
 
   # GET /instituciones
   # GET /instituciones.json
@@ -77,5 +82,9 @@ class InstitucionesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def institucion_params
       params.require(:institucion).permit(:nombre, :siglas, :telefono, :direccion, :correo_electronico, :sitio_web, :id_status)
+    end
+
+    def load_config
+      @search_type = [search_entity_class]
     end
 end

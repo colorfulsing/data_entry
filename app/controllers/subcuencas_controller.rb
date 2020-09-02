@@ -1,6 +1,11 @@
 class SubcuencasController < ApplicationController
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_subcuenca, only: [:show, :edit, :update, :destroy]
+  before_action :load_config
+
+  def search_entity_class
+    Subcuenca.name
+  end
 
   # GET /subcuencas
   # GET /subcuencas.json
@@ -76,5 +81,9 @@ class SubcuencasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def subcuenca_params
       params.require(:subcuenca).permit(:id_cuenca, :nombre, :id_status)
+    end
+
+    def load_config
+      @search_type = [search_entity_class]
     end
 end

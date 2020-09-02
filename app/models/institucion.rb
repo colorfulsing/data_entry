@@ -18,4 +18,11 @@ class Institucion < ApplicationRecord
   #end
 
   #alias_attribute :institutos, :facultades
+
+  class << self
+    def search query
+      where("nombre RLIKE ?", [query])
+        .includes(:status)
+    end
+  end
 end

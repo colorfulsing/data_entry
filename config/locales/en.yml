@@ -49,3 +49,7 @@ es:
           other: "Mostrando <b>todos los %{count}</b> %{entry_name}"
       more_pages:
         display_entries: "Mostrando %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b> en total"
+    support:
+      array:
+        two_words_connector: ' y '
+        last_word_connector: ', y '

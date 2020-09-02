@@ -5,27 +5,4 @@
     .col.col-4
       = link_to 'Nuevo Proyecto Programa', new_proyecto_path, class:"btn btn-primary pull-right"
 
-  .row
-    .col
-      %table.table.table-striped
-        %thead
-          %tr
-            %th Facultad
-            %th Nombre
-            %th Descripcion
-            %th Estado
-            %th{:colspan => "3"}
-        %tbody
-          - @proyectos.each do |proyecto|
-            %tr
-              %td= proyecto.facultad.nil? ? 'N/A' : proyecto.facultad.nombre
-              %td= proyecto.nombre
-              %td= proyecto.descripcion
-              %td= render 'shared/status_beautify', status: proyecto.status
-              %td= link_to 'Mostrar', proyecto
-              %td= link_to 'Editar', edit_proyecto_path(proyecto)
-              %td= link_to 'Borrar', proyecto, method: :delete, data: { confirm: 'Estas seguro?' }
-
-  .row
-    .col
-      = paginate @proyectos
+  = render 'proyectos/list', collection: @proyectos

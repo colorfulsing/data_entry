@@ -1,0 +1,27 @@
+- collection ||= []
+- param_name ||= :page
+- hide_pagination ||= false
+
+.row
+  .col
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Nombre
+          %th Descripcion
+          %th Estado
+          %th{:colspan => "3"}
+      %tbody
+        - collection.each do |tipo_documento|
+          %tr
+            %td= tipo_documento.nombre
+            %td= tipo_documento.descripcion
+            %td= render 'shared/status_beautify', status: tipo_documento.status
+            %td= link_to 'Mostrar', tipo_documento
+            %td= link_to 'Editar', edit_tipo_documento_path(tipo_documento)
+            %td= link_to 'Borrar', tipo_documento, method: :delete, data: { confirm: 'Estas seguro?' }
+
+- if !hide_pagination
+  .row
+    .col
+      = paginate collection, param_name: param_name

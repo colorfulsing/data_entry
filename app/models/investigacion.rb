@@ -1,5 +1,5 @@
 class Investigacion < ApplicationRecord
-  self.table_name = 'Investigaciones'
+  self.table_name = 'investigaciones'
 
   belongs_to :status, class_name: 'Status', foreign_key: 'id_status'
   belongs_to :facultad, class_name: 'Facultad', foreign_key: 'id_insituto', inverse_of: :investigaciones
@@ -11,4 +11,17 @@ class Investigacion < ApplicationRecord
     foreign_key: "id_investigacion",
     association_foreign_key: "id_area",
     join_table: 'area_investigacion'
+
+  class << self
+    def search query
+      where("titulo RLIKE ?", [query])
+        .includes(
+          :status,
+          :facultad,
+          {municipio: [:departamento]},
+          :microcuenca,
+          :tipo_documento
+        )
+    end
+  end
 end

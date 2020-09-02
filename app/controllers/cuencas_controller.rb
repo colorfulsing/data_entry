@@ -1,6 +1,11 @@
 class CuencasController < ApplicationController
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_cuenca, only: [:show, :edit, :update, :destroy]
+  before_action :load_config
+
+  def search_entity_class
+    Cuenca.name
+  end
 
   # GET /cuencas
   # GET /cuencas.json
@@ -76,5 +81,9 @@ class CuencasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def cuenca_params
       params.require(:cuenca).permit(:id_vertiente, :nombre, :id_status)
+    end
+
+    def load_config
+      @search_type = [search_entity_class]
     end
 end

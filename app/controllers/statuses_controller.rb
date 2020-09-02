@@ -1,6 +1,11 @@
 class StatusesController < ApplicationController
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_status, only: [:show, :edit, :update, :destroy]
+  before_action :load_config
+
+  def search_entity_class
+    Status.name
+  end
 
   # GET /statuses
   # GET /statuses.json
@@ -76,5 +81,9 @@ class StatusesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def status_params
       params.require(:status).permit(:nombre, :visible)
+    end
+
+    def load_config
+      @search_type = [search_entity_class]
     end
 end

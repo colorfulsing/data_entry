@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   get '/', to: 'default#home', as: :home
+  get '/buscar', to: 'default#search', as: :search
 
   resources :vertientes
   resources :tipo_documentos

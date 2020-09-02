@@ -87,7 +87,8 @@
 
 
 
-    %form.form-inline.my-2.my-lg-0
-      %input.form-control.mr-sm-2{type: "search", placeholder: "Buscar", aria: {label: "Buscar"}}
+    %form.form-inline.my-2.my-lg-0{action: search_path}
+      %input#q.form-control.mr-sm-2{name: :q, type: "search", placeholder: "Buscar", aria: {label: "Buscar"}}
+      %input#search_type{name: :search_type, type: 'hidden', value: @search_type.join(',')}
       %button.btn.btn-outline-info.my-2.my-sm-0{type: "submit"}
         %i.fa.fa-search

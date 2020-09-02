@@ -5,25 +5,4 @@
     .col.col-4
       = link_to 'Nuevo Microcuenca', new_microcuenca_path, class:"btn btn-primary pull-right"
 
-  .row
-    .col
-      %table.table.table-striped
-        %thead
-          %tr
-            %th Subcuenca
-            %th Nombre
-            %th Estado
-            %th{:colspan => "3"}
-        %tbody
-          - @microcuencas.each do |microcuenca|
-            %tr
-              %td= microcuenca.subcuenca.nombre
-              %td= microcuenca.nombre
-              %td= render 'shared/status_beautify', status: microcuenca.status
-              %td= link_to 'Mostrar', microcuenca
-              %td= link_to 'Editar', edit_microcuenca_path(microcuenca)
-              %td= link_to 'Borrar', microcuenca, method: :delete, data: { confirm: 'Estas seguro?' }
-
-  .row
-    .col
-      = paginate @microcuencas
+  = render 'microcuencas/list', collection: @microcuencas

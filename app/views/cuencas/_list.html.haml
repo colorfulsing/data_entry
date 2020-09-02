@@ -1,0 +1,27 @@
+- collection ||= []
+- param_name ||= :page
+- hide_pagination ||= false
+
+.row
+  .col
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Vertiente
+          %th Nombre
+          %th Estado
+          %th{:colspan => "3"}
+      %tbody
+        - collection.each do |cuenca|
+          %tr
+            %td= cuenca.vertiente.nombre
+            %td= cuenca.nombre
+            %td= render 'shared/status_beautify', status: cuenca.status
+            %td= link_to 'Mostrar', cuenca
+            %td= link_to 'Editar', edit_cuenca_path(cuenca)
+            %td= link_to 'Borrar', cuenca, method: :delete, data: { confirm: 'Estas seguro?' }
+
+- if !hide_pagination
+  .row
+    .col
+      = paginate collection, param_name: param_name

@@ -8,6 +8,16 @@ class Status < ApplicationRecord
     #:published => 4
   }
 
+  class << self
+    def search query
+      where("nombre RLIKE ?", [query])
+    end
+
+    def entity_label
+      "Estado"
+    end
+  end
+
   def deleted?
     self.id == VALUES[:deleted]
   end

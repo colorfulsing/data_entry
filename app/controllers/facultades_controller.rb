@@ -1,6 +1,11 @@
 class FacultadesController < ApplicationController
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_facultad, only: [:show, :edit, :update, :destroy]
+  before_action :load_config
+
+  def search_entity_class
+    Facultad.name
+  end
 
   # GET /facultades
   # GET /facultades.json
@@ -76,5 +81,9 @@ class FacultadesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def facultad_params
       params.require(:facultad).permit(:id_instituciones, :nombre, :siglas, :telefono, :extension, :direccion, :correo_electronico, :sitio_web, :id_status)
+    end
+
+    def load_config
+      @search_type = [search_entity_class]
     end
 end

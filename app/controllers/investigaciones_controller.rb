@@ -1,6 +1,11 @@
 class InvestigacionesController < ApplicationController
   before_action :load_status, only: [:show, :edit, :update, :new, :create]
   before_action :set_investigacion, only: [:show, :edit, :update, :destroy]
+  before_action :load_config
+
+  def search_entity_class
+    Investigacion.name
+  end
 
   # GET /investigaciones
   # GET /investigaciones.json
@@ -76,5 +81,9 @@ class InvestigacionesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def investigacion_params
       params.require(:investigacion).permit(:id_instituto, :id_microcuenca, :id_municipio, :id_documento, :autor, :titulo, :no_paginas, :fecha_realizacion, :fecha_publicacion, :resumen, :palabras_clave, :recurso_web, :id_status)
+    end
+
+    def load_config
+      @search_type = [search_entity_class]
     end
 end

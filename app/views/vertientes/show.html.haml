@@ -15,3 +15,15 @@
       Estado
     .col.col-8
       = render 'shared/status_beautify', status: @vertiente.status
+
+  %br/
+  %br/
+
+.container-fluid
+  .row
+    .col.col-8
+      %h2 Cuencas
+    .col.col-4
+      = link_to 'Nueva Cuenca', new_cuenca_path, class:"btn btn-primary pull-right"
+
+  = render 'cuencas/list', collection: @vertiente.cuencas, hide_pagination: true

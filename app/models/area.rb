@@ -14,4 +14,11 @@ class Area < ApplicationRecord
     association_foreign_key: "id_investigacion",
     join_table: 'area_investigacion',
     inverse_of: :areas
+
+  class << self
+    def search query
+      where("nombre RLIKE ?", [query])
+        .includes(:proyectos, :investigaciones, :status)
+    end
+  end
 end

@@ -1,0 +1,27 @@
+- collection ||= []
+- param_name ||= :page
+- hide_pagination ||= false
+
+.row
+  .col
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Departamento
+          %th Nombre
+          %th Estado
+          %th{:colspan => "3"}
+      %tbody
+        - collection.each do |municipio|
+          %tr
+            %td= municipio.departamento.nombre
+            %td= municipio.nombre
+            %td= render 'shared/status_beautify', status: municipio.status
+            %td= link_to 'Mostrar', municipio
+            %td= link_to 'Editar', edit_municipio_path(municipio)
+            %td= link_to 'Borrar', municipio, method: :delete, data: { confirm: 'Estas seguro?' }
+
+- if !hide_pagination
+  .row
+    .col
+      = paginate collection, param_name: param_name

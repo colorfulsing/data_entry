@@ -1,0 +1,19 @@
+- entity_class ||= nil
+- list_view ||= nil
+- entity_name = entity_class.name
+- entity_label = entity_class.entity_label
+- if @search_results.has_key? entity_name
+  - collection = @search_results[entity_name]
+  .result-detail
+    - if collection.count < 1
+      -# When empty
+      .row
+        .col.col-xs-12
+          %h2 No se encontraron #{entity_label.pluralize.downcase}.
+    - else
+      -# When has items
+      .row
+        .col.col-xs-12
+          %h2 Se encontraron #{pluralize(collection.count, entity_label.downcase)}
+
+      = render list_view, collection: collection, param_name: "page_#{entity_name.downcase}"

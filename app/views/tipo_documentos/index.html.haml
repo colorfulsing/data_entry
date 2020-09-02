@@ -5,25 +5,4 @@
     .col.col-4
       = link_to 'Nuevo Tipo Documento', new_tipo_documento_path, class:"btn btn-primary pull-right"
 
-  .row
-    .col
-      %table.table.table-striped
-        %thead
-          %tr
-            %th Nombre
-            %th Descripcion
-            %th Estado
-            %th{:colspan => "3"}
-        %tbody
-          - @tipo_documentos.each do |tipo_documento|
-            %tr
-              %td= tipo_documento.nombre
-              %td= tipo_documento.descripcion
-              %td= render 'shared/status_beautify', status: tipo_documento.status
-              %td= link_to 'Mostrar', tipo_documento
-              %td= link_to 'Editar', edit_tipo_documento_path(tipo_documento)
-              %td= link_to 'Borrar', tipo_documento, method: :delete, data: { confirm: 'Estas seguro?' }
-
-  .row
-    .col
-      = paginate @tipo_documentos
+  = render 'tipo_documentos/list', collection: @tipo_documentos
