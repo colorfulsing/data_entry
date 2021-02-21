@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'hello_world', to: 'hello_world#index'
   devise_for :users, skip: [:new, :create]
   devise_scope :user do
    resources :users, path: "usuarios", only: [:new, :create], controller: 'registrations'
@@ -65,5 +66,5 @@ Rails.application.routes.draw do
   get "/usuarios/:id(.:format)/disable", to: 'usuarios#disable', as: :disable_usuario
   delete "/usuarios/:id(.:format)", to: 'usuarios#destroy', as: :delete_usuario
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

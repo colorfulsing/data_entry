@@ -37,12 +37,12 @@
       = @facultad.telefono
   .row
     .col.col-4.font-weight-bold
-      Extension:
+      Extensi&oacute;n:
     .col.col-8
       = @facultad.extension
   .row
     .col.col-4.font-weight-bold
-      Direccion:
+      Direcci&oacute;n:
     .col.col-8
       = @facultad.direccion
   .row
@@ -81,6 +81,6 @@
     .col.col-8
       %h2 Investigaciones
     .col.col-4
-      = link_to 'Nueva investigaci&oacute;n', new_investigacion_path, class:"btn btn-primary pull-right"
+      = link_to 'Nueva investigaci&oacute;n'.html_safe, new_investigacion_path, class:"btn btn-primary pull-right"
 
   = render 'investigaciones/list', collection: @facultad.investigaciones, hide_pagination: true

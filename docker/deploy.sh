@@ -167,7 +167,7 @@ echo ""
 
 # Detect possible permission deny
 echo "Testing docker access, executing \"docker info\" command..."
-if [ "$(docker info | grep -i -E "^server\\s+version\\s*\\:\\s*")" == "" ]; then
+if [ "$(docker info | grep -i -E "^\s*server\\s+version\\s*\\:\\s*")" == "" ]; then
   echo "Failed, it could be a permission issue, will try again using sudo..."
 
   # Ask for root access only once
@@ -176,7 +176,7 @@ if [ "$(docker info | grep -i -E "^server\\s+version\\s*\\:\\s*")" == "" ]; then
   while true; do sudo docker -v >> /dev/null; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
   # Test again with sudo
-  if [ "$(sudo docker info | grep -i -E "^server\\s+version\\s*\\:\\s*")" == "" ]; then
+  if [ "$(sudo docker info | grep -i -E "^\s*server\\s+version\\s*\\:\\s*")" == "" ]; then
     echo "Failed, please check that docker service is running"
     exit 1
   fi

@@ -1,12 +1,12 @@
 # README
 
-Data entry project donated to Redfia using Ruby on Rails 5.
+Data entry project donated to Redfia using Ruby on Rails 6.
 
 Requirements:
 
-* MySQL v5.7
-* Ruby 2.5
-* Nginx 1.15
+* MySQL v58.0
+* Ruby 2.7
+* Nginx 1.19
 
 ## Docker
 You can use the included docker-compose file for both development and production.

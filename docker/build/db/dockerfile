@@ -1,8 +1,10 @@
-FROM mysql:5.7
-MAINTAINER Eduardo Rosales <edutato2008@gmail.com>
+FROM mysql/mysql-server:8.0
+MAINTAINER CFS <https://github.com/colorfulsing>
 
-RUN apt-get update && apt-get install -y \
-  gettext-base
+RUN yum install -y \
+    gettext \
+    ngettext \
+  && yum clean all
 RUN if [ ! -e /opt ]; then mkdir /opt || exit 1; fi; mkdir /opt/deploy && mkdir /opt/deploy/bin
 COPY ./shared/template_tools.sh /opt/deploy/bin/template_tools.sh
 COPY ./db/load_env.sh /opt/deploy/bin/load_env.sh

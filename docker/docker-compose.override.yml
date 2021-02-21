@@ -44,7 +44,3 @@ secrets:
     file: "./secrets/app_secret_key.txt"
   proxy_web_domain_name:
     file: "./secrets/web_domain_name.txt"
-  proxy_app_certificate:
-    file: "./secrets/proxy_app_certificate/ssl.crt"
-  proxy_app_certificate_key:
-    file: "./secrets/proxy_app_certificate/ssl.key"

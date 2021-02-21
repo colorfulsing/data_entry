@@ -1,0 +1,73 @@
+yarn install v1.22.5
+[1/4] Resolving packages...
+success Already up-to-date.
+Done in 0.76s.
+Compiling...
+Compilation failed:
+Hash: 709b5fc550b188540d82
+Version: webpack 4.46.0
+Time: 11830ms
+Built at: 02/15/2021 10:01:23 AM
+                                                                                  Asset       Size              Chunks                         Chunk Names
+                                                 js/application-264575ed076ba4e48a47.js    380 KiB         application  [emitted] [immutable]  application
+                                             js/application-264575ed076ba4e48a47.js.map    447 KiB         application  [emitted] [dev]        application
+                                                   js/bootstrap-2a03d3dac1e15d4bf182.js    546 KiB           bootstrap  [emitted] [immutable]  bootstrap
+                                               js/bootstrap-2a03d3dac1e15d4bf182.js.map    645 KiB           bootstrap  [emitted] [dev]        bootstrap
+                                          js/hello-world-bundle-d8c6f1e77d39275b0c7f.js   1.29 MiB  hello-world-bundle  [emitted] [immutable]  hello-world-bundle
+                                      js/hello-world-bundle-d8c6f1e77d39275b0c7f.js.map   1.48 MiB  hello-world-bundle  [emitted] [dev]        hello-world-bundle
+                                                js/hello_coffee-2dffb50637fee7245bff.js   4.13 KiB        hello_coffee  [emitted] [immutable]  hello_coffee
+                                            js/hello_coffee-2dffb50637fee7245bff.js.map   3.53 KiB        hello_coffee  [emitted] [dev]        hello_coffee
+                                                 js/hello_react-9ee656adcbaf6eafdbe8.js    1.1 MiB         hello_react  [emitted] [immutable]  hello_react
+                                             js/hello_react-9ee656adcbaf6eafdbe8.js.map   1.27 MiB         hello_react  [emitted] [dev]        hello_react
+                                                  js/stylesheet-5815c32c9606689d00b0.js    736 KiB          stylesheet  [emitted] [immutable]  stylesheet
+                                              js/stylesheet-5815c32c9606689d00b0.js.map    755 KiB          stylesheet  [emitted] [dev]        stylesheet
+                                                                          manifest.json   4.73 KiB                      [emitted]              
+                           media/fonts/FontAwesome-0d2717cd5d853e5c765ca032dfd41a4d.otf    132 KiB                      [emitted]              
+                   media/fonts/fontawesome-webfont-674f50d287a8c48dc19ba404d20fe713.eot    162 KiB                      [emitted]              
+                   media/fonts/fontawesome-webfont-912ec66d7572ff821749319396470bde.svg    434 KiB                      [emitted]              
+                 media/fonts/fontawesome-webfont-af7ae505a9eed503f8b8e6982036873e.woff2   75.4 KiB                      [emitted]              
+                   media/fonts/fontawesome-webfont-b06871f281fee6b241d60582ae9369b9.ttf    162 KiB                      [emitted]              
+                  media/fonts/fontawesome-webfont-fee66e712a8a08eef5805a46892932ad.woff   95.7 KiB                      [emitted]              
+                                 media/images/logo-2d5c77963d56c29b09e971512482340e.png   29.7 KiB                      [emitted]              
+                             media/images/logo_icc-3f84098013e6a187d9dcbdf75f39bfaa.png   14.7 KiB                      [emitted]              
+media/images/ui-bg_diagonals-thick_18_b81900_40x40-93770c4cfadf2ff7091c0a76631123ca.png  418 bytes                      [emitted]              
+media/images/ui-bg_diagonals-thick_20_666666_40x40-c025bfaae1a84e3d984713fd129c0722.png  312 bytes                      [emitted]              
+         media/images/ui-bg_glass_100_f6f6f6_1x400-d9de38172a90023ebe5128d06532310b.png  262 bytes                      [emitted]              
+         media/images/ui-bg_glass_100_fdf5ce_1x400-866f5051d3504cd21ecfc1c5a4edbae7.png  348 bytes                      [emitted]              
+          media/images/ui-bg_glass_65_ffffff_1x400-0df13006809b40797c34f51243c9bbe2.png  207 bytes                      [emitted]              
+   media/images/ui-bg_gloss-wave_35_f6a828_500x100-b69ec703fdc02adb377d2660896b4a97.png   5.68 KiB                      [emitted]              
+media/images/ui-bg_highlight-soft_100_eeeeee_1x100-b90947e8f56adcf3aade9d7526d0ee15.png  278 bytes                      [emitted]              
+ media/images/ui-bg_highlight-soft_75_ffe45c_1x100-a6ec3df953f7df67c3dbeabc1bcdead4.png  328 bytes                      [emitted]              
+              media/images/ui-icons_222222_256x240-3861e9eb08528ed839cf22c3d51e2042.png   6.76 KiB                      [emitted]              
+              media/images/ui-icons_228ef1_256x240-167c47c1f0e437f9b273f4cbce2d8dde.png   4.44 KiB                      [emitted]              
+              media/images/ui-icons_ef8c08_256x240-965ac4a7613203bb99e600fe6fec1b1b.png   4.44 KiB                      [emitted]              
+              media/images/ui-icons_ffd27a_256x240-99f06ee1344e12dee060155236aa5e70.png   4.44 KiB                      [emitted]              
+              media/images/ui-icons_ffffff_256x240-e33c878c8e1b176d439484ca0a094ec4.png   6.15 KiB                      [emitted]              
+Entrypoint application = js/application-264575ed076ba4e48a47.js js/application-264575ed076ba4e48a47.js.map
+Entrypoint bootstrap = js/bootstrap-2a03d3dac1e15d4bf182.js js/bootstrap-2a03d3dac1e15d4bf182.js.map
+Entrypoint hello_coffee = js/hello_coffee-2dffb50637fee7245bff.js js/hello_coffee-2dffb50637fee7245bff.js.map
+Entrypoint hello_react = js/hello_react-9ee656adcbaf6eafdbe8.js js/hello_react-9ee656adcbaf6eafdbe8.js.map
+Entrypoint hello-world-bundle = js/hello-world-bundle-d8c6f1e77d39275b0c7f.js js/hello-world-bundle-d8c6f1e77d39275b0c7f.js.map
+Entrypoint stylesheet = js/stylesheet-5815c32c9606689d00b0.js js/stylesheet-5815c32c9606689d00b0.js.map
+[./app/frontend/bundles/HelloWorld/components/HelloWorld.jsx] 3.15 KiB {hello-world-bundle} [built]
+[./app/frontend/channels/index.js] 211 bytes {application} [built]
+[./app/frontend/fonts sync recursive ^\.\/.*$] ./app/frontend/fonts sync ^\.\/.*$ 361 bytes {stylesheet} [built]
+[./app/frontend/images sync recursive ^\.\/.*$] ./app/frontend/images sync ^\.\/.*$ 1.18 KiB {stylesheet} [built]
+[./app/frontend/packs/application.js] 496 bytes {application} [built]
+[./app/frontend/packs/bootstrap.js] 2.64 KiB {bootstrap} [built]
+[./app/frontend/packs/hello-world-bundle.js] 235 bytes {hello-world-bundle} [built]
+[./app/frontend/packs/hello_coffee.coffee] 219 bytes {hello_coffee} [built] [failed] [1 error]
+[./app/frontend/packs/hello_react.jsx] 1.04 KiB {hello_react} [built]
+[./app/frontend/packs/stylesheet.js] 378 bytes {stylesheet} [built]
+[./app/frontend/stylesheets/application.scss] 664 bytes {stylesheet} [built]
+[./node_modules/@rails/activestorage/app/assets/javascripts/activestorage.js] 33.9 KiB {application} [built]
+[./node_modules/@rails/ujs/lib/assets/compiled/rails-ujs.js] 28.4 KiB {application} [built]
+[./node_modules/bootstrap/dist/js/bootstrap.js] 141 KiB {bootstrap} [built]
+[./node_modules/jquery/dist/jquery.js] 308 KiB {application} {bootstrap} [built]
+    + 59 hidden modules
+
+ERROR in ./app/frontend/packs/hello_coffee.coffee
+Module build failed (from ./node_modules/coffee-loader/dist/cjs.js):
+TypeError: this.getOptions is not a function
+    at Object.loader (/var/www/html/node_modules/coffee-loader/dist/index.js:21:24)
+

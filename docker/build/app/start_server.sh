@@ -98,7 +98,7 @@ fi
 cd /var/www/html
 
 echo "Execute database migration"
-rails db:migrate || $(if [ "$ENV" == 'dev' ]; then echo "exit 1"; else echo 'echo "DEV mode detected, ignoring migration failure..."'; fi)
+rails db:migrate || $(if [ "$ENV" != 'dev' ]; then echo "exit 1"; else echo 'echo "DEV mode detected, ignoring migration failure..."'; fi)
 
 # Execute test when
 if [ "$EXEC_TEST" == '1' ]; then
@@ -107,6 +107,10 @@ if [ "$EXEC_TEST" == '1' ]; then
 fi
 if [ "$ENV" == "prod" ]; then
   echo "Precompiling assets"
-  rake assets:precompile || exit 1
+  ./bin/rails webpack:compile || exit 1
+  ./bin/rails s -b 0.0.0.0 || exit 1
+else
+  # loop until infinite
+  echo "DEV mode detected, will wait until stop"
+  while true; do sleep 60; kill -0 "$$" || exit; done 2>/dev/null
 fi
-rails s || exit 1

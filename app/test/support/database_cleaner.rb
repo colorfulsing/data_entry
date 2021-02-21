@@ -1,4 +1,6 @@
 require 'capybara/rspec'
+require 'database_cleaner/active_record'
+require 'database_cleaner/redis'
 
 RSpec.configure do |config|
 

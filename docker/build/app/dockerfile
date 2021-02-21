@@ -1,5 +1,5 @@
-FROM ruby:2.5-slim-stretch
-MAINTAINER Eduardo Rosales <edutato2008@gmail.com>
+FROM ruby:2.7-slim
+MAINTAINER CFS <https://github.com/colorfulsing>
 RUN apt-get update && apt-get install -y apt-utils
 RUN apt-get install -y \
   curl \
@@ -9,7 +9,11 @@ RUN apt-get install -y \
   apt-transport-https \
   gettext-base \
   sqlite3
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+RUN curl -sS https://downloads.mariadb.com/MariaDB/mariadb_repo_setup | bash \
+  && apt-get update \
+  && apt-get install -y libmariadb3
+
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
   && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
   && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
   && apt-get update && apt-get install -y yarn nodejs
@@ -17,6 +21,13 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
 
 RUN if [ ! -e /opt ]; then mkdir /opt || exit 1; fi; \
   mkdir /opt/deploy && mkdir /opt/deploy/bin
+
+# Install gems and node dependencies
+COPY ./app/data/dependencies_config/ /opt/deploy/dependencies_config/
+RUN cd /opt/deploy/dependencies_config \
+  && bundle install --jobs=4 \
+  && yarn install || exit 1
+
 COPY ./shared/template_tools.sh /opt/deploy/bin/template_tools.sh
 COPY ./app/load_env.sh /opt/deploy/bin/load_env.sh
 COPY ./app/start_server.sh /opt/deploy/bin/start_server.sh
@@ -24,13 +35,6 @@ RUN chmod +x \
   /opt/deploy/bin/template_tools.sh \
   /opt/deploy/bin/load_env.sh \
   /opt/deploy/bin/start_server.sh || exit 1
-
-# Install gems and node dependencies
-COPY ./app/data/dependencies_config/ /opt/deploy/dependencies_config/
-RUN cd /opt/deploy/dependencies_config \
-  && gem install bundle \
-  && bundle install --jobs=4 \
-  && yarn install || exit 1
 
 VOLUME /var/www/html
 WORKDIR /var/www/html

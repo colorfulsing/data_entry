@@ -9,6 +9,13 @@ source /opt/deploy/bin/template_tools.sh
 # Delete previous configurations
 rm -Rf /etc/nginx/conf.d/*
 
+# create certificate files
+export PROXY_APP_CERTIFICATE_FILE="/etc/ssl/private/ssl.cert"
+export PROXY_APP_CERTIFICATE_KEY_FILE="/etc/ssl/private/ssl.key"
+openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 \
+    -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=${WEB_DOMAIN_NAME}" \
+    -keyout "$PROXY_APP_CERTIFICATE_KEY_FILE"  -out "$PROXY_APP_CERTIFICATE_FILE" || exit 1
+
 # Apply configuration templates
 echo ""
 echo "Apply templates"

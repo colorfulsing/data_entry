@@ -55,13 +55,9 @@ services:
     image: "${COMPOSE_PROJECT_NAME}_proxy"
     secrets:
       - proxy_web_domain_name
-      - proxy_app_certificate
-      - proxy_app_certificate_key
     environment:
       ENV: "${ENV}"
       WEB_DOMAIN_NAME_FILE: /run/secrets/proxy_web_domain_name
-      PROXY_APP_CERTIFICATE_FILE: /run/secrets/proxy_app_certificate
-      PROXY_APP_CERTIFICATE_KEY_FILE: /run/secrets/proxy_app_certificate_key
     depends_on:
       - app
     links:
@@ -93,8 +89,4 @@ secrets:
   app_secret_key:
     external: true
   proxy_web_domain_name:
-    external: true
-  proxy_app_certificate:
-    external: true
-  proxy_app_certificate_key:
     external: true

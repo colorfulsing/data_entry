@@ -1,6 +1,6 @@
 class CreateAudits < ActiveRecord::Migration[5.2]
   def change
-    create_table :audits do |t|
+    create_table :audits, charset: "utf8" do |t|
       t.references :target, polymorphic: true, null: false
       t.text :change, null: false
       t.string :commit_hash, null: false, limit: 50

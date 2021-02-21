@@ -20,4 +20,4 @@ apply_templates /opt/deploy/templates/* /docker-entrypoint-initdb.d || exit 1
 cp /opt/deploy/seeds/* /docker-entrypoint-initdb.d/
 
 # Start mysql service
-/usr/local/bin/docker-entrypoint.sh mysqld || exit 1
+/entrypoint.sh mysqld || exit 1

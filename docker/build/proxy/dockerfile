@@ -1,6 +1,6 @@
-FROM nginx:1.15-alpine
-MAINTAINER Eduardo Rosales <edutato2008@gmail.com>
-RUN apk add --update --no-cache bash bash-completion gettext
+FROM nginx:1.19-alpine
+MAINTAINER CFS <https://github.com/colorfulsing>
+RUN apk add --update --no-cache bash bash-completion gettext openssl
 
 RUN if [ ! -e /opt ]; then mkdir /opt || exit 1; fi; \
   mkdir /opt/deploy && mkdir /opt/deploy/bin

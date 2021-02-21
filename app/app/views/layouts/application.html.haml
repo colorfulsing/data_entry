@@ -5,7 +5,10 @@
 %html
   %head
     %title= "#{meta_title.empty? ? '' : (h(meta_title) + ' | ')}Sistematizaci&oacute;n".html_safe
+    = #%meta{name: "viewport", content: "width=device-width,initial-scale=1"}
     = csrf_meta_tags
+    = csp_meta_tag
+
     = stylesheet_link_tag 'application', media: 'all' #, 'data-turbolinks-track': 'reload'
     %meta{name: "robots", content: "NOINDEX"}
   %body{class: yield(:page_class)}
@@ -31,6 +34,7 @@
       .section-footer
         = render 'shared/footer'
 
+    =# javascript_include_tag 'bootstrap'
     = javascript_include_tag 'application' #, 'data-turbolinks-track': 'reload'
     = yield :javascript
 

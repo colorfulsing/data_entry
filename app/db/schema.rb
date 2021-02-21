@@ -2,20 +2,20 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_22_003640) do
+ActiveRecord::Schema.define(version: 2021_02_21_182947) do
 
-  create_table "area", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "area", id: :integer, charset: "utf8", force: :cascade do |t|
     t.string "nombre", limit: 100, null: false
     t.string "descripcion", limit: 500
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.datetime "updated_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["created_at"], name: "area_created_at"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "area_investigacion", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "area_investigacion", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "id_investigacion", null: false
     t.integer "id_area", null: false
     t.index ["id"], name: "id_UNIQUE", unique: true
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["id_investigacion"], name: "fk14_idx"
   end
 
-  create_table "audits", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "audits", charset: "utf8", force: :cascade do |t|
     t.string "target_type", null: false
     t.bigint "target_id", null: false
     t.text "change", null: false
@@ -43,15 +43,15 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["id_status"], name: "audit_status"
-    t.index ["target_type", "target_id"], name: "index_audits_on_target_type_and_target_id"
+    t.index ["target_type", "target_id"], name: "index_audits_on_target"
     t.index ["user_id", "user_type", "target_id", "target_type", "created_at", "updated_at", "action"], name: "audits_main_idx"
-    t.index ["user_type", "user_id"], name: "index_audits_on_user_type_and_user_id"
+    t.index ["user_type", "user_id"], name: "index_audits_on_user"
   end
 
-  create_table "cuencas", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "cuencas", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "id_vertiente", null: false
     t.string "nombre", limit: 100, null: false
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.datetime "updated_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["created_at"], name: "cuencas_created_at"
@@ -61,9 +61,9 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "departamentos", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "departamentos", id: :integer, charset: "utf8", force: :cascade do |t|
     t.string "nombre", limit: 45, null: false
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.datetime "updated_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["created_at"], name: "departamentos_created_at"
@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "facultades_institutos", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "facultades_institutos", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "id_instituciones", null: false
     t.integer "id_tipo_instituto", default: 1, null: false
     t.string "nombre", limit: 150, null: false
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.string "direccion", limit: 300, default: "Dentro de la institución"
     t.string "correo_electronico", limit: 60, default: "Mismo de la institución"
     t.string "sitio_web", limit: 150, default: "Mismo de la institución"
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.datetime "updated_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["created_at"], name: "facultades_institutos_created_at"
@@ -91,14 +91,14 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["id_tipo_instituto"], name: "fk123_idx"
   end
 
-  create_table "instituciones", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "instituciones", id: :integer, charset: "utf8", force: :cascade do |t|
     t.string "nombre", limit: 150, null: false
     t.string "siglas", limit: 30, default: "N/A"
     t.string "telefono", limit: 30, default: "N/A"
     t.string "direccion", limit: 300, null: false
     t.string "correo_electronico", limit: 60, default: "N/A"
     t.string "sitio_web", limit: 300, default: "N/A"
-    t.integer "id_status", default: 1
+    t.integer "id_status", default: 1, null: false
     t.datetime "updated_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["created_at"], name: "instituciones_created_at"
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "investigaciones", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "investigaciones", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "id_instituto", null: false
     t.integer "id_microcuenca", null: false
     t.integer "id_municipio"
@@ -117,10 +117,10 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.integer "no_paginas"
     t.date "fecha_realizacion"
     t.date "fecha_publicacion"
-    t.string "resumen", limit: 2000
+    t.text "resumen"
     t.string "palabras_clave", limit: 300, null: false
     t.text "recurso_web"
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.datetime "updated_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["created_at"], name: "investigaciones_created_at"
@@ -132,10 +132,10 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["id_status"], name: "investigaciones_status_idx"
   end
 
-  create_table "microcuenca", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "microcuenca", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "id_subcuenca", null: false
     t.string "nombre", limit: 100, null: false
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.datetime "updated_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["created_at"], name: "rios_created_at"
@@ -144,10 +144,10 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["id_subcuenca"], name: "fk8_idx"
   end
 
-  create_table "municipios", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "municipios", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "id_departamento", null: false
     t.string "nombre", limit: 45, null: false
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.datetime "updated_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }
     t.index ["created_at"], name: "municipios_created_at"
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["id_status"], name: "municipios_status_idx"
   end
 
-  create_table "proyecto_area", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "proyecto_area", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "id_proyecto", null: false
     t.integer "id_area", null: false
     t.datetime "updated_at"
@@ -167,11 +167,11 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["id_proyecto"], name: "fk1_idx"
   end
 
-  create_table "proyecto_programa", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "proyecto_programa", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "id_instituto", null: false
     t.string "nombre", limit: 200, null: false
     t.string "descripcion", limit: 600, default: "N/A"
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.datetime "updated_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["created_at"], name: "proyecto_programa_created_at"
@@ -180,16 +180,16 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["id_status"], name: "proyecto_programa_status_idx"
   end
 
-  create_table "status", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "status", id: :integer, charset: "utf8", force: :cascade do |t|
     t.string "nombre", limit: 100, null: false
     t.integer "visible", limit: 1, null: false
     t.index ["id", "visible"], name: "index2"
   end
 
-  create_table "subcuencas", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "subcuencas", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "id_cuenca", null: false
     t.string "nombre", limit: 100, null: false
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.datetime "updated_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["created_at"], name: "subcuencas_created_at"
@@ -199,10 +199,10 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "tipo_documento", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "tipo_documento", id: :integer, charset: "utf8", force: :cascade do |t|
     t.string "nombre", limit: 50, null: false
     t.string "descripcion", limit: 500
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.datetime "updated_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["created_at"], name: "tipo_documento_created_at"
@@ -211,17 +211,18 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "tipo_instituto", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "tipo_instituto", id: :integer, charset: "utf8", force: :cascade do |t|
     t.string "nombre", limit: 50, null: false
     t.string "descripcion", limit: 500
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.datetime "updated_at"
     t.datetime "created_at"
     t.index ["id"], name: "id_UNIQUE", unique: true
+    t.index ["id_status"], name: "tipo_instituto_status"
     t.index ["nombre"], name: "nombre_UNIQUE"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -235,16 +236,17 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role"
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.string "nombre"
     t.string "telefono"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["id_status"], name: "users_status"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "vertientes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "vertientes", id: :integer, charset: "utf8", force: :cascade do |t|
     t.string "nombre", limit: 100, null: false
-    t.integer "id_status"
+    t.integer "id_status", null: false
     t.datetime "updated_at"
     t.datetime "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["created_at"], name: "vertientes_created_at"
@@ -280,5 +282,7 @@ ActiveRecord::Schema.define(version: 2018_10_22_003640) do
   add_foreign_key "subcuencas", "cuencas", column: "id_cuenca", name: "fksc"
   add_foreign_key "subcuencas", "status", column: "id_status", name: "subcuencas_status"
   add_foreign_key "tipo_documento", "status", column: "id_status", name: "tipo_documento_status"
+  add_foreign_key "tipo_instituto", "status", column: "id_status", name: "tipo_instituto_status"
+  add_foreign_key "users", "status", column: "id_status", name: "users_status"
   add_foreign_key "vertientes", "status", column: "id_status", name: "vertientes_status"
 end

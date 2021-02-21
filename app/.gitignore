@@ -13,18 +13,31 @@
 !/log/.keep
 !/tmp/.keep
 
-/node_modules
-/yarn-error.log
+# Ignore pidfiles, but keep the directory.
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
 
-.byebug_history
-/config/database.yml
+# Ignore uploaded files in development.
+/storage/*
+!/storage/.keep
+
 /public/assets
+.byebug_history
 
-/.env
+# Ignore master key for decrypting credentials and more.
+/config/master.key
 
-/coverage
 /public/packs
 /public/packs-test
 /node_modules
+/yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+/app/controllers/hello_world_controller.rb
+/app/views/layouts/hello_world.html.erb
+/app/views/hello_world
+/app/frontend/bundles
+/app/frontend/packs/hello_react.jsx
+/app/frontend/packs/hello-world-bundle.js
+/app/config/database.yml
