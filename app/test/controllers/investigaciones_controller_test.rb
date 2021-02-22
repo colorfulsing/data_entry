@@ -31,6 +31,23 @@ class InvestigacionesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to investigacion_url(Investigacion.last)
   end
 
+  test "should create investigacion with long resumen" do
+    assert_difference('Investigacion.count') do
+      long_string =  "a" * 65500
+      post investigaciones_url, params: { investigacion: { autor: @investigacion.autor, fecha_publicacion: @investigacion.fecha_publicacion, fecha_realizacion: @investigacion.fecha_realizacion, id_documento: @investigacion.tipo_documento.id, id_instituto: @investigacion.facultad.id, id_microcuenca: @investigacion.microcuenca.id, id_municipio: @investigacion.municipio.id, id_status: @investigacion.status.id, no_paginas: @investigacion.no_paginas, palabras_clave: @investigacion.palabras_clave, resumen: long_string, titulo: @investigacion.titulo } }
+    end
+
+    assert_redirected_to investigacion_url(Investigacion.last)
+  end
+
+  test "should create investigacion without recurso_web" do
+    assert_difference('Investigacion.count') do
+      post investigaciones_url, params: { investigacion: { autor: @investigacion.autor, fecha_publicacion: @investigacion.fecha_publicacion, fecha_realizacion: @investigacion.fecha_realizacion, id_documento: @investigacion.tipo_documento.id, id_instituto: @investigacion.facultad.id, id_microcuenca: @investigacion.microcuenca.id, id_municipio: @investigacion.municipio.id, id_status: @investigacion.status.id, no_paginas: @investigacion.no_paginas, palabras_clave: @investigacion.palabras_clave, resumen: @investigacion.resumen, titulo: @investigacion.titulo } }
+    end
+
+    assert_redirected_to investigacion_url(Investigacion.last)
+  end
+
   test "should show investigacion" do
     get investigacion_url(@investigacion)
     assert_response :success

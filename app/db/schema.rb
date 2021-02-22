@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_182947) do
+ActiveRecord::Schema.define(version: 2021_02_21_201328) do
 
   create_table "area", id: :integer, charset: "utf8", force: :cascade do |t|
     t.string "nombre", limit: 100, null: false
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2021_02_21_182947) do
   create_table "audits", charset: "utf8", force: :cascade do |t|
     t.string "target_type", null: false
     t.bigint "target_id", null: false
-    t.text "change", null: false
+    t.text "change", size: :long, null: false
     t.string "commit_hash", limit: 50, null: false
     t.string "user_type", null: false
     t.bigint "user_id", null: false
