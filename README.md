@@ -4,7 +4,7 @@ Data entry project donated to Redfia using Ruby on Rails 6.
 
 Requirements:
 
-* MySQL v58.0
+* MySQL v8.0
 * Ruby 2.7
 * Nginx 1.19
 
