@@ -10,8 +10,10 @@ source /opt/deploy/bin/template_tools.sh
 echo ""
 echo "Apply templates"
 echo ""
-TEMPLATE_VARIABLE_LIST='${DB_DATABASE_NAME} ${DB_WRITE_USER} ${DB_WRITE_PASS} ${SECRET_KEY_BASE}'
-apply_templates /var/www/html/config/database.yml.template /var/www/html/config || exit 1
+if [ -f /var/www/html/config/database.yml.template ]; then
+  TEMPLATE_VARIABLE_LIST='${DB_DATABASE_NAME} ${DB_WRITE_USER} ${DB_WRITE_PASS} ${SECRET_KEY_BASE}'
+  apply_templates /var/www/html/config/database.yml.template /var/www/html/config || exit 1
+fi
 
 # Remove existing server process ID
 if [ -d /var/www/html/tmp ] && [ -d /var/www/html/tmp/pids ] && [ -f /var/www/html/tmp/pids/server.pid ]; then

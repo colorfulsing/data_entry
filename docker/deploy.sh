@@ -305,5 +305,5 @@ if [ "$START" == "1" ]; then
 fi
 
 if [ "$SWARM_MODE" == "1" ]; then
-  sudo_env docker stack deploy -c ./docker-compose.yml -c ./docker-compose.prod.yml
+  sudo_env docker stack deploy -c ./docker-compose.yml -c ./docker-compose.prod.yml "$COMPOSE_PROJECT_NAME"
 fi
