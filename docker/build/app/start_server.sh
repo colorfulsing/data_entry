@@ -103,7 +103,7 @@ echo "Execute database migration"
 ./bin/rake db:migrate || $(if [ "$RAILS_ENV" != 'development' ]; then echo "exit 1"; else echo 'echo "DEV mode detected, ignoring migration failure..."'; fi)
 
 # Execute test when
-if [ "$RAILS_ENV" != "production" && "$EXEC_TEST" == '1' ]; then
+if [ "$RAILS_ENV" != "production" ] && [ "$EXEC_TEST" == '1' ]; then
   echo "Executing tests"
   env RAILS_ENV=test ./bin/rake test || exit 1
 fi
