@@ -109,7 +109,7 @@ if [ "$RAILS_ENV" != "production" && "$EXEC_TEST" == '1' ]; then
 fi
 if [ "$RAILS_ENV" == "production" ]; then
   echo "Precompiling assets"
-  ./bin/rails webpack:compile || exit 1
+  ./bin/rails webpacker:compile || exit 1
   ./bin/rails s -b 0.0.0.0 || exit 1
 else
   # loop until infinite
