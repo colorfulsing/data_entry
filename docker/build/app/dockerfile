@@ -38,7 +38,7 @@ RUN chmod +x \
   /opt/deploy/bin/load_env.sh \
   /opt/deploy/bin/start_server.sh || exit 1
 
-VOLUME /var/www/html
+#VOLUME /var/www/html
 WORKDIR /var/www/html
 ENTRYPOINT ["/opt/deploy/bin/load_env.sh"]
 CMD ["/opt/deploy/bin/start_server.sh"]
