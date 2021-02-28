@@ -276,7 +276,7 @@ if [ "$BUILD_IMAGE" == "1" ]; then
 
   echo "Copy db templates to db image build context before build..."
   rm -rf ./build/db/data/templates
-  cp ./modules/db/templates ./build/db/data/templates
+  cp -r ./modules/db/templates ./build/db/data/templates
   echo "Done"
 
   echo "Copy proxy templates and settings to proxy image build context before build..."
