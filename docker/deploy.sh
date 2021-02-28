@@ -274,24 +274,46 @@ if [ "$BUILD_IMAGE" == "1" ]; then
   fi
   echo "Done"
 
-  if [ "$ENV" == "prod" ]; then
-    echo "Copy website files to app image build context before build..."
-    rm -rf ./build/app/data/website
-    cp -r "$APP" ./build/app/data/website
-    echo "Done"
-
-    echo "Copy db templates to db image build context before build..."
-    rm -rf ./build/db/data/templates
-    cp -r ./modules/db/templates ./build/db/data/templates
-    echo "Done"
-
-    echo "Copy proxy templates and settings to proxy image build context before build..."
-    rm -rf ./build/proxy/data/templates
-    cp -r ./modules/proxy/templates ./build/proxy/data/templates
-    rm -rf ./build/proxy/data/settings
-    cp -r ./modules/proxy/settings ./build/proxy/data/settings
-    echo "Done"
+  echo "Copy website files to app image build context before build..."
+  if [ -d ./build/app/data/website ]; then
+    rm -rf ./build/app/data/website || exit 1
   fi
+  if [ "$ENV" == "prod" ]; then
+    cp -r "$APP_PATH" ./build/app/data/website || exit 1
+  else
+    mkdir ./build/app/data/website || exit 1
+  fi
+  echo "Done"
+
+  echo "Copy db templates to db image build context before build..."
+  if [ -d ./build/db/data/templates ]; then
+    rm -rf ./build/db/data/templates || exit 1
+  fi
+  if [ "$ENV" == "prod" ]; then
+    cp -r ./modules/db/templates ./build/db/data/templates || exit 1
+  else
+    mkdir ./build/db/data/templates || exit 1
+  fi
+  echo "Done"
+
+  echo "Copy proxy templates and settings to proxy image build context before build..."
+  if [ -d /build/proxy/data/templates ]; then
+    rm -rf ./build/proxy/data/templates || exit 1
+  fi
+  if [ "$ENV" == "prod" ]; then
+    cp -r ./modules/proxy/templates ./build/proxy/data/templates || exit 1
+  else
+    mkdir /build/proxy/data/templates || exit 1
+  fi
+  if [ -d ./build/proxy/data/settings ]; then
+    rm -rf ./build/proxy/data/settings || exit 1
+  fi
+  if [ "$ENV" == "prod" ]; then
+    cp -r ./modules/proxy/settings ./build/proxy/data/settings || exit 1
+  else
+    mkdir ./build/proxy/data/settings || exit 1
+  fi
+  echo "Done"
   sudo_env docker-compose build || exit 1
 fi
 
