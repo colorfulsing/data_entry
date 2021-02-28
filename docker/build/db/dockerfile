@@ -14,6 +14,8 @@ RUN chmod +x \
   /opt/deploy/bin/load_env.sh \
   /opt/deploy/bin/start_server.sh
 
+COPY ./db/data/templates/ /opt/deploy/templates/
+
 #RUN source /opt/deploy/bin/template_tools.sh && apply_templates /opt/deploy/templates/* /docker-entrypoint-initdb.d || exit 1
 
 VOLUME /var/lib/mysql

@@ -7,10 +7,14 @@ RUN if [ ! -e /opt ]; then mkdir /opt || exit 1; fi; \
 COPY ./shared/template_tools.sh /opt/deploy/bin/template_tools.sh
 COPY ./proxy/load_env.sh /opt/deploy/bin/load_env.sh
 COPY ./proxy/start_server.sh /opt/deploy/bin/start_server.sh
+
 RUN chmod +x \
   /opt/deploy/bin/template_tools.sh \
   /opt/deploy/bin/load_env.sh \
   /opt/deploy/bin/start_server.sh
+
+COPY ./proxy/data/templates/ /opt/deploy/templates/
+COPY ./proxy/data/settings/* /etc/nginx/settings/
 
 ENTRYPOINT ["/opt/deploy/bin/load_env.sh"]
 CMD ["/opt/deploy/bin/start_server.sh"]
