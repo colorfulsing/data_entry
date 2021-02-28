@@ -280,8 +280,8 @@ if [ "$BUILD_IMAGE" == "1" ]; then
   echo "Done"
 
   echo "Copy proxy templates and settings to proxy image build context before build..."
-  rm -rf ./build/db/data/templates
-  cp -r ./modules/db/templates ./build/db/data/templates
+  rm -rf ./build/proxy/data/templates
+  cp -r ./modules/proxy/templates ./build/proxy/data/templates
   rm -rf ./build/proxy/data/settings
   cp -r ./modules/proxy/settings ./build/proxy/data/settings
   echo "Done"
