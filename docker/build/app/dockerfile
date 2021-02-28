@@ -28,6 +28,8 @@ RUN cd /opt/deploy/dependencies_config \
   && bundle install --jobs=4 \
   && yarn install || exit 1
 
+COPY ./app/data/website/ /var/www/html/
+
 COPY ./shared/template_tools.sh /opt/deploy/bin/template_tools.sh
 COPY ./app/load_env.sh /opt/deploy/bin/load_env.sh
 COPY ./app/start_server.sh /opt/deploy/bin/start_server.sh

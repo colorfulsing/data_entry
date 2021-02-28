@@ -274,17 +274,24 @@ if [ "$BUILD_IMAGE" == "1" ]; then
   fi
   echo "Done"
 
-  echo "Copy db templates to db image build context before build..."
-  rm -rf ./build/db/data/templates
-  cp -r ./modules/db/templates ./build/db/data/templates
-  echo "Done"
+  if [ "$ENV" == "prod" ]; then
+    echo "Copy website files to app image build context before build..."
+    rm -rf ./build/app/data/website
+    cp -r "$APP" ./build/app/data/website
+    echo "Done"
 
-  echo "Copy proxy templates and settings to proxy image build context before build..."
-  rm -rf ./build/proxy/data/templates
-  cp -r ./modules/proxy/templates ./build/proxy/data/templates
-  rm -rf ./build/proxy/data/settings
-  cp -r ./modules/proxy/settings ./build/proxy/data/settings
-  echo "Done"
+    echo "Copy db templates to db image build context before build..."
+    rm -rf ./build/db/data/templates
+    cp -r ./modules/db/templates ./build/db/data/templates
+    echo "Done"
+
+    echo "Copy proxy templates and settings to proxy image build context before build..."
+    rm -rf ./build/proxy/data/templates
+    cp -r ./modules/proxy/templates ./build/proxy/data/templates
+    rm -rf ./build/proxy/data/settings
+    cp -r ./modules/proxy/settings ./build/proxy/data/settings
+    echo "Done"
+  fi
   sudo_env docker-compose build || exit 1
 fi
 
