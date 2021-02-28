@@ -139,7 +139,7 @@ case "$ACTION" in
     DOWN=1
     STOP=1
     ;;
-  swarm-mode)
+  publish)
     SWARM_MODE=1
     ;;
   build-image)
@@ -293,5 +293,5 @@ if [ "$START" == "1" ]; then
 fi
 
 if [ "$SWARM_MODE" == "1" ]; then
-  sudo_env docker stack -c ./docker-compose.yml -c ./docker-compose.prod.yml
+  sudo_env docker stack deploy -c ./docker-compose.yml -c ./docker-compose.prod.yml
 fi
