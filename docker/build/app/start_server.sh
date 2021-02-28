@@ -100,12 +100,12 @@ fi
 cd /var/www/html
 
 echo "Execute database migration"
-rails db:migrate || $(if [ "$ENV" != 'dev' ]; then echo "exit 1"; else echo 'echo "DEV mode detected, ignoring migration failure..."'; fi)
+./bin/rake db:migrate || $(if [ "$ENV" != 'dev' ]; then echo "exit 1"; else echo 'echo "DEV mode detected, ignoring migration failure..."'; fi)
 
 # Execute test when
 if [ "$EXEC_TEST" == '1' ]; then
   echo "Executing tests"
-  rails test || exit 1
+  ./bin/rake test || exit 1
 fi
 if [ "$ENV" == "prod" ]; then
   echo "Precompiling assets"
